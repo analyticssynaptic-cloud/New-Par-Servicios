@@ -261,6 +261,57 @@ ul,ol{list-style:none}
 .btn-sec:hover{border-color:var(--g-d);color:var(--g-d)}
 .btn-sec svg{width:16px;height:16px}
 
+/* ── HERO CAROUSEL ──────────────────────────────────────── */
+.hero-carousel{position:relative;min-height:380px}
+.h-slide{
+  position:absolute;inset:0;opacity:0;pointer-events:none;
+  transform:translateY(20px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.h-slide.active{opacity:1;pointer-events:auto;transform:none;position:relative}
+.h-slide .hero-tag{margin-bottom:22px}
+.h-slide .hero-h1{margin-bottom:22px}
+.h-slide .hero-p{margin-bottom:0;max-width:540px}
+
+.h-carousel-controls{
+  display:flex;align-items:center;gap:18px;margin-top:34px;
+}
+.h-dots{display:flex;gap:8px}
+.h-dot{
+  width:32px;height:4px;border-radius:2px;
+  background:var(--line-2);cursor:pointer;
+  transition:background var(--t1),width var(--t1);
+  border:none;padding:0;position:relative;overflow:hidden;
+}
+.h-dot.active{background:var(--line);width:60px}
+.h-dot.active::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  background:var(--g);
+  animation:dot-fill 6s linear forwards;
+}
+@keyframes dot-fill{from{width:0%}to{width:100%}}
+
+.h-arrows{display:flex;gap:6px;margin-left:auto}
+.h-arrow{
+  width:38px;height:38px;border-radius:50%;
+  background:#fff;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--slate);
+  transition:border-color var(--t1),color var(--t1),transform var(--t1);
+}
+.h-arrow:hover{border-color:var(--g);color:var(--g-d);transform:translateY(-2px)}
+.h-arrow svg{width:16px;height:16px}
+
+.h-counter{
+  font-family:var(--cond);font-size:.78rem;font-weight:600;
+  letter-spacing:2px;color:var(--muted);min-width:46px;
+  font-variant-numeric:tabular-nums;
+}
+
+.hero-actions-wrap{
+  display:flex;gap:14px;flex-wrap:wrap;margin-top:36px;margin-bottom:44px;
+}
+
 .hero-feats{
   display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
   padding-top:32px;border-top:1px solid var(--line);
@@ -1009,19 +1060,83 @@ footer{
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-left">
-        <div class="hero-tag reveal">
-          <span class="hero-tag-dot">
-            <svg width="10" height="10"><use href="#i-check"/></svg>
-          </span>
-          <span>Programa <strong>certificado</strong> de bienestar laboral</span>
+        <div class="hero-carousel reveal">
+          <!-- SLIDE 1 -->
+          <div class="h-slide active" data-slide="0">
+            <div class="hero-tag">
+              <span class="hero-tag-dot"><svg width="10" height="10"><use href="#i-check"/></svg></span>
+              <span>Programa <strong>certificado</strong> de bienestar laboral</span>
+            </div>
+            <h1 class="h-display hero-h1">
+              Pausas <em>activas</em><br>que transforman<br>tu jornada laboral
+            </h1>
+            <p class="hero-p">
+              Diseñamos programas de pausas activas que reducen el ausentismo, previenen lesiones musculoesqueletales y elevan la productividad de tu equipo. Movimiento consciente, respaldado por evidencia.
+            </p>
+          </div>
+
+          <!-- SLIDE 2 -->
+          <div class="h-slide" data-slide="1">
+            <div class="hero-tag">
+              <span class="hero-tag-dot"><svg width="10" height="10"><use href="#i-trending"/></svg></span>
+              <span>Resultados <strong>medibles</strong> desde el primer mes</span>
+            </div>
+            <h1 class="h-display hero-h1">
+              <em>37%</em> menos<br>ausentismo en<br>equipos activos
+            </h1>
+            <p class="hero-p">
+              Las empresas que implementan nuestro programa reportan una reducción significativa en incapacidades por dolor lumbar, cervical y túnel carpiano. Bienestar que se traduce en rendimiento.
+            </p>
+          </div>
+
+          <!-- SLIDE 3 -->
+          <div class="h-slide" data-slide="2">
+            <div class="hero-tag">
+              <span class="hero-tag-dot"><svg width="10" height="10"><use href="#i-users"/></svg></span>
+              <span><strong>+500 empresas</strong> ya confían en PAR Servicios</span>
+            </div>
+            <h1 class="h-display hero-h1">
+              Cuidamos a quienes<br>mueven la <em>economía</em><br>de Colombia
+            </h1>
+            <p class="hero-p">
+              Desde pymes hasta grandes corporaciones — más de 15 años acompañando organizaciones colombianas a construir culturas de bienestar duraderas. Sin discursos: con resultados.
+            </p>
+          </div>
+
+          <!-- SLIDE 4 -->
+          <div class="h-slide" data-slide="3">
+            <div class="hero-tag">
+              <span class="hero-tag-dot"><svg width="10" height="10"><use href="#i-shield"/></svg></span>
+              <span>Cumple la <strong>Resolución 1016/89</strong> y Ley 1562/2012</span>
+            </div>
+            <h1 class="h-display hero-h1">
+              Tu programa de<br>pausas activas <em>al día</em><br>con la normativa
+            </h1>
+            <p class="hero-p">
+              Implementamos pausas activas obligatorias según el SG-SST: ejercicios físicos, mentales, oculares y respiratorios diseñados por fisioterapeutas y psicólogos certificados.
+            </p>
+          </div>
         </div>
-        <h1 class="h-display hero-h1 reveal reveal-d1">
-          Pausas <em>activas</em><br>que transforman<br>tu jornada laboral
-        </h1>
-        <p class="hero-p reveal reveal-d2">
-          En PAR Servicios diseñamos programas de pausas activas que reducen el ausentismo, previenen lesiones musculoesqueletales y elevan la productividad de tu equipo. Movimiento consciente, respaldado por evidencia.
-        </p>
-        <div class="hero-actions reveal reveal-d3">
+
+        <div class="h-carousel-controls">
+          <div class="h-dots" role="tablist">
+            <button class="h-dot active" data-go="0" aria-label="Slide 1"></button>
+            <button class="h-dot" data-go="1" aria-label="Slide 2"></button>
+            <button class="h-dot" data-go="2" aria-label="Slide 3"></button>
+            <button class="h-dot" data-go="3" aria-label="Slide 4"></button>
+          </div>
+          <span class="h-counter"><span id="h-curr">01</span> / 04</span>
+          <div class="h-arrows">
+            <button class="h-arrow" id="h-prev" aria-label="Anterior">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="h-arrow" id="h-next" aria-label="Siguiente">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-actions-wrap reveal reveal-d2">
           <a href="app.html" class="btn-pri">
             <svg><use href="#i-play"/></svg>
             Comenzar mi Ruta
@@ -1031,7 +1146,7 @@ footer{
             Conocer el programa
           </a>
         </div>
-        <div class="hero-feats reveal reveal-d4">
+        <div class="hero-feats reveal reveal-d3">
           <div class="hero-feat">
             <div class="hero-feat-ico"><svg><use href="#i-shield"/></svg></div>
             <div class="hero-feat-tx">
@@ -1522,10 +1637,15 @@ footer{
     <div class="foot-grid">
       <div>
         <div class="foot-brand">
-          <div class="brand-mark">P</div>
+          <svg class="foot-brand-svg" viewBox="0 0 100 100" aria-hidden="true">
+            <g transform="rotate(-28 50 50)">
+              <rect class="pill" x="3" y="30" width="94" height="18" rx="9"/>
+              <rect class="pill" x="3" y="52" width="94" height="18" rx="9"/>
+            </g>
+          </svg>
           <div class="brand-txt">
-            <span class="foot-brand-name">PAR</span>
-            <span class="foot-brand-tag">Servicios Integrales</span>
+            <span class="foot-brand-par">par</span>
+            <span class="foot-brand-svc">servicios</span>
           </div>
         </div>
         <p class="foot-desc">Especialistas colombianos en pausas activas, salud ocupacional, seguridad vial PESV y gestión integral del riesgo. Cuidamos a las personas que mueven tu empresa.</p>
@@ -1667,6 +1787,42 @@ document.querySelectorAll('.faq-item').forEach(item => {
     }
   });
 });
+
+/* ═══════════════════════════════════════════════════════
+   HERO CAROUSEL
+═══════════════════════════════════════════════════════ */
+(function carousel(){
+  const slides = document.querySelectorAll('.h-slide');
+  const dots = document.querySelectorAll('.h-dot');
+  const curr = document.getElementById('h-curr');
+  const prev = document.getElementById('h-prev');
+  const next = document.getElementById('h-next');
+  let idx = 0, timer = null;
+  const total = slides.length;
+
+  function go(i){
+    idx = (i + total) % total;
+    slides.forEach((s, k) => s.classList.toggle('active', k === idx));
+    dots.forEach((d, k) => d.classList.toggle('active', k === idx));
+    curr.textContent = String(idx + 1).padStart(2, '0');
+  }
+  function autoplay(){
+    clearInterval(timer);
+    timer = setInterval(() => go(idx + 1), 6000);
+  }
+  function pause(){ clearInterval(timer); }
+
+  dots.forEach(d => d.addEventListener('click', () => { go(parseInt(d.dataset.go)); autoplay(); }));
+  prev.addEventListener('click', () => { go(idx - 1); autoplay(); });
+  next.addEventListener('click', () => { go(idx + 1); autoplay(); });
+
+  // Pause on hover
+  const wrap = document.querySelector('.hero-carousel');
+  wrap.addEventListener('mouseenter', pause);
+  wrap.addEventListener('mouseleave', autoplay);
+
+  autoplay();
+})();
 
 /* ═══════════════════════════════════════════════════════
    PARALLAX hero glow

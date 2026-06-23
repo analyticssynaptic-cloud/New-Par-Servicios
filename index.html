@@ -4,19 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0FBF8B">
-<meta name="description" content="PAR Servicios — Pausas Activas Laborales. Programa integral de bienestar, ergonomía y salud ocupacional para empresas en Colombia.">
+<meta name="description" content="PAR Servicios — Pausas Activas Laborales. Programa integral de bienestar, calendario de actividades, terapias de sonido y salud ocupacional.">
 <title>Pausas Activas · PAR Servicios Integrales</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.unsplash.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Barlow+Condensed:wght@500;600;700;800&family=Fraunces:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Barlow+Condensed:wght@500;600;700;800&family=Fraunces:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
 <style>
-/* ────────────────────────────────────────────────────────
-   PAR SERVICIOS — Pausas Activas
-   Design System
-──────────────────────────────────────────────────────── */
 :root {
-  /* Brand colors */
   --g:       #0FBF8B;
   --g-d:     #0A9E72;
   --g-deep:  #086B4D;
@@ -31,28 +26,27 @@
   --bg:      #FAFCFB;
   --surface: #FFFFFF;
   --cream:   #F6F4EF;
+  --gold:    #C9A961;
+  --gold-d:  #A8854D;
+  --logo-g:  #2EBA9D;
 
-  /* Shadows */
-  --sh-1:    0 1px 2px rgba(13,27,42,.04), 0 4px 12px rgba(13,27,42,.06);
-  --sh-2:    0 4px 16px rgba(13,27,42,.08), 0 12px 32px rgba(13,27,42,.10);
-  --sh-3:    0 16px 48px rgba(13,27,42,.14);
-  --sh-g:    0 12px 32px rgba(15,191,139,.32);
+  --sh-1: 0 1px 2px rgba(13,27,42,.04), 0 4px 12px rgba(13,27,42,.06);
+  --sh-2: 0 4px 16px rgba(13,27,42,.08), 0 12px 32px rgba(13,27,42,.10);
+  --sh-3: 0 16px 48px rgba(13,27,42,.14);
+  --sh-g: 0 12px 32px rgba(15,191,139,.32);
 
-  /* Motion */
-  --t1:      .25s cubic-bezier(.4,0,.2,1);
-  --t2:      .5s cubic-bezier(.4,0,.2,1);
-  --bounce:  .45s cubic-bezier(.34,1.56,.64,1);
+  --t1: .25s cubic-bezier(.4,0,.2,1);
+  --t2: .5s cubic-bezier(.4,0,.2,1);
+  --bounce: .45s cubic-bezier(.34,1.56,.64,1);
 
-  /* Radii */
-  --r-s:     10px;
-  --r-m:     16px;
-  --r-l:     24px;
-  --r-xl:    32px;
+  --r-s: 10px;
+  --r-m: 16px;
+  --r-l: 24px;
+  --r-xl: 32px;
 
-  /* Type */
-  --display: 'Fraunces', 'Times New Roman', serif;
-  --sans:    'Barlow', -apple-system, BlinkMacSystemFont, sans-serif;
-  --cond:    'Barlow Condensed', 'Barlow', sans-serif;
+  --display: 'Fraunces','Times New Roman',serif;
+  --sans: 'Barlow',-apple-system,BlinkMacSystemFont,sans-serif;
+  --cond: 'Barlow Condensed','Barlow',sans-serif;
 }
 
 /* ── BASE ───────────────────────────────────────────────── */
@@ -70,12 +64,10 @@ ul,ol{list-style:none}
 
 /* ── LAYOUT ─────────────────────────────────────────────── */
 .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
-.wrap-sm{max-width:880px;margin:0 auto;padding:0 32px}
+.wrap-sm{max-width:920px;margin:0 auto;padding:0 32px}
 .sec{padding:120px 0}
-.sec-sm{padding:80px 0}
 @media(max-width:768px){
   .sec{padding:80px 0}
-  .sec-sm{padding:56px 0}
   .wrap,.wrap-sm{padding:0 22px}
 }
 
@@ -85,52 +77,28 @@ ul,ol{list-style:none}
   font-family:var(--cond);font-size:.78rem;font-weight:700;
   letter-spacing:3.5px;text-transform:uppercase;color:var(--g-d);
 }
-.eyebrow::before{
-  content:'';width:28px;height:1.5px;background:var(--g);
-}
+.eyebrow::before{content:'';width:28px;height:1.5px;background:var(--g)}
+
 .h-display{
   font-family:var(--display);font-weight:700;
   font-size:clamp(2.4rem, 5.5vw, 4.5rem);line-height:1.04;
   letter-spacing:-.025em;color:var(--ink);
 }
-.h-display em{
-  font-style:italic;font-weight:600;color:var(--g-d);
-  font-feature-settings:"liga","calt","kern","onum","ss01";
-}
+.h-display em{font-style:italic;font-weight:600;color:var(--g-d)}
+
 .h-section{
   font-family:var(--display);font-weight:700;
   font-size:clamp(1.9rem,3.4vw,2.9rem);line-height:1.1;
   letter-spacing:-.022em;color:var(--ink);margin-bottom:18px;
 }
 .h-section em{font-style:italic;color:var(--g-d);font-weight:600}
-.lead{
-  font-size:1.06rem;color:var(--slate);line-height:1.7;
-  max-width:600px;font-weight:400;
-}
-@media(max-width:640px){
-  .lead{font-size:.98rem}
-}
 
-/* ── NAV ────────────────────────────────────────────────── */
-#nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  background:rgba(250,252,251,.85);
-  backdrop-filter:blur(20px) saturate(180%);
-  -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border-bottom:1px solid transparent;
-  transition:border-color var(--t1),background var(--t1);
-}
-#nav.scrolled{
-  border-bottom-color:var(--line);
-  background:rgba(255,255,255,.92);
-}
-.nav-inner{
-  max-width:1240px;margin:0 auto;padding:0 32px;height:72px;
-  display:flex;align-items:center;justify-content:space-between;
-}
+.lead{font-size:1.06rem;color:var(--slate);line-height:1.7;max-width:600px;font-weight:400}
+
+/* ── BRAND LOGO ────────────────────────────────────────── */
 .brand{display:flex;align-items:center;gap:11px;user-select:none}
 .brand-svg{width:44px;height:44px;flex-shrink:0}
-.brand-svg .pill{fill:#2EBA9D}
+.brand-svg .pill{fill:var(--logo-g)}
 .brand-txt{display:flex;flex-direction:column;line-height:1}
 .brand-par{
   font-family:var(--sans);font-weight:800;font-size:1.7rem;
@@ -142,22 +110,36 @@ ul,ol{list-style:none}
   margin-top:2px;margin-left:1px;
 }
 
-.nav-links{display:flex;align-items:center;gap:4px}
+/* ── NAV ────────────────────────────────────────────────── */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(250,252,251,.85);
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid transparent;
+  transition:border-color var(--t1),background var(--t1);
+}
+#nav.scrolled{border-bottom-color:var(--line);background:rgba(255,255,255,.94)}
+.nav-inner{
+  max-width:1240px;margin:0 auto;padding:0 32px;height:72px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-links{display:flex;align-items:center;gap:2px}
 .nav-links a{
   padding:9px 14px;font-size:.88rem;font-weight:500;color:var(--slate);
-  border-radius:9px;transition:background var(--t1),color var(--t1);
-  position:relative;
+  border-radius:9px;transition:background var(--t1),color var(--t1);position:relative;
 }
 .nav-links a:hover{color:var(--g-d);background:var(--g-tint)}
 .nav-cta{
   margin-left:8px;
-  background:var(--ink) !important;color:#fff !important;
-  padding:10px 20px !important;border-radius:9px;
+  background:var(--g) !important;color:#fff !important;
+  padding:10px 18px !important;border-radius:9px;
   display:inline-flex;align-items:center;gap:8px;
   transition:transform var(--bounce),background var(--t1) !important;
+  box-shadow:var(--sh-g);
 }
 .nav-cta:hover{transform:translateY(-2px);background:var(--g-d) !important}
-.nav-cta svg{width:14px;height:14px}
+.nav-cta svg{width:13px;height:13px}
 
 .burger{display:none;flex-direction:column;gap:5px;padding:8px;cursor:pointer}
 .burger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:all .3s}
@@ -169,9 +151,9 @@ ul,ol{list-style:none}
 .nav-mob.open{display:flex}
 .nav-mob a{padding:12px 16px;font-size:.95rem;font-weight:500;color:var(--slate);border-radius:10px}
 .nav-mob a:hover{background:var(--g-tint);color:var(--g-d)}
-.nav-mob .nav-cta{margin-top:8px;text-align:center;justify-content:center;background:var(--ink) !important;color:#fff !important}
+.nav-mob .nav-cta{margin-top:8px;text-align:center;justify-content:center;background:var(--g) !important;color:#fff !important}
 
-@media(max-width:880px){
+@media(max-width:960px){
   .nav-links{display:none}
   .burger{display:flex}
 }
@@ -183,20 +165,25 @@ ul,ol{list-style:none}
 .reveal-d2{transition-delay:.16s}
 .reveal-d3{transition-delay:.24s}
 .reveal-d4{transition-delay:.32s}
-.reveal-d5{transition-delay:.4s}
 
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes pulse-ring{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.6);opacity:0}}
-@keyframes shimmer{0%{background-position:-1000px 0}100%{background-position:1000px 0}}
-@keyframes spin-slow{to{transform:rotate(360deg)}}
+@keyframes ken-burns{
+  0%{transform:scale(1) translate(0,0)}
+  100%{transform:scale(1.12) translate(-2%,-1%)}
+}
+@keyframes float-slow{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes shimmer{0%,100%{transform:translateX(-100%)}50%{transform:translateX(100%)}}
+@keyframes wave-1{0%,100%{transform:scaleY(1)}50%{transform:scaleY(2.4)}}
+@keyframes wave-2{0%,100%{transform:scaleY(1.4)}50%{transform:scaleY(.6)}}
 
-/* ── HERO ───────────────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════
+   HERO con CARRUSEL DE IMÁGENES
+═══════════════════════════════════════════════════════ */
 #hero{
   min-height:100vh;position:relative;overflow:hidden;
-  padding:130px 0 80px;background:var(--bg);
-  display:flex;align-items:center;
+  padding:130px 0 80px;background:var(--bg);display:flex;align-items:center;
 }
-.hero-bg-grid{
+.hero-grid-bg{
   position:absolute;inset:0;
   background-image:
     linear-gradient(rgba(15,191,139,.04) 1px,transparent 1px),
@@ -213,15 +200,16 @@ ul,ol{list-style:none}
 }
 .hero-grid{
   position:relative;z-index:1;
-  display:grid;grid-template-columns:1.1fr 1fr;
-  gap:64px;align-items:center;
+  display:grid;grid-template-columns:1.05fr 1fr;
+  gap:60px;align-items:center;
 }
+
 .hero-tag{
   display:inline-flex;align-items:center;gap:10px;
   background:#fff;border:1px solid var(--line);
   border-radius:30px;padding:7px 16px 7px 8px;
-  margin-bottom:26px;box-shadow:var(--sh-1);
-  font-size:.83rem;font-weight:600;color:var(--slate);
+  margin-bottom:24px;box-shadow:var(--sh-1);
+  font-size:.82rem;font-weight:600;color:var(--slate);
 }
 .hero-tag-dot{
   width:24px;height:24px;border-radius:50%;
@@ -231,90 +219,39 @@ ul,ol{list-style:none}
 }
 .hero-tag strong{color:var(--g-d);font-weight:700}
 
-.hero-h1{margin-bottom:24px}
+.hero-h1{margin-bottom:22px}
 .hero-h1 em{position:relative;display:inline-block}
 .hero-h1 em::after{
   content:'';position:absolute;left:0;right:0;bottom:.05em;height:.14em;
   background:var(--g);opacity:.22;border-radius:8px;z-index:-1;
 }
 .hero-p{
-  font-size:1.1rem;color:var(--slate);line-height:1.75;
-  max-width:520px;margin-bottom:36px;
+  font-size:1.08rem;color:var(--slate);line-height:1.75;
+  max-width:520px;margin-bottom:32px;
 }
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
 .btn-pri{
   display:inline-flex;align-items:center;gap:11px;
-  padding:16px 30px;background:var(--ink);color:#fff;
+  padding:16px 28px;background:var(--ink);color:#fff;
   border-radius:12px;font-weight:600;font-size:.98rem;
   transition:transform var(--bounce),background var(--t1);
   box-shadow:var(--sh-2);
 }
 .btn-pri:hover{transform:translateY(-3px);background:var(--g-d)}
-.btn-pri svg{width:18px;height:18px}
+.btn-pri svg{width:16px;height:16px}
 .btn-sec{
   display:inline-flex;align-items:center;gap:9px;
-  padding:16px 26px;
+  padding:16px 24px;
   border:1.5px solid var(--line-2);color:var(--ink);
   border-radius:12px;font-weight:600;font-size:.95rem;background:#fff;
   transition:border-color var(--t1),color var(--t1);
 }
 .btn-sec:hover{border-color:var(--g-d);color:var(--g-d)}
-.btn-sec svg{width:16px;height:16px}
-
-/* ── HERO CAROUSEL ──────────────────────────────────────── */
-.hero-carousel{position:relative;min-height:380px}
-.h-slide{
-  position:absolute;inset:0;opacity:0;pointer-events:none;
-  transform:translateY(20px);
-  transition:opacity .7s ease,transform .7s ease;
-}
-.h-slide.active{opacity:1;pointer-events:auto;transform:none;position:relative}
-.h-slide .hero-tag{margin-bottom:22px}
-.h-slide .hero-h1{margin-bottom:22px}
-.h-slide .hero-p{margin-bottom:0;max-width:540px}
-
-.h-carousel-controls{
-  display:flex;align-items:center;gap:18px;margin-top:34px;
-}
-.h-dots{display:flex;gap:8px}
-.h-dot{
-  width:32px;height:4px;border-radius:2px;
-  background:var(--line-2);cursor:pointer;
-  transition:background var(--t1),width var(--t1);
-  border:none;padding:0;position:relative;overflow:hidden;
-}
-.h-dot.active{background:var(--line);width:60px}
-.h-dot.active::after{
-  content:'';position:absolute;left:0;top:0;bottom:0;
-  background:var(--g);
-  animation:dot-fill 6s linear forwards;
-}
-@keyframes dot-fill{from{width:0%}to{width:100%}}
-
-.h-arrows{display:flex;gap:6px;margin-left:auto}
-.h-arrow{
-  width:38px;height:38px;border-radius:50%;
-  background:#fff;border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;color:var(--slate);
-  transition:border-color var(--t1),color var(--t1),transform var(--t1);
-}
-.h-arrow:hover{border-color:var(--g);color:var(--g-d);transform:translateY(-2px)}
-.h-arrow svg{width:16px;height:16px}
-
-.h-counter{
-  font-family:var(--cond);font-size:.78rem;font-weight:600;
-  letter-spacing:2px;color:var(--muted);min-width:46px;
-  font-variant-numeric:tabular-nums;
-}
-
-.hero-actions-wrap{
-  display:flex;gap:14px;flex-wrap:wrap;margin-top:36px;margin-bottom:44px;
-}
+.btn-sec svg{width:15px;height:15px}
 
 .hero-feats{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
-  padding-top:32px;border-top:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
+  padding-top:30px;border-top:1px solid var(--line);
 }
 .hero-feat{display:flex;align-items:flex-start;gap:11px}
 .hero-feat-ico{
@@ -327,529 +264,1021 @@ ul,ol{list-style:none}
 .hero-feat-tx strong{display:block;color:var(--ink);font-weight:700;margin-bottom:2px;font-size:.92rem}
 .hero-feat-tx span{color:var(--muted)}
 
-/* HERO RIGHT — Visual collage */
-.hero-visual{position:relative;height:560px}
-.hv-card{
-  position:absolute;border-radius:24px;overflow:hidden;
-  box-shadow:var(--sh-3);background:#eee;
+/* ── ORBIT CIRCULAR PLANO — 2026 ──────────────────────── */
+.hero-orbit{
+  position:relative;width:100%;height:640px;
+  cursor:grab;user-select:none;
+  -webkit-user-select:none;
+  touch-action:pan-y;
 }
-.hv-1{
-  top:0;left:0;width:62%;height:62%;
-  z-index:2;animation:float 6s ease-in-out infinite;
-}
-.hv-2{
-  bottom:0;right:0;width:58%;height:55%;
-  z-index:3;animation:float 6s ease-in-out -3s infinite;
-}
-.hv-3{
-  bottom:18%;left:-4%;width:42%;height:32%;
-  z-index:4;background:#fff;
-  padding:22px;display:flex;flex-direction:column;justify-content:space-between;
-  border:1px solid var(--line);
-  animation:float 5s ease-in-out -2s infinite;
-}
-.hv-img{width:100%;height:100%;object-fit:cover}
-.hv-3-top{display:flex;align-items:center;justify-content:space-between}
-.hv-3-ico{
-  width:38px;height:38px;border-radius:10px;
-  background:var(--g-soft);color:var(--g-d);
-  display:flex;align-items:center;justify-content:center;
-}
-.hv-3-ico svg{width:18px;height:18px}
-.hv-3-stat{font-family:var(--display);font-size:1.7rem;font-weight:700;color:var(--ink);line-height:1}
-.hv-3-stat sup{font-size:1rem;color:var(--g-d);margin-left:2px}
-.hv-3-lbl{font-size:.74rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-top:4px}
+.hero-orbit.dragging{cursor:grabbing}
 
-.hv-badge{
-  position:absolute;top:20%;right:-8%;
-  background:#fff;border-radius:18px;padding:12px 16px;
-  box-shadow:var(--sh-2);z-index:5;
+/* Decorative orbit ring path */
+.orbit-ring{
+  position:absolute;
+  width:680px;height:680px;border-radius:50%;
+  border:1.5px dashed rgba(15,191,139,.18);
+  top:50%;right:-60px;
+  transform:translate(0,-50%);
+  pointer-events:none;
+  animation:orbit-ring-spin 60s linear infinite;
+}
+.orbit-ring::before{
+  content:'';position:absolute;inset:30px;border-radius:50%;
+  border:1px solid rgba(15,191,139,.08);
+}
+@keyframes orbit-ring-spin{to{transform:translate(0,-50%) rotate(360deg)}}
+
+.orbit-center{
+  position:absolute;
+  /* Centro virtual del círculo: arriba-derecha, ligeramente fuera */
+  right:-60px;top:50%;
+  width:0;height:0;
+  z-index:5;
+}
+
+/* Cada imagen orbita el orbit-center */
+.orb-item{
+  position:absolute;
+  left:0;top:0;
+  width:240px;height:300px;
+  margin:-150px 0 0 -120px;
+  border-radius:24px;overflow:hidden;
+  box-shadow:var(--sh-2);
+  background:#222;
+  cursor:pointer;
+  transition:width .7s cubic-bezier(.4,0,.2,1),
+             height .7s cubic-bezier(.4,0,.2,1),
+             margin .7s cubic-bezier(.4,0,.2,1),
+             box-shadow .5s ease,
+             border-radius .5s ease;
+  will-change:transform,opacity,filter;
+}
+.orb-item:hover{box-shadow:var(--sh-3)}
+.orb-item img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform 7s ease-out;
+}
+.orb-item.front img{transform:scale(1.08)}
+
+.orb-item.front{
+  width:380px;height:480px;
+  margin:-240px 0 0 -190px;
+  box-shadow:var(--sh-3);
+  border-radius:28px;
+}
+
+/* Info overlay */
+.orb-info{
+  position:absolute;left:0;right:0;bottom:0;
+  padding:24px;
+  color:#fff;z-index:2;
+  pointer-events:none;
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity .5s ease .25s,transform .5s ease .25s;
+}
+.orb-info::before{
+  content:'';position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,transparent 30%,rgba(13,27,42,.88));
+}
+.orb-item.front .orb-info{opacity:1;transform:none}
+.orb-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(15,191,139,.95);
+  border-radius:30px;padding:5px 13px;
+  font-family:var(--cond);font-size:.7rem;font-weight:700;
+  letter-spacing:2.2px;text-transform:uppercase;color:#fff;
+  margin-bottom:10px;
+}
+.orb-tag svg{width:11px;height:11px}
+.orb-title{
+  font-family:var(--display);font-weight:700;font-style:italic;
+  font-size:1.42rem;line-height:1.22;letter-spacing:-.012em;color:#fff;
+}
+
+/* Sub-cards: small tags */
+.orb-num{
+  position:absolute;top:14px;right:14px;z-index:3;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(8px);
+  border-radius:30px;padding:4px 11px;
+  font-family:var(--cond);font-size:.7rem;font-weight:700;
+  letter-spacing:1.8px;color:var(--ink);
+  opacity:0;
+  transition:opacity .5s ease .15s;
+}
+.orb-item.front .orb-num{opacity:1}
+
+/* CONTROL TRAY at bottom */
+.orbit-tray{
+  position:absolute;bottom:14px;left:14px;z-index:20;
   display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.96);backdrop-filter:blur(10px);
   border:1px solid var(--line);
-  animation:float 5s ease-in-out -1s infinite;
+  border-radius:50px;padding:6px 6px 6px 14px;
+  box-shadow:var(--sh-2);
 }
-.hv-badge-ic{
-  width:36px;height:36px;border-radius:50%;
-  background:var(--g);color:#fff;
+.orbit-tray-ctrl{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--ink);color:#fff;
   display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:background var(--t1),transform var(--t1);
 }
-.hv-badge-ic svg{width:16px;height:16px}
-.hv-badge-tx{font-size:.78rem;font-weight:600;color:var(--ink)}
-.hv-badge-tx em{display:block;font-style:normal;font-weight:400;color:var(--muted);font-size:.7rem;margin-top:1px}
+.orbit-tray-ctrl:hover{background:var(--g-d);transform:scale(1.05)}
+.orbit-tray-ctrl svg{width:14px;height:14px}
+.orbit-tray-ctrl.pp svg.ic-pause,
+.orbit-tray-ctrl.pp.paused svg.ic-play{display:block}
+.orbit-tray-ctrl.pp svg.ic-play,
+.orbit-tray-ctrl.pp.paused svg.ic-pause{display:none}
+
+.orbit-progress{
+  display:flex;align-items:center;gap:6px;
+  padding:0 6px;
+}
+.orbit-prog-cur{
+  font-family:var(--display);font-weight:700;font-size:1rem;
+  color:var(--ink);min-width:18px;text-align:center;
+  font-variant-numeric:tabular-nums;
+}
+.orbit-prog-sep{color:var(--line-2);font-weight:300;font-size:1.05rem}
+.orbit-prog-tot{
+  font-family:var(--display);font-size:.86rem;color:var(--muted);
+}
+
+.orbit-dots{display:flex;gap:5px;padding:0 6px 0 4px}
+.orbit-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--line-2);
+  border:none;cursor:pointer;
+  transition:background var(--t1),width var(--t1),transform var(--t1);
+}
+.orbit-dot.active{background:var(--g);width:22px;border-radius:4px}
+.orbit-dot:hover:not(.active){background:var(--muted);transform:scale(1.15)}
+
+/* Floating stat badge */
+.orbit-badge{
+  position:absolute;top:8%;left:-12px;z-index:10;
+  background:#fff;border-radius:18px;
+  padding:13px 18px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:var(--sh-3);
+  border:1px solid var(--line);
+  animation:float-slow 5s ease-in-out infinite;
+}
+.orbit-badge-ic{
+  width:42px;height:42px;border-radius:12px;
+  background:linear-gradient(135deg,var(--g),var(--g-deep));
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.orbit-badge-ic svg{width:18px;height:18px}
+.orbit-badge-tx{line-height:1.2}
+.orbit-badge-num{
+  font-family:var(--display);font-weight:700;font-size:1.5rem;color:var(--ink);
+  letter-spacing:-.02em;
+}
+.orbit-badge-num sup{font-size:.95rem;color:var(--g-d);margin-left:1px;font-weight:600}
+.orbit-badge-lbl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.4px;font-weight:600;margin-top:2px}
+
+/* Live activity badge */
+.orbit-live{
+  position:absolute;top:42%;left:8px;z-index:10;
+  background:var(--ink);color:#fff;
+  border-radius:16px;padding:11px 15px;
+  display:flex;align-items:center;gap:10px;
+  box-shadow:var(--sh-3);
+  animation:float-slow 5.5s ease-in-out -2s infinite;
+}
+.orbit-live-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--g);
+  position:relative;flex-shrink:0;
+}
+.orbit-live-dot::after{
+  content:'';position:absolute;inset:-4px;border-radius:50%;
+  border:1.5px solid var(--g);
+  animation:ping 1.8s ease-out infinite;
+}
+@keyframes ping{
+  0%{transform:scale(1);opacity:.8}
+  100%{transform:scale(2);opacity:0}
+}
+.orbit-live-tx{font-size:.76rem;font-weight:600;line-height:1.2}
+.orbit-live-tx em{display:block;font-style:normal;font-size:.66rem;font-weight:400;color:rgba(255,255,255,.55);margin-top:2px;letter-spacing:.3px}
 
 @media(max-width:960px){
   .hero-grid{grid-template-columns:1fr;gap:48px}
-  .hero-visual{height:460px}
-  .hero-feats{grid-template-columns:1fr 1fr;gap:18px}
+  .hero-orbit{height:560px}
+  .orbit-center{right:-30px}
+  .orbit-ring{width:560px;height:560px;right:-30px}
+  .orb-item{width:200px;height:250px;margin:-125px 0 0 -100px}
+  .orb-item.front{width:320px;height:400px;margin:-200px 0 0 -160px}
+  .orb-title{font-size:1.2rem}
 }
 @media(max-width:520px){
-  .hero-visual{height:380px}
-  .hero-feats{grid-template-columns:1fr}
-  .hv-3{padding:16px;width:48%}
-  .hv-badge{padding:9px 13px}
+  .hero-orbit{height:480px}
+  .orbit-ring{width:440px;height:440px}
+  .orb-item{width:160px;height:200px;margin:-100px 0 0 -80px}
+  .orb-item.front{width:260px;height:330px;margin:-165px 0 0 -130px}
+  .hero-feats{grid-template-columns:1fr;gap:16px}
+  .orbit-badge{padding:10px 14px;top:4%}
+  .orbit-badge-num{font-size:1.25rem}
+  .orbit-live{left:0;padding:9px 12px}
 }
 
-/* ── MARQUEE ────────────────────────────────────────────── */
-.marquee{
-  background:var(--ink);color:rgba(255,255,255,.7);
-  padding:18px 0;overflow:hidden;
-  border-top:1px solid rgba(255,255,255,.06);
-  border-bottom:1px solid rgba(255,255,255,.06);
+/* ════════════════════════════════════════════════════════
+   STATS STRIP
+═══════════════════════════════════════════════════════ */
+#stats-strip{
+  background:var(--ink);color:#fff;padding:18px 0;overflow:hidden;
+  border-top:1px solid rgba(255,255,255,.05);
 }
 .marquee-track{
-  display:flex;gap:48px;
-  animation:marquee 30s linear infinite;
-  white-space:nowrap;
+  display:flex;gap:42px;animation:marquee 32s linear infinite;white-space:nowrap;
 }
-@keyframes marquee{
-  from{transform:translateX(0)}
-  to{transform:translateX(-50%)}
-}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .marquee-item{
   display:inline-flex;align-items:center;gap:12px;
   font-family:var(--cond);font-size:.92rem;font-weight:600;
-  letter-spacing:2px;text-transform:uppercase;
+  letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.7);
 }
-.marquee-item svg{width:16px;height:16px;color:var(--g);flex-shrink:0}
+.marquee-item svg{width:16px;height:16px;color:var(--g)}
 .marquee-dot{
-  width:6px;height:6px;border-radius:50%;background:var(--g);
-  margin:0 auto;align-self:center;flex-shrink:0;
+  width:5px;height:5px;border-radius:50%;background:var(--g);
+  align-self:center;flex-shrink:0;
 }
 
-/* ── SECTION INTRO ──────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════
+   SECTION INTRO
+═══════════════════════════════════════════════════════ */
 .intro-header{
   display:grid;grid-template-columns:1fr 1.4fr;gap:60px;
   margin-bottom:64px;align-items:end;
 }
-.intro-aside{font-size:.95rem;color:var(--slate);line-height:1.75}
+.intro-aside{font-size:.96rem;color:var(--slate);line-height:1.75}
 .intro-aside p+p{margin-top:12px}
 @media(max-width:768px){
   .intro-header{grid-template-columns:1fr;gap:24px;margin-bottom:44px}
 }
 
-/* ── QUE SON ────────────────────────────────────────────── */
-#que-son{background:var(--surface)}
-.que-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+/* ════════════════════════════════════════════════════════
+   CALENDARIO DE ACTIVIDADES
+═══════════════════════════════════════════════════════ */
+#calendario{background:var(--surface)}
+
+.cal-toolbar{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:36px;gap:24px;flex-wrap:wrap;
 }
-.que-visual{
-  position:relative;border-radius:32px;overflow:hidden;
-  aspect-ratio:4/5;background:#ddd;box-shadow:var(--sh-3);
+.cal-month-nav{display:flex;align-items:center;gap:14px}
+.cal-arrow{
+  width:38px;height:38px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;color:var(--slate);
+  transition:border-color var(--t1),color var(--t1);
 }
-.que-visual img{width:100%;height:100%;object-fit:cover}
-.que-visual::after{
+.cal-arrow:hover{border-color:var(--g-d);color:var(--g-d)}
+.cal-arrow svg{width:14px;height:14px}
+.cal-month{
+  font-family:var(--display);font-weight:700;font-size:1.4rem;
+  color:var(--ink);letter-spacing:-.015em;
+  min-width:200px;text-align:center;
+}
+.cal-filters{display:flex;gap:8px;flex-wrap:wrap}
+.cal-fbtn{
+  padding:7px 14px;border-radius:30px;border:1.5px solid var(--line);
+  background:var(--surface);color:var(--slate);
+  font-size:.82rem;font-weight:600;
+  display:inline-flex;align-items:center;gap:7px;
+  transition:all var(--t1);
+}
+.cal-fbtn-dot{width:7px;height:7px;border-radius:50%;background:var(--g)}
+.cal-fbtn.on,.cal-fbtn:hover{border-color:var(--g);color:var(--g-d);background:var(--g-tint)}
+.cal-fbtn.fis .cal-fbtn-dot{background:var(--g)}
+.cal-fbtn.son .cal-fbtn-dot{background:#8B5CF6}
+.cal-fbtn.med .cal-fbtn-dot{background:#0EA8E8}
+.cal-fbtn.gru .cal-fbtn-dot{background:var(--gold)}
+
+/* Calendar grid */
+.cal-grid-wrap{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-xl);overflow:hidden;
+  box-shadow:var(--sh-1);
+}
+.cal-weekdays{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  background:var(--g-tint);border-bottom:1px solid var(--line);
+}
+.cal-weekday{
+  padding:14px 8px;text-align:center;
+  font-family:var(--cond);font-size:.74rem;font-weight:700;
+  letter-spacing:2.5px;text-transform:uppercase;color:var(--g-deep);
+}
+.cal-grid{
+  display:grid;grid-template-columns:repeat(7,1fr);
+  grid-auto-rows:minmax(110px,auto);
+}
+.cal-cell{
+  padding:10px;border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  position:relative;cursor:default;
+  transition:background var(--t1);
+}
+.cal-cell:nth-child(7n){border-right:none}
+.cal-cell.empty{background:var(--bg);opacity:.4}
+.cal-cell.today{background:var(--g-tint)}
+.cal-cell.today .cal-day-num{
+  background:var(--g);color:#fff;width:30px;height:30px;
+  border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+}
+.cal-day-num{
+  font-family:var(--display);font-weight:700;font-size:1.05rem;
+  color:var(--ink);margin-bottom:6px;display:block;
+  width:30px;text-align:center;
+}
+.cal-event{
+  display:block;
+  font-size:.74rem;font-weight:600;
+  padding:3px 7px;border-radius:5px;
+  margin-bottom:3px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  cursor:pointer;
+  border-left:2.5px solid;
+  background:#fff;
+  transition:transform var(--t1);
+}
+.cal-event:hover{transform:translateX(2px)}
+.cal-event.fis{border-color:var(--g);color:var(--g-deep);background:rgba(15,191,139,.08)}
+.cal-event.son{border-color:#8B5CF6;color:#6D28D9;background:rgba(139,92,246,.08)}
+.cal-event.med{border-color:#0EA8E8;color:#0670AB;background:rgba(14,168,232,.08)}
+.cal-event.gru{border-color:var(--gold);color:var(--gold-d);background:rgba(201,169,97,.1)}
+
+/* Featured events cards below */
+.cal-feats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:22px;
+  margin-top:36px;
+}
+.cal-feat{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:20px;padding:24px;
+  display:flex;flex-direction:column;gap:12px;
+  transition:transform var(--t1),box-shadow var(--t1);
+}
+.cal-feat:hover{transform:translateY(-4px);box-shadow:var(--sh-2)}
+.cal-feat-top{display:flex;align-items:center;justify-content:space-between}
+.cal-feat-date{
+  display:flex;flex-direction:column;align-items:flex-start;
+  background:var(--ink);color:#fff;border-radius:12px;
+  padding:8px 14px;line-height:1;
+}
+.cal-feat-d{font-family:var(--display);font-weight:700;font-size:1.6rem;letter-spacing:-.025em}
+.cal-feat-m{font-family:var(--cond);font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:2px}
+.cal-feat-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 11px;border-radius:30px;
+  font-family:var(--cond);font-size:.66rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;
+}
+.cal-feat-tag.fis{background:var(--g-soft);color:var(--g-deep)}
+.cal-feat-tag.son{background:rgba(139,92,246,.12);color:#6D28D9}
+.cal-feat-tag.med{background:rgba(14,168,232,.12);color:#0670AB}
+.cal-feat h4{
+  font-family:var(--display);font-size:1.18rem;font-weight:700;
+  color:var(--ink);line-height:1.25;letter-spacing:-.012em;
+}
+.cal-feat-time{
+  font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:7px;
+}
+.cal-feat-time svg{width:13px;height:13px;color:var(--g-d)}
+
+@media(max-width:880px){
+  .cal-grid{display:none}
+  .cal-weekdays{display:none}
+  .cal-grid-wrap{border:none;background:transparent;box-shadow:none}
+  .cal-feats{grid-template-columns:1fr}
+  .cal-toolbar{flex-direction:column;align-items:flex-start}
+}
+
+/* ════════════════════════════════════════════════════════
+   MODAL (compartido)
+═══════════════════════════════════════════════════════ */
+.modal{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(13,27,42,.65);
+  backdrop-filter:blur(10px);
+  display:none;align-items:center;justify-content:center;
+  padding:24px;
+  opacity:0;transition:opacity .25s ease;
+}
+.modal.open{display:flex;opacity:1}
+.modal-box{
+  background:var(--surface);border-radius:var(--r-xl);
+  width:100%;max-width:680px;max-height:90vh;
+  overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:var(--sh-3);
+  transform:scale(.95);opacity:0;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .25s ease;
+}
+.modal.open .modal-box{transform:scale(1);opacity:1}
+.modal-close{
+  position:absolute;top:18px;right:18px;z-index:10;
+  width:38px;height:38px;border-radius:50%;
+  background:rgba(255,255,255,.9);backdrop-filter:blur(8px);
+  color:var(--ink);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;border:1px solid var(--line);
+  transition:transform var(--t1),background var(--t1);
+}
+.modal-close:hover{transform:rotate(90deg);background:#fff}
+.modal-close svg{width:16px;height:16px}
+.modal-body{padding:32px;overflow-y:auto;flex:1}
+.modal-body::-webkit-scrollbar{width:6px}
+.modal-body::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+
+/* AGENDA MODAL */
+.am-hero{
+  padding:32px;background:linear-gradient(135deg,var(--g-tint),var(--g-soft));
+  border-bottom:1px solid var(--line);position:relative;
+}
+.am-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:5px 13px;border-radius:30px;
+  font-family:var(--cond);font-size:.7rem;font-weight:700;
+  letter-spacing:2.2px;text-transform:uppercase;
+  margin-bottom:14px;
+}
+.am-tag.fis{background:var(--g-soft);color:var(--g-deep)}
+.am-tag.son{background:rgba(139,92,246,.15);color:#6D28D9}
+.am-tag.med{background:rgba(14,168,232,.15);color:#0670AB}
+.am-tag.gru{background:rgba(201,169,97,.15);color:var(--gold-d)}
+.am-title{
+  font-family:var(--display);font-weight:700;font-size:1.7rem;
+  color:var(--ink);line-height:1.18;letter-spacing:-.018em;margin-bottom:10px;
+}
+.am-title em{font-style:italic;color:var(--g-d);font-weight:600}
+.am-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.am-meta-chip{
+  display:inline-flex;align-items:center;gap:7px;
+  background:#fff;border:1px solid var(--line);
+  border-radius:10px;padding:8px 12px;
+  font-size:.85rem;font-weight:500;color:var(--slate);
+}
+.am-meta-chip svg{width:14px;height:14px;color:var(--g-d)}
+
+.am-body{padding:28px 32px}
+.am-section-title{
+  font-family:var(--cond);font-size:.72rem;font-weight:700;
+  letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);
+  margin-bottom:12px;
+}
+.am-desc{font-size:.96rem;color:var(--slate);line-height:1.75;margin-bottom:24px}
+
+.am-form{
+  background:var(--bg);border:1px solid var(--line);
+  border-radius:var(--r-l);padding:24px;
+}
+.am-field{margin-bottom:14px}
+.am-field label{
+  display:block;font-size:.78rem;font-weight:600;
+  color:var(--muted);margin-bottom:5px;letter-spacing:.3px;
+}
+.am-field input{
+  width:100%;padding:13px 15px;
+  background:#fff;border:1.5px solid var(--line);
+  border-radius:11px;font-size:.93rem;color:var(--ink);
+  font-family:inherit;outline:none;
+  transition:border-color var(--t1),box-shadow var(--t1);
+}
+.am-field input:focus{border-color:var(--g);box-shadow:0 0 0 4px rgba(15,191,139,.1)}
+.am-field input.err{border-color:#DC2626}
+.am-err{font-size:.78rem;color:#DC2626;margin-top:5px;display:none}
+.am-err.show{display:block}
+
+.am-btn{
+  width:100%;padding:14px;margin-top:8px;
+  background:var(--ink);color:#fff;
+  border-radius:12px;font-weight:600;font-size:.97rem;
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  transition:transform var(--bounce),background var(--t1);
+  box-shadow:var(--sh-2);
+}
+.am-btn:hover{transform:translateY(-2px);background:var(--g-d)}
+.am-btn svg{width:15px;height:15px}
+
+.am-success{
+  text-align:center;padding:32px 28px;
+}
+.am-success-ic{
+  width:74px;height:74px;margin:0 auto 18px;
+  background:linear-gradient(135deg,var(--g),var(--g-deep));
+  border-radius:22px;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--sh-g);
+  animation:badge-in .6s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes badge-in{
+  from{transform:scale(0) rotate(-20deg);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+.am-success-ic svg{width:36px;height:36px}
+.am-success h4{
+  font-family:var(--display);font-weight:700;font-size:1.5rem;
+  color:var(--ink);margin-bottom:8px;letter-spacing:-.015em;
+}
+.am-success h4 em{font-style:italic;color:var(--g-d);font-weight:600}
+.am-success p{font-size:.93rem;color:var(--slate);line-height:1.65;margin-bottom:18px}
+.am-success-meta{
+  background:var(--g-tint);border:1px solid rgba(15,191,139,.18);
+  border-radius:12px;padding:14px;margin-top:14px;
+  font-size:.85rem;color:var(--g-deep);
+}
+
+/* Calendar interactive cell tweaks */
+.cal-event{cursor:pointer;transition:transform var(--t1),box-shadow var(--t1)}
+.cal-event:hover{transform:translateX(3px);box-shadow:0 2px 8px rgba(13,27,42,.1)}
+.cal-event.booked{
+  position:relative;
+  font-weight:700;
+}
+.cal-event.booked::after{
+  content:'✓';position:absolute;right:5px;top:50%;transform:translateY(-50%);
+  color:var(--g-d);font-weight:800;font-size:.86rem;
+}
+
+.cal-feat{cursor:pointer;position:relative}
+.cal-feat.booked-feat::before{
+  content:'';position:absolute;top:18px;right:18px;
+  width:24px;height:24px;border-radius:50%;
+  background:var(--g);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.8rem;font-weight:800;line-height:1;
+  z-index:5;
+}
+.cal-feat.booked-feat::after{
+  content:'✓';position:absolute;top:18px;right:18px;
+  width:24px;height:24px;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;font-weight:800;
+  z-index:6;
+}
+
+/* ════════════════════════════════════════════════════════
+   TERAPIAS DE SONIDO
+═══════════════════════════════════════════════════════ */
+#sonido{
+  background:linear-gradient(180deg,var(--bg),var(--g-tint));
+  position:relative;overflow:hidden;
+}
+.sonido-glow{
+  position:absolute;top:30%;right:-200px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(139,92,246,.10) 0%,transparent 65%);
+  filter:blur(20px);pointer-events:none;
+}
+.sonido-glow-2{
+  position:absolute;bottom:10%;left:-200px;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(15,191,139,.10) 0%,transparent 65%);
+  filter:blur(20px);pointer-events:none;
+}
+
+.sonido-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  margin-top:56px;position:relative;z-index:1;
+}
+.son-card{
+  background:var(--surface);border-radius:24px;
+  padding:32px 28px;border:1px solid var(--line);
+  position:relative;overflow:hidden;
+  transition:transform var(--t2),box-shadow var(--t2),border-color var(--t1);
+}
+.son-card:hover{transform:translateY(-8px);box-shadow:var(--sh-3);border-color:transparent}
+.son-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform var(--t2);
+}
+.son-1::before{background:linear-gradient(90deg,#8B5CF6,#6D28D9)}
+.son-2::before{background:linear-gradient(90deg,#0EA8E8,#0670AB)}
+.son-3::before{background:linear-gradient(90deg,var(--g),var(--g-deep))}
+.son-4::before{background:linear-gradient(90deg,var(--gold),var(--gold-d))}
+.son-5::before{background:linear-gradient(90deg,#EC4899,#BE185D)}
+.son-6::before{background:linear-gradient(90deg,#F59E0B,#D97706)}
+.son-card:hover::before{transform:scaleX(1)}
+
+.son-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.son-ico{
+  width:54px;height:54px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;transition:transform var(--bounce);
+}
+.son-card:hover .son-ico{transform:scale(1.08) rotate(-5deg)}
+.son-1 .son-ico{background:linear-gradient(135deg,#8B5CF6,#6D28D9)}
+.son-2 .son-ico{background:linear-gradient(135deg,#0EA8E8,#0670AB)}
+.son-3 .son-ico{background:linear-gradient(135deg,var(--g),var(--g-deep))}
+.son-4 .son-ico{background:linear-gradient(135deg,var(--gold),var(--gold-d))}
+.son-5 .son-ico{background:linear-gradient(135deg,#EC4899,#BE185D)}
+.son-6 .son-ico{background:linear-gradient(135deg,#F59E0B,#D97706)}
+.son-ico svg{width:26px;height:26px}
+
+.son-freq{
+  font-family:var(--display);font-weight:700;font-style:italic;
+  font-size:1.6rem;letter-spacing:-.02em;
+}
+.son-1 .son-freq{color:#6D28D9}
+.son-2 .son-freq{color:#0670AB}
+.son-3 .son-freq{color:var(--g-d)}
+.son-4 .son-freq{color:var(--gold-d)}
+.son-5 .son-freq{color:#BE185D}
+.son-6 .son-freq{color:#D97706}
+.son-freq sub{font-size:.7rem;font-weight:600;color:var(--muted);font-style:normal;margin-left:2px}
+
+.son-card h3{
+  font-family:var(--display);font-size:1.35rem;font-weight:700;
+  color:var(--ink);margin-bottom:10px;letter-spacing:-.015em;
+}
+.son-card p{font-size:.92rem;color:var(--muted);line-height:1.65;margin-bottom:18px}
+
+/* Wave visualization */
+.son-wave{
+  display:flex;align-items:center;justify-content:center;gap:3px;
+  height:36px;margin:14px 0;
+}
+.son-wave-bar{
+  width:3px;border-radius:3px;
+  transform-origin:center;
+}
+.son-1 .son-wave-bar{background:#8B5CF6}
+.son-2 .son-wave-bar{background:#0EA8E8}
+.son-3 .son-wave-bar{background:var(--g)}
+.son-4 .son-wave-bar{background:var(--gold)}
+.son-5 .son-wave-bar{background:#EC4899}
+.son-6 .son-wave-bar{background:#F59E0B}
+
+.son-card:hover .son-wave-bar{animation:wave-1 1.2s ease-in-out infinite}
+.son-card:hover .son-wave-bar:nth-child(2n){animation:wave-2 1.2s ease-in-out infinite}
+.son-card:hover .son-wave-bar:nth-child(3n){animation-delay:.1s}
+.son-card:hover .son-wave-bar:nth-child(5n){animation-delay:.3s}
+
+.son-meta{
+  display:flex;align-items:center;gap:14px;
+  padding-top:16px;border-top:1px solid var(--line);
+  font-size:.82rem;color:var(--slate);
+}
+.son-meta-item{display:flex;align-items:center;gap:6px}
+.son-meta-item svg{width:13px;height:13px;color:var(--g-d)}
+
+@media(max-width:960px){.sonido-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.sonido-grid{grid-template-columns:1fr}}
+
+/* ════════════════════════════════════════════════════════
+   RECOMENDACIONES
+═══════════════════════════════════════════════════════ */
+#recomendaciones{background:var(--surface)}
+
+.reco-tabs{
+  display:flex;gap:6px;background:var(--bg);
+  border:1px solid var(--line);border-radius:14px;
+  padding:5px;margin-top:40px;margin-bottom:36px;
+  overflow-x:auto;
+}
+.reco-tab{
+  flex:1;min-width:auto;
+  padding:11px 18px;border-radius:10px;
+  font-size:.86rem;font-weight:600;color:var(--slate);
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  white-space:nowrap;transition:all var(--t1);
+}
+.reco-tab svg{width:15px;height:15px}
+.reco-tab.on{background:var(--ink);color:#fff;box-shadow:var(--sh-1)}
+.reco-tab:not(.on):hover{background:var(--g-tint);color:var(--g-d)}
+
+.reco-panel{display:none}
+.reco-panel.active{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:start}
+
+.reco-content h3{
+  font-family:var(--display);font-weight:700;font-size:1.7rem;
+  color:var(--ink);margin-bottom:14px;letter-spacing:-.018em;
+}
+.reco-content h3 em{font-style:italic;color:var(--g-d);font-weight:600}
+.reco-content>p{
+  font-size:1rem;color:var(--slate);line-height:1.75;margin-bottom:24px;
+}
+.reco-tips li{
+  display:flex;gap:14px;
+  padding:14px 0;border-top:1px solid var(--line);
+}
+.reco-tips li:first-child{border-top:none;padding-top:0}
+.reco-tip-n{
+  font-family:var(--display);font-weight:700;font-style:italic;
+  font-size:1.4rem;color:var(--g-d);
+  flex-shrink:0;width:36px;line-height:1.15;
+}
+.reco-tip-body strong{display:block;color:var(--ink);font-weight:600;margin-bottom:3px;font-size:1rem}
+.reco-tip-body span{font-size:.92rem;color:var(--muted);line-height:1.6}
+
+.reco-visual{
+  position:relative;border-radius:28px;overflow:hidden;
+  aspect-ratio:4/5;background:#ddd;
+  box-shadow:var(--sh-3);
+}
+.reco-visual img{width:100%;height:100%;object-fit:cover}
+.reco-visual::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,transparent 50%,rgba(13,27,42,.45));
+  background:linear-gradient(180deg,transparent 60%,rgba(13,27,42,.6));
 }
-.que-tag{
+.reco-visual-tag{
   position:absolute;left:24px;bottom:24px;z-index:2;
   display:inline-flex;align-items:center;gap:10px;
   background:rgba(255,255,255,.95);backdrop-filter:blur(14px);
   border-radius:14px;padding:11px 16px;
   color:var(--ink);font-size:.85rem;font-weight:600;
 }
-.que-tag-ic{
+.reco-visual-tag-ic{
   width:30px;height:30px;border-radius:8px;
-  background:var(--g-soft);color:var(--g-d);
+  background:var(--g);color:#fff;
   display:flex;align-items:center;justify-content:center;flex-shrink:0;
 }
-.que-tag-ic svg{width:15px;height:15px}
-
-.que-body p{
-  font-size:1.02rem;color:var(--slate);line-height:1.8;margin-bottom:18px;
-}
-.que-quote{
-  background:var(--g-tint);border-left:3px solid var(--g);
-  padding:22px 28px;border-radius:0 var(--r-m) var(--r-m) 0;
-  margin:28px 0;
-  font-family:var(--display);font-style:italic;
-  font-size:1.18rem;line-height:1.55;color:var(--ink-2);
-}
-.que-list{margin-top:24px}
-.que-list li{
-  display:flex;align-items:flex-start;gap:14px;
-  padding:14px 0;border-top:1px solid var(--line);
-  font-size:.95rem;color:var(--slate);line-height:1.55;
-}
-.que-list li:first-child{border-top:none;padding-top:0}
-.que-li-ic{
-  width:26px;height:26px;border-radius:50%;
-  background:var(--g);color:#fff;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
-}
-.que-li-ic svg{width:13px;height:13px}
-.que-list strong{color:var(--ink);font-weight:600;display:block;margin-bottom:2px;font-size:1rem}
+.reco-visual-tag-ic svg{width:14px;height:14px}
 
 @media(max-width:960px){
-  .que-grid{grid-template-columns:1fr;gap:48px}
-  .que-visual{aspect-ratio:4/3;max-height:480px}
+  .reco-panel.active{grid-template-columns:1fr;gap:36px}
+  .reco-visual{aspect-ratio:4/3;max-height:420px}
 }
 
-/* ── TIPOS DE PAUSAS ────────────────────────────────────── */
-#tipos{background:var(--bg);position:relative;overflow:hidden}
-.tipos-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:22px;
-  margin-top:48px;
+/* ════════════════════════════════════════════════════════
+   RECETAS SALUDABLES
+═══════════════════════════════════════════════════════ */
+#recetas{background:linear-gradient(180deg,var(--surface),var(--cream))}
+
+.rec-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:24px;margin-top:56px;
 }
-.tipo{
+.rec-card{
   background:var(--surface);border-radius:24px;
-  padding:36px 28px;border:1px solid var(--line);
-  position:relative;overflow:hidden;
-  transition:transform var(--t2),box-shadow var(--t2),border-color var(--t1);
-  cursor:default;
-}
-.tipo:hover{
-  transform:translateY(-8px);
-  box-shadow:var(--sh-2);
-  border-color:transparent;
-}
-.tipo::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--g),var(--g-deep));
-  transform:scaleX(0);transform-origin:left;
-  transition:transform var(--t2);
-}
-.tipo:hover::before{transform:scaleX(1)}
-.tipo-ico-wrap{
-  width:64px;height:64px;border-radius:18px;
-  background:linear-gradient(135deg,var(--g-soft),#D5F4E8);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:24px;color:var(--g-d);
-  transition:transform var(--bounce),background var(--t1);
-}
-.tipo:hover .tipo-ico-wrap{
-  background:linear-gradient(135deg,var(--g),var(--g-deep));color:#fff;
-  transform:scale(1.05);
-}
-.tipo-ico-wrap svg{width:30px;height:30px}
-.tipo h3{
-  font-family:var(--display);font-size:1.4rem;font-weight:700;
-  color:var(--ink);margin-bottom:10px;letter-spacing:-.015em;
-}
-.tipo p{font-size:.93rem;color:var(--muted);line-height:1.65;margin-bottom:18px}
-.tipo-meta{
-  display:flex;align-items:center;gap:8px;
-  padding-top:18px;border-top:1px solid var(--line);
-  font-size:.78rem;font-weight:600;color:var(--g-d);
-  letter-spacing:.5px;
-}
-.tipo-meta svg{width:14px;height:14px}
-
-@media(max-width:960px){
-  .tipos-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:520px){
-  .tipos-grid{grid-template-columns:1fr}
-}
-
-/* ── BENEFICIOS — Split layout ──────────────────────────── */
-#beneficios{
-  background:linear-gradient(180deg,var(--surface),var(--g-tint));
-  position:relative;overflow:hidden;
-}
-.ben-deco{
-  position:absolute;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:1000px;height:1000px;border-radius:50%;
-  background:radial-gradient(circle,rgba(15,191,139,.06) 0%,transparent 60%);
-  pointer-events:none;
-}
-.ben-wrap{position:relative;z-index:1}
-.ben-stats{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:0;background:var(--surface);
-  border-radius:var(--r-xl);
-  overflow:hidden;box-shadow:var(--sh-2);
-  margin-bottom:64px;
-}
-.ben-stat{
-  padding:44px 28px;text-align:center;
-  border-right:1px solid var(--line);
-  position:relative;
-}
-.ben-stat:last-child{border-right:none}
-.ben-stat-num{
-  font-family:var(--display);font-weight:700;
-  font-size:3.4rem;line-height:1;color:var(--g-d);
-  font-variant-numeric:tabular-nums;margin-bottom:8px;
-  letter-spacing:-.03em;
-}
-.ben-stat-num sup{font-size:1.6rem;color:var(--g);margin-left:2px;font-weight:600}
-.ben-stat-label{font-size:.86rem;color:var(--slate);line-height:1.45;font-weight:500}
-.ben-stat-label strong{color:var(--ink);display:block;font-weight:700;font-size:.95rem;margin-bottom:3px}
-
-.ben-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
-}
-.ben{
-  background:var(--surface);border-radius:var(--r-l);
-  padding:32px 28px;border:1px solid var(--line);
-  display:flex;flex-direction:column;gap:14px;
-  transition:transform var(--t1),border-color var(--t1);
-}
-.ben:hover{transform:translateY(-4px);border-color:var(--g)}
-.ben-num{
-  font-family:var(--cond);font-weight:700;
-  font-size:.78rem;letter-spacing:3px;text-transform:uppercase;
-  color:var(--g-d);
-}
-.ben h3{
-  font-family:var(--display);font-size:1.25rem;font-weight:700;
-  color:var(--ink);line-height:1.25;letter-spacing:-.012em;
-}
-.ben p{font-size:.93rem;color:var(--muted);line-height:1.65}
-.ben-arrow{
-  align-self:flex-start;margin-top:auto;
-  width:38px;height:38px;border-radius:50%;
-  background:var(--g-soft);color:var(--g-d);
-  display:flex;align-items:center;justify-content:center;
-  transition:background var(--t1),color var(--t1),transform var(--t1);
-}
-.ben:hover .ben-arrow{background:var(--g);color:#fff;transform:translateX(4px)}
-.ben-arrow svg{width:16px;height:16px}
-
-@media(max-width:960px){
-  .ben-stats{grid-template-columns:1fr 1fr}
-  .ben-stat{border-right:none;border-bottom:1px solid var(--line)}
-  .ben-stat:nth-child(odd){border-right:1px solid var(--line)}
-  .ben-stat:nth-last-child(-n+2){border-bottom:none}
-  .ben-grid{grid-template-columns:1fr 1fr}
-}
-@media(max-width:640px){
-  .ben-stats{grid-template-columns:1fr}
-  .ben-stat{border-right:none !important;border-bottom:1px solid var(--line)}
-  .ben-stat:last-child{border-bottom:none}
-  .ben-grid{grid-template-columns:1fr}
-  .ben-stat-num{font-size:2.6rem}
-}
-
-/* ── PROGRAMA / EJERCICIOS ──────────────────────────────── */
-#programa{background:var(--surface)}
-.prog-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
-  margin-top:56px;
-}
-.prog{
-  background:var(--surface);border-radius:var(--r-xl);
   overflow:hidden;border:1px solid var(--line);
+  cursor:pointer;
   transition:transform var(--t2),box-shadow var(--t2);
+  display:flex;flex-direction:column;
 }
-.prog:hover{transform:translateY(-6px);box-shadow:var(--sh-2)}
-.prog-img{
-  position:relative;aspect-ratio:5/4;background:#ddd;overflow:hidden;
+.rec-card:hover{transform:translateY(-6px);box-shadow:var(--sh-3)}
+.rec-img{
+  position:relative;aspect-ratio:4/3;overflow:hidden;background:#eee;
 }
-.prog-img img{
+.rec-img img{
   width:100%;height:100%;object-fit:cover;
   transition:transform .9s cubic-bezier(.4,0,.2,1);
 }
-.prog:hover .prog-img img{transform:scale(1.06)}
-.prog-img::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(0deg,rgba(13,27,42,.5) 0%,transparent 50%);
-}
-.prog-pill{
-  position:absolute;top:18px;left:18px;z-index:2;
-  background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
-  border-radius:30px;padding:6px 14px;
-  font-family:var(--cond);font-size:.72rem;font-weight:700;
+.rec-card:hover .rec-img img{transform:scale(1.06)}
+.rec-tag{
+  position:absolute;top:14px;left:14px;z-index:2;
+  background:rgba(255,255,255,.96);backdrop-filter:blur(10px);
+  border-radius:30px;padding:5px 12px;
+  font-family:var(--cond);font-size:.68rem;font-weight:700;
   letter-spacing:2px;text-transform:uppercase;color:var(--g-d);
 }
-.prog-dur{
-  position:absolute;bottom:18px;right:18px;z-index:2;
-  display:inline-flex;align-items:center;gap:6px;
-  background:rgba(255,255,255,.95);backdrop-filter:blur(10px);
-  border-radius:8px;padding:5px 11px;
-  font-size:.78rem;font-weight:700;color:var(--ink);
+.rec-cal{
+  position:absolute;top:14px;right:14px;z-index:2;
+  background:var(--ink);color:#fff;
+  border-radius:30px;padding:5px 11px;
+  font-family:var(--display);font-size:.85rem;font-weight:700;letter-spacing:-.01em;
 }
-.prog-dur svg{width:13px;height:13px;color:var(--g-d)}
-.prog-body{padding:28px 26px}
-.prog h3{
-  font-family:var(--display);font-size:1.4rem;font-weight:700;
-  color:var(--ink);margin-bottom:10px;line-height:1.25;letter-spacing:-.015em;
+.rec-cal sub{font-size:.62rem;font-weight:500;letter-spacing:.5px;margin-left:1px;color:rgba(255,255,255,.7)}
+.rec-body{padding:18px 20px;flex:1;display:flex;flex-direction:column}
+.rec-card h3{
+  font-family:var(--display);font-weight:700;font-size:1.15rem;
+  color:var(--ink);line-height:1.25;letter-spacing:-.012em;margin-bottom:6px;
 }
-.prog p{font-size:.93rem;color:var(--muted);line-height:1.65;margin-bottom:18px}
-.prog-list{display:flex;flex-direction:column;gap:9px}
-.prog-list li{
+.rec-desc{font-size:.84rem;color:var(--muted);line-height:1.55;flex:1;margin-bottom:14px}
+.rec-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:12px;border-top:1px solid var(--line);
+}
+.rec-time{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--slate);font-weight:500}
+.rec-time svg{width:13px;height:13px;color:var(--g-d)}
+.rec-cta{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:.78rem;font-weight:700;color:var(--g-d);
+  font-family:var(--cond);letter-spacing:2px;text-transform:uppercase;
+}
+.rec-cta svg{width:11px;height:11px;transition:transform var(--t1)}
+.rec-card:hover .rec-cta svg{transform:translateX(3px)}
+
+/* MODAL DE RECETA */
+.rt-hero{
+  position:relative;aspect-ratio:16/9;background:#ddd;overflow:hidden;
+}
+.rt-hero img{width:100%;height:100%;object-fit:cover}
+.rt-hero::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 45%,rgba(13,27,42,.88));
+}
+.rt-hero-info{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:28px 32px;color:#fff;
+}
+.rt-tag{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(15,191,139,.95);
+  border-radius:30px;padding:5px 13px;
+  font-family:var(--cond);font-size:.7rem;font-weight:700;
+  letter-spacing:2.2px;text-transform:uppercase;color:#fff;
+  margin-bottom:12px;
+}
+.rt-name{
+  font-family:var(--display);font-weight:700;font-style:italic;
+  font-size:1.95rem;line-height:1.18;letter-spacing:-.018em;color:#fff;
+}
+.rt-meta{
+  display:flex;flex-wrap:wrap;gap:0;padding:0;
+  border-bottom:1px solid var(--line);
+}
+.rt-meta-item{
+  flex:1;min-width:120px;padding:18px 20px;
+  display:flex;align-items:center;gap:12px;
+  border-right:1px solid var(--line);
+}
+.rt-meta-item:last-child{border-right:none}
+.rt-meta-ic{
+  width:38px;height:38px;border-radius:11px;
+  background:var(--g-soft);color:var(--g-d);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.rt-meta-ic svg{width:17px;height:17px}
+.rt-meta-lbl{
+  font-family:var(--cond);font-size:.66rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+  margin-bottom:2px;
+}
+.rt-meta-val{
+  font-family:var(--display);font-weight:700;font-size:1.05rem;color:var(--ink);
+  letter-spacing:-.01em;
+}
+.rt-body{padding:28px 32px}
+.rt-block{margin-bottom:24px}
+.rt-block:last-child{margin-bottom:0}
+.rt-block-title{
+  font-family:var(--cond);font-size:.74rem;font-weight:700;
+  letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);
+  margin-bottom:14px;display:flex;align-items:center;gap:9px;
+}
+.rt-block-title::before{
+  content:'';width:24px;height:1.5px;background:var(--g);
+}
+.rt-ingr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rt-ingr li{
   display:flex;align-items:center;gap:10px;
-  font-size:.87rem;color:var(--slate);
+  font-size:.9rem;color:var(--slate);
+  padding:9px 12px;background:var(--g-tint);
+  border-radius:10px;line-height:1.4;
 }
-.prog-list li svg{width:14px;height:14px;color:var(--g-d);flex-shrink:0}
-
-@media(max-width:960px){.prog-grid{grid-template-columns:1fr 1fr}}
-@media(max-width:640px){.prog-grid{grid-template-columns:1fr}}
-
-/* ── PROCESO ────────────────────────────────────────────── */
-#proceso{background:var(--cream);position:relative;overflow:hidden}
-.proc-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
-  margin-top:56px;position:relative;
+.rt-ingr li::before{
+  content:'';width:6px;height:6px;border-radius:50%;background:var(--g);flex-shrink:0;
 }
-.proc-line{
-  position:absolute;top:36px;left:5%;right:5%;height:2px;
-  background:linear-gradient(90deg,transparent,var(--line-2) 10%,var(--line-2) 90%,transparent);
-  z-index:0;
+.rt-steps li{
+  display:flex;gap:14px;padding:14px 0;
+  border-top:1px solid var(--line);
 }
-.proc-step{
-  position:relative;z-index:1;padding:0 18px;text-align:center;
+.rt-steps li:first-child{border-top:none;padding-top:0}
+.rt-step-n{
+  font-family:var(--display);font-weight:700;font-style:italic;
+  font-size:1.35rem;color:var(--g-d);
+  flex-shrink:0;width:36px;line-height:1.15;
 }
-.proc-num{
-  width:72px;height:72px;margin:0 auto 22px;
-  background:var(--surface);border:2px solid var(--g);
-  border-radius:50%;
+.rt-step-tx{font-size:.94rem;color:var(--slate);line-height:1.65;padding-top:3px}
+.rt-benefit{
+  background:linear-gradient(135deg,var(--g-tint),var(--g-soft));
+  border-radius:14px;padding:16px 20px;
+  display:flex;align-items:flex-start;gap:13px;
+  border:1px solid rgba(15,191,139,.18);
+}
+.rt-benefit-ic{
+  width:38px;height:38px;border-radius:11px;
+  background:linear-gradient(135deg,var(--g),var(--g-deep));
+  color:#fff;flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
-  font-family:var(--display);font-size:1.6rem;font-weight:700;
-  color:var(--g-d);position:relative;
 }
-.proc-num::before{
-  content:'';position:absolute;inset:-6px;border-radius:50%;
-  border:2px solid var(--g);opacity:0;
-  animation:pulse-ring 2s ease-out infinite;
-}
-.proc-step:hover .proc-num::before{opacity:1}
-.proc-step h4{
-  font-family:var(--display);font-size:1.18rem;font-weight:700;
-  color:var(--ink);margin-bottom:8px;letter-spacing:-.012em;
-}
-.proc-step p{font-size:.88rem;color:var(--muted);line-height:1.6}
-@media(max-width:880px){
-  .proc-grid{grid-template-columns:1fr 1fr;gap:36px}
-  .proc-line{display:none}
-}
-@media(max-width:520px){
-  .proc-grid{grid-template-columns:1fr;gap:24px}
+.rt-benefit-ic svg{width:17px;height:17px}
+.rt-benefit-tx{font-size:.92rem;color:var(--g-deep);line-height:1.6}
+.rt-benefit-tx strong{display:block;font-family:var(--cond);font-size:.7rem;
+  font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--g-d);margin-bottom:4px}
+
+@media(max-width:560px){
+  .rt-hero-info{padding:22px 24px}
+  .rt-name{font-size:1.5rem}
+  .rt-body{padding:24px}
+  .rt-ingr{grid-template-columns:1fr}
 }
 
-/* ── TESTIMONIO destacado ───────────────────────────────── */
-#testimonio{
-  background:var(--ink);color:#fff;position:relative;overflow:hidden;
-}
-.tes-glow{
-  position:absolute;top:-200px;left:-200px;
-  width:600px;height:600px;border-radius:50%;
-  background:radial-gradient(circle,rgba(15,191,139,.18) 0%,transparent 70%);
-  filter:blur(20px);
-}
-.tes-inner{
-  position:relative;z-index:1;text-align:center;max-width:880px;margin:0 auto;
-}
-.tes-quote-ico{
-  width:60px;height:60px;margin:0 auto 28px;
-  background:var(--g);border-radius:18px;
-  display:flex;align-items:center;justify-content:center;color:#fff;
-}
-.tes-quote-ico svg{width:30px;height:30px}
-.tes-quote{
-  font-family:var(--display);font-style:italic;font-weight:400;
-  font-size:clamp(1.6rem,3vw,2.4rem);line-height:1.35;color:#fff;
-  margin-bottom:36px;letter-spacing:-.012em;
-}
-.tes-quote em{color:var(--g);font-style:italic;font-weight:600}
-.tes-author{display:flex;align-items:center;justify-content:center;gap:14px}
-.tes-avatar{
-  width:54px;height:54px;border-radius:50%;
-  background:#fff;border:2px solid var(--g);
-  background-image:url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&fit=crop&q=80');
-  background-size:cover;background-position:center;
-}
-.tes-meta{text-align:left}
-.tes-name{font-weight:700;color:#fff;font-size:.98rem;margin-bottom:2px}
-.tes-role{font-size:.84rem;color:rgba(255,255,255,.6)}
-
-/* ── FAQ ────────────────────────────────────────────────── */
-#faq{background:var(--bg)}
-.faq-wrap{
-  display:grid;grid-template-columns:.85fr 1.4fr;gap:80px;align-items:start;
-}
-.faq-list{display:flex;flex-direction:column;gap:12px}
-.faq-item{
-  background:var(--surface);border-radius:var(--r-m);
-  border:1px solid var(--line);overflow:hidden;
-  transition:border-color var(--t1);
-}
-.faq-item.open{border-color:var(--g)}
-.faq-q{
-  width:100%;padding:22px 26px;
-  display:flex;align-items:center;justify-content:space-between;gap:16px;
-  text-align:left;cursor:pointer;
-  font-weight:600;font-size:1rem;color:var(--ink);
-  transition:color var(--t1);
-}
-.faq-item.open .faq-q{color:var(--g-d)}
-.faq-icon{
-  flex-shrink:0;width:32px;height:32px;border-radius:50%;
-  background:var(--g-tint);color:var(--g-d);
-  display:flex;align-items:center;justify-content:center;
-  transition:transform var(--t2),background var(--t1),color var(--t1);
-}
-.faq-icon svg{width:14px;height:14px}
-.faq-item.open .faq-icon{background:var(--g);color:#fff;transform:rotate(45deg)}
-.faq-a{
-  max-height:0;overflow:hidden;
-  font-size:.95rem;color:var(--slate);line-height:1.75;
-  transition:max-height .4s ease,padding .4s ease;
-  padding:0 26px;
-}
-.faq-item.open .faq-a{max-height:300px;padding:0 26px 24px}
-
-@media(max-width:960px){
-  .faq-wrap{grid-template-columns:1fr;gap:36px}
-}
-
-/* ── CTA ────────────────────────────────────────────────── */
-#cta{position:relative;overflow:hidden;padding:0}
-.cta-card{
+/* ════════════════════════════════════════════════════════
+   OBJETIVO ALCANZADO - CTA
+═══════════════════════════════════════════════════════ */
+#objetivo{position:relative;overflow:hidden;padding:0}
+.obj-card{
   position:relative;background:var(--ink);color:#fff;
   border-radius:36px;overflow:hidden;
-  padding:90px 64px;text-align:center;
   margin:0 32px;
 }
-.cta-mesh{
+.obj-grid{
+  display:grid;grid-template-columns:1.2fr 1fr;align-items:center;
+  min-height:520px;
+}
+.obj-left{padding:80px 64px;position:relative;z-index:1}
+.obj-mesh{
   position:absolute;inset:0;
   background:
     radial-gradient(circle at 25% 30%,rgba(15,191,139,.32) 0%,transparent 45%),
     radial-gradient(circle at 75% 70%,rgba(10,158,114,.26) 0%,transparent 45%);
   pointer-events:none;
 }
-.cta-content{position:relative;z-index:1;max-width:680px;margin:0 auto}
-.cta-eyebrow{
-  color:var(--g);background:rgba(15,191,139,.18);
-  padding:6px 16px;border-radius:30px;
-  font-family:var(--cond);font-size:.74rem;font-weight:700;
+.obj-tag{
+  display:inline-flex;align-items:center;gap:9px;
+  background:rgba(15,191,139,.18);border:1px solid rgba(15,191,139,.35);
+  color:var(--g);border-radius:30px;
+  padding:6px 16px;font-size:.74rem;font-weight:700;
   letter-spacing:3px;text-transform:uppercase;
-  display:inline-block;margin-bottom:22px;
+  font-family:var(--cond);margin-bottom:22px;
 }
-.cta-h{
+.obj-tag svg{width:12px;height:12px}
+.obj-h{
   font-family:var(--display);font-weight:700;
-  font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.1;
+  font-size:clamp(2rem,4.2vw,3rem);line-height:1.1;
   margin-bottom:18px;letter-spacing:-.022em;
 }
-.cta-h em{font-style:italic;color:var(--g);font-weight:600}
-.cta-p{font-size:1.06rem;color:rgba(255,255,255,.7);line-height:1.7;max-width:540px;margin:0 auto 40px}
-.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.btn-cta{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:17px 32px;background:var(--g);color:#fff;
+.obj-h em{font-style:italic;color:var(--g);font-weight:600}
+.obj-p{font-size:1.04rem;color:rgba(255,255,255,.7);line-height:1.7;max-width:480px;margin-bottom:34px}
+.obj-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-obj{
+  display:inline-flex;align-items:center;gap:11px;
+  padding:16px 30px;background:var(--g);color:#fff;
   border-radius:12px;font-weight:600;font-size:1rem;
   transition:transform var(--bounce),background var(--t1);
   box-shadow:var(--sh-g);
 }
-.btn-cta:hover{transform:translateY(-3px);background:var(--g-d)}
-.btn-cta svg{width:18px;height:18px}
-.btn-cta-out{
+.btn-obj:hover{transform:translateY(-3px);background:var(--g-d)}
+.btn-obj svg{width:16px;height:16px}
+.btn-obj-out{
   display:inline-flex;align-items:center;gap:9px;
-  padding:17px 28px;
+  padding:16px 26px;
   border:1.5px solid rgba(255,255,255,.22);color:rgba(255,255,255,.88);
   border-radius:12px;font-weight:600;font-size:.96rem;
   transition:background var(--t1);
 }
-.btn-cta-out:hover{background:rgba(255,255,255,.1)}
-.btn-cta-out svg{width:16px;height:16px}
+.btn-obj-out:hover{background:rgba(255,255,255,.1)}
 
-@media(max-width:768px){
-  .cta-card{padding:60px 28px;margin:0 18px;border-radius:24px}
+.obj-right{
+  position:relative;height:100%;
+}
+.obj-img{
+  width:100%;height:100%;object-fit:cover;
+}
+.obj-img-wrap{
+  position:relative;height:100%;
+  overflow:hidden;
+}
+.obj-img-wrap::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(270deg,transparent,rgba(13,27,42,.4));
 }
 
-/* ── FOOTER ─────────────────────────────────────────────── */
+/* Floating stats over obj */
+.obj-stat{
+  position:absolute;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);
+  border-radius:18px;padding:14px 18px;
+  display:flex;align-items:center;gap:12px;
+  box-shadow:var(--sh-2);z-index:2;color:var(--ink);
+}
+.obj-stat-1{top:32px;right:32px;animation:float-slow 5s ease-in-out infinite}
+.obj-stat-2{bottom:32px;left:-24px;animation:float-slow 5s ease-in-out -2.5s infinite}
+.obj-stat-ic{
+  width:40px;height:40px;border-radius:11px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--g),var(--g-deep));
+  color:#fff;display:flex;align-items:center;justify-content:center;
+}
+.obj-stat-ic svg{width:18px;height:18px}
+.obj-stat-num{
+  font-family:var(--display);font-weight:700;font-size:1.3rem;
+  color:var(--ink);letter-spacing:-.02em;line-height:1;
+}
+.obj-stat-num sup{font-size:.85rem;color:var(--g-d);font-weight:600}
+.obj-stat-lbl{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.3px;font-weight:600;margin-top:2px}
+
+@media(max-width:960px){
+  .obj-grid{grid-template-columns:1fr}
+  .obj-left{padding:60px 36px}
+  .obj-right{min-height:300px}
+}
+@media(max-width:520px){
+  .obj-card{margin:0 18px;border-radius:24px}
+  .obj-left{padding:48px 28px}
+  .obj-stat-1{top:18px;right:18px}
+  .obj-stat-2{bottom:18px;left:18px}
+}
+
+/* ════════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════ */
 footer{
   background:var(--ink-2);color:rgba(255,255,255,.7);
   padding:80px 0 32px;margin-top:120px;
@@ -860,7 +1289,7 @@ footer{
 }
 .foot-brand{display:flex;align-items:center;gap:11px;margin-bottom:18px}
 .foot-brand-svg{width:46px;height:46px;flex-shrink:0}
-.foot-brand-svg .pill{fill:#2EBA9D}
+.foot-brand-svg .pill{fill:var(--logo-g)}
 .foot-brand-par{
   font-family:var(--sans);font-weight:800;font-size:1.8rem;
   color:#fff;letter-spacing:-1.5px;line-height:.9;
@@ -874,29 +1303,23 @@ footer{
 .foot-social{display:flex;gap:10px;margin-top:24px}
 .foot-social a{
   width:36px;height:36px;border-radius:10px;
-  background:rgba(255,255,255,.06);
+  background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);
   display:flex;align-items:center;justify-content:center;
-  color:rgba(255,255,255,.6);
   transition:background var(--t1),color var(--t1),transform var(--t1);
 }
 .foot-social a:hover{background:var(--g);color:#fff;transform:translateY(-3px)}
 .foot-social svg{width:16px;height:16px}
 .foot-col h5{
-  font-family:var(--cond);
-  font-size:.74rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
-  color:#fff;margin-bottom:18px;
+  font-family:var(--cond);font-size:.74rem;font-weight:700;
+  letter-spacing:2.5px;text-transform:uppercase;color:#fff;margin-bottom:18px;
 }
 .foot-col ul li{margin-bottom:10px}
-.foot-col ul li a{
-  font-size:.9rem;color:rgba(255,255,255,.55);
-  transition:color var(--t1);
-}
+.foot-col ul li a{font-size:.9rem;color:rgba(255,255,255,.55);transition:color var(--t1)}
 .foot-col ul li a:hover{color:var(--g)}
 .foot-col ul li a svg{width:12px;height:12px;display:inline-block;margin-right:6px;vertical-align:middle;opacity:.5}
 
 .foot-bottom{
-  border-top:1px solid rgba(255,255,255,.06);
-  padding-top:28px;
+  border-top:1px solid rgba(255,255,255,.06);padding-top:28px;
   display:flex;align-items:center;justify-content:space-between;
   font-size:.84rem;flex-wrap:wrap;gap:12px;color:rgba(255,255,255,.4);
 }
@@ -915,97 +1338,46 @@ footer{
 <body>
 
 <!-- ═══════════════════════════════════════════════════════
-     SVG SPRITE (iconos planos monocromáticos)
+     SVG SPRITE
 ═══════════════════════════════════════════════════════ -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <symbol id="i-arrow-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-    </symbol>
-    <symbol id="i-arrow-ur" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/>
-    </symbol>
+    <symbol id="i-arrow-r" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+    <symbol id="i-arrow-l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></symbol>
+    <symbol id="i-arrow-ur" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></symbol>
+    <symbol id="i-arrow-er" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></symbol>
-    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="20 6 9 17 4 12"/>
-    </symbol>
-    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-    </symbol>
-    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-    </symbol>
-    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-    </symbol>
-    <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-    </symbol>
-    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-    </symbol>
-    <!-- Pausa Física: figura corriendo -->
-    <symbol id="i-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-    </symbol>
-    <!-- Pausa Mental: cerebro -->
-    <symbol id="i-brain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5V20a2 2 0 0 1-2 2h-.5A2.5 2.5 0 0 1 7 19.5a2.5 2.5 0 0 1-2.96-3.08A2.5 2.5 0 0 1 3 14.5a2.5 2.5 0 0 1 1.04-2.04A2.5 2.5 0 0 1 4 10.5a2.5 2.5 0 0 1 1.04-2.04A2.5 2.5 0 0 1 4 6.5 2.5 2.5 0 0 1 7 4a2.5 2.5 0 0 1 2.5-2z"/>
-      <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5V20a2 2 0 0 0 2 2h.5a2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0 2.96-3.08A2.5 2.5 0 0 0 21 14.5a2.5 2.5 0 0 0-1.04-2.04A2.5 2.5 0 0 0 20 10.5a2.5 2.5 0 0 0-1.04-2.04A2.5 2.5 0 0 0 20 6.5 2.5 2.5 0 0 0 17 4a2.5 2.5 0 0 0-2.5-2z"/>
-    </symbol>
-    <!-- Pausa Ocular: ojo -->
-    <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-    </symbol>
-    <!-- Respiración: viento/aire -->
-    <symbol id="i-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
-    </symbol>
-    <symbol id="i-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>
-    </symbol>
-    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
-    </symbol>
-    <symbol id="i-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
-    </symbol>
-    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19.2 2.96c1.2 4.16.43 7.4-1.5 9.5C16 14.5 13.4 16 11 16"/>
-      <path d="M2 21c0-3 1.85-5.36 5.08-6"/>
-    </symbol>
-    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-    </symbol>
-    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-    </symbol>
-    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-    </symbol>
-    <symbol id="i-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-    </symbol>
-    <symbol id="i-quote" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M3 7h6v6H5c0 2 1 4 3 5l-1 2c-3-1-4-4-4-7V7zm12 0h6v6h-4c0 2 1 4 3 5l-1 2c-3-1-4-4-4-7V7z"/>
-    </symbol>
-    <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
-    </symbol>
-    <symbol id="i-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-    </symbol>
-    <symbol id="i-facebook" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.26h3.34l-.53 3.49h-2.81V24C19.61 23.09 24 18.1 24 12.07z"/>
-    </symbol>
-    <symbol id="i-whatsapp" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1s-1.3-.5-2.5-1.5c-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.2.3-.4.1-.2.1-.3 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.4 1 2.8 1.2 3c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.2-.1-.4-.2-.6-.3zM12 0C5.4 0 0 5.4 0 12c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.6c1.7 1 3.7 1.6 5.7 1.6 6.6 0 12-5.4 12-12S18.6 0 12 0zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.8 1 1-3.7-.2-.4C2.5 15.5 2 13.8 2 12 2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 9.8-10 9.8z"/>
-    </symbol>
-    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-      <line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>
-    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19.2 2.96c1.2 4.16.43 7.4-1.5 9.5C16 14.5 13.4 16 11 16"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></symbol>
+    <symbol id="i-brain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5V20a2 2 0 0 1-2 2h-.5A2.5 2.5 0 0 1 7 19.5a2.5 2.5 0 0 1-2.96-3.08A2.5 2.5 0 0 1 3 14.5a2.5 2.5 0 0 1 1.04-2.04A2.5 2.5 0 0 1 4 10.5a2.5 2.5 0 0 1 1.04-2.04A2.5 2.5 0 0 1 4 6.5 2.5 2.5 0 0 1 7 4a2.5 2.5 0 0 1 2.5-2z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5V20a2 2 0 0 0 2 2h.5a2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0 2.96-3.08A2.5 2.5 0 0 0 21 14.5a2.5 2.5 0 0 0-1.04-2.04A2.5 2.5 0 0 0 20 10.5a2.5 2.5 0 0 0-1.04-2.04A2.5 2.5 0 0 0 20 6.5 2.5 2.5 0 0 0 17 4a2.5 2.5 0 0 0-2.5-2z"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></symbol>
+    <symbol id="i-headphones" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></symbol>
+    <symbol id="i-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+    <symbol id="i-radio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"/></symbol>
+    <symbol id="i-trending" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+    <symbol id="i-coffee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+    <symbol id="i-droplet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.26h3.34l-.53 3.49h-2.81V24C19.61 23.09 24 18.1 24 12.07z"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1s-1.3-.5-2.5-1.5c-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.4.1-.6.1-.1.3-.3.4-.5.1-.1.2-.2.3-.4.1-.2.1-.3 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4s-1 1-1 2.4 1 2.8 1.2 3c.1.2 2 3 4.8 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.2-.1-.4-.2-.6-.3zM12 0C5.4 0 0 5.4 0 12c0 2.1.5 4.1 1.6 5.9L0 24l6.3-1.6c1.7 1 3.7 1.6 5.7 1.6 6.6 0 12-5.4 12-12S18.6 0 12 0zm0 21.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.8 1 1-3.7-.2-.4C2.5 15.5 2 13.8 2 12 2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 9.8-10 9.8z"/></symbol>
   </defs>
 </svg>
 
@@ -1027,14 +1399,14 @@ footer{
       </div>
     </a>
     <nav class="nav-links" aria-label="Navegación">
-      <a href="#que-son">Qué son</a>
-      <a href="#tipos">Tipos de pausas</a>
-      <a href="#beneficios">Beneficios</a>
-      <a href="#programa">Programa</a>
-      <a href="#faq">FAQ</a>
-      <a href="app.html" class="nav-cta">
-        Comenzar Ruta
-        <svg width="14" height="14"><use href="#i-arrow-r"/></svg>
+      <a href="#hero">Inicio</a>
+      <a href="#calendario">Calendario</a>
+      <a href="#sonido">Sonido</a>
+      <a href="#recomendaciones">Recomendaciones</a>
+      <a href="#recetas">Recetas</a>
+      <a href="https://forms.office.com/pages/responsepage.aspx?id=XeGN-vyc90KIcPq1ymwzBP-S6A5kRB5MpXcBObPT2LpUQVJTV0dYMVcyOThSNlRER0I3SDFFWDhLSi4u&route=shorturl" target="_blank" rel="noopener" class="nav-cta">
+        Objetivo Alcanzado
+        <svg><use href="#i-arrow-er"/></svg>
       </a>
     </nav>
     <button class="burger" id="burger" aria-label="Menú">
@@ -1042,156 +1414,163 @@ footer{
     </button>
   </div>
   <nav class="nav-mob" id="nav-mob" aria-label="Menú móvil">
-    <a href="#que-son">Qué son</a>
-    <a href="#tipos">Tipos de pausas</a>
-    <a href="#beneficios">Beneficios</a>
-    <a href="#programa">Programa</a>
-    <a href="#faq">FAQ</a>
-    <a href="app.html" class="nav-cta">Comenzar Ruta →</a>
+    <a href="#hero">Inicio</a>
+    <a href="#calendario">Calendario de Actividades</a>
+    <a href="#sonido">Terapias de Sonido</a>
+    <a href="#recomendaciones">Recomendaciones</a>
+    <a href="#recetas">Recetas Saludables</a>
+    <a href="https://forms.office.com/pages/responsepage.aspx?id=XeGN-vyc90KIcPq1ymwzBP-S6A5kRB5MpXcBObPT2LpUQVJTV0dYMVcyOThSNlRER0I3SDFFWDhLSi4u&route=shorturl" target="_blank" rel="noopener" class="nav-cta">Objetivo Alcanzado →</a>
   </nav>
 </header>
 
 <!-- ═══════════════════════════════════════════════════════
-     HERO
+     HERO con CARRUSEL DE IMÁGENES
 ═══════════════════════════════════════════════════════ -->
 <section id="hero">
-  <div class="hero-bg-grid"></div>
+  <div class="hero-grid-bg"></div>
   <div class="hero-glow"></div>
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-left">
-        <div class="hero-carousel reveal">
-          <!-- SLIDE 1 -->
-          <div class="h-slide active" data-slide="0">
-            <div class="hero-tag">
-              <span class="hero-tag-dot"><svg width="10" height="10"><use href="#i-check"/></svg></span>
-              <span>Programa <strong>certificado</strong> de bienestar laboral</span>
-            </div>
-            <h1 class="h-display hero-h1">
-              Pausas <em>activas</em><br>que transforman<br>tu jornada laboral
-            </h1>
-            <p class="hero-p">
-              Diseñamos programas de pausas activas que reducen el ausentismo, previenen lesiones musculoesqueletales y elevan la productividad de tu equipo. Movimiento consciente, respaldado por evidencia.
-            </p>
-          </div>
-
-          <!-- SLIDE 2 -->
-          <div class="h-slide" data-slide="1">
-            <div class="hero-tag">
-              <span class="hero-tag-dot"><svg width="10" height="10"><use href="#i-trending"/></svg></span>
-              <span>Resultados <strong>medibles</strong> desde el primer mes</span>
-            </div>
-            <h1 class="h-display hero-h1">
-              <em>37%</em> menos<br>ausentismo en<br>equipos activos
-            </h1>
-            <p class="hero-p">
-              Las empresas que implementan nuestro programa reportan una reducción significativa en incapacidades por dolor lumbar, cervical y túnel carpiano. Bienestar que se traduce en rendimiento.
-            </p>
-          </div>
-
-          <!-- SLIDE 3 -->
-          <div class="h-slide" data-slide="2">
-            <div class="hero-tag">
-              <span class="hero-tag-dot"><svg width="10" height="10"><use href="#i-users"/></svg></span>
-              <span><strong>+500 empresas</strong> ya confían en PAR Servicios</span>
-            </div>
-            <h1 class="h-display hero-h1">
-              Cuidamos a quienes<br>mueven la <em>economía</em><br>de Colombia
-            </h1>
-            <p class="hero-p">
-              Desde pymes hasta grandes corporaciones — más de 15 años acompañando organizaciones colombianas a construir culturas de bienestar duraderas. Sin discursos: con resultados.
-            </p>
-          </div>
-
-          <!-- SLIDE 4 -->
-          <div class="h-slide" data-slide="3">
-            <div class="hero-tag">
-              <span class="hero-tag-dot"><svg width="10" height="10"><use href="#i-shield"/></svg></span>
-              <span>Cumple la <strong>Resolución 1016/89</strong> y Ley 1562/2012</span>
-            </div>
-            <h1 class="h-display hero-h1">
-              Tu programa de<br>pausas activas <em>al día</em><br>con la normativa
-            </h1>
-            <p class="hero-p">
-              Implementamos pausas activas obligatorias según el SG-SST: ejercicios físicos, mentales, oculares y respiratorios diseñados por fisioterapeutas y psicólogos certificados.
-            </p>
-          </div>
+        <div class="hero-tag reveal">
+          <span class="hero-tag-dot"><svg width="10" height="10"><use href="#i-check"/></svg></span>
+          <span>Programa <strong>certificado</strong> de bienestar laboral</span>
         </div>
-
-        <div class="h-carousel-controls">
-          <div class="h-dots" role="tablist">
-            <button class="h-dot active" data-go="0" aria-label="Slide 1"></button>
-            <button class="h-dot" data-go="1" aria-label="Slide 2"></button>
-            <button class="h-dot" data-go="2" aria-label="Slide 3"></button>
-            <button class="h-dot" data-go="3" aria-label="Slide 4"></button>
-          </div>
-          <span class="h-counter"><span id="h-curr">01</span> / 04</span>
-          <div class="h-arrows">
-            <button class="h-arrow" id="h-prev" aria-label="Anterior">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <button class="h-arrow" id="h-next" aria-label="Siguiente">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </button>
-          </div>
-        </div>
-
-        <div class="hero-actions-wrap reveal reveal-d2">
-          <a href="app.html" class="btn-pri">
-            <svg><use href="#i-play"/></svg>
-            Comenzar mi Ruta
+        <h1 class="h-display hero-h1 reveal reveal-d1">
+          Movimiento, sonido y <em>calma</em><br>para tu jornada laboral
+        </h1>
+        <p class="hero-p reveal reveal-d2">
+          PAR Servicios integra pausas activas, terapias de sonido y un calendario completo de actividades para construir bienestar real en tu equipo. Una ruta diaria hacia el bienestar.
+        </p>
+        <div class="hero-actions reveal reveal-d3">
+          <a href="https://forms.office.com/pages/responsepage.aspx?id=XeGN-vyc90KIcPq1ymwzBP-S6A5kRB5MpXcBObPT2LpUQVJTV0dYMVcyOThSNlRER0I3SDFFWDhLSi4u&route=shorturl" target="_blank" rel="noopener" class="btn-pri">
+            <svg><use href="#i-target"/></svg>
+            Reportar Objetivo Alcanzado
           </a>
-          <a href="#programa" class="btn-sec">
-            <svg><use href="#i-arrow-r"/></svg>
-            Conocer el programa
+          <a href="#calendario" class="btn-sec">
+            <svg><use href="#i-calendar"/></svg>
+            Ver calendario
           </a>
         </div>
-        <div class="hero-feats reveal reveal-d3">
+        <div class="hero-feats reveal reveal-d4">
           <div class="hero-feat">
-            <div class="hero-feat-ico"><svg><use href="#i-shield"/></svg></div>
+            <div class="hero-feat-ico"><svg><use href="#i-calendar"/></svg></div>
             <div class="hero-feat-tx">
-              <strong>SST aprobado</strong>
-              <span>Cumple normativa Mintrabajo</span>
+              <strong>15 actividades</strong>
+              <span>cada mes</span>
+            </div>
+          </div>
+          <div class="hero-feat">
+            <div class="hero-feat-ico"><svg><use href="#i-headphones"/></svg></div>
+            <div class="hero-feat-tx">
+              <strong>6 frecuencias</strong>
+              <span>terapéuticas</span>
             </div>
           </div>
           <div class="hero-feat">
             <div class="hero-feat-ico"><svg><use href="#i-users"/></svg></div>
             <div class="hero-feat-tx">
               <strong>+500 empresas</strong>
-              <span>Confían en PAR Servicios</span>
-            </div>
-          </div>
-          <div class="hero-feat">
-            <div class="hero-feat-ico"><svg><use href="#i-award"/></svg></div>
-            <div class="hero-feat-tx">
-              <strong>15 años</strong>
-              <span>De experiencia certificada</span>
+              <span>en Colombia</span>
             </div>
           </div>
         </div>
       </div>
-      <div class="hero-visual reveal reveal-d2">
-        <div class="hv-card hv-1">
-          <img class="hv-img" src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=900&q=80" alt="Profesional realizando pausa activa en oficina">
-        </div>
-        <div class="hv-card hv-2">
-          <img class="hv-img" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80" alt="Ejercicio de estiramiento laboral">
-        </div>
-        <div class="hv-card hv-3">
-          <div class="hv-3-top">
-            <div class="hv-3-ico"><svg><use href="#i-trending"/></svg></div>
-            <svg width="20" height="20" style="color:#0FBF8B"><use href="#i-arrow-ur"/></svg>
+
+      <!-- ORBIT CIRCULAR PLANO — 8 imágenes que giran en arco -->
+      <div class="hero-orbit reveal reveal-d2" id="hero-orbit">
+        <div class="orbit-ring"></div>
+        <div class="orbit-center" id="orbit-center">
+          <!-- Las imágenes orbitan alrededor de este punto -->
+          <div class="orb-item" data-tag="Pausas Activas" data-icon="i-activity" data-title="Movimiento que despierta el cuerpo">
+            <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=85" alt="Pausas activas">
+            <div class="orb-info">
+              <span class="orb-tag"><svg><use href="#i-activity"/></svg>Pausas Activas</span>
+              <h3 class="orb-title">Movimiento que despierta el cuerpo</h3>
+            </div>
           </div>
-          <div>
-            <div class="hv-3-stat">37<sup>%</sup></div>
-            <div class="hv-3-lbl">Menos ausentismo</div>
+          <div class="orb-item" data-tag="Terapias de Sonido" data-icon="i-headphones" data-title="Frecuencias que sanan tu mente">
+            <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&q=85" alt="Terapia de sonido">
+            <div class="orb-info">
+              <span class="orb-tag"><svg><use href="#i-headphones"/></svg>Terapias de Sonido</span>
+              <h3 class="orb-title">Frecuencias que sanan tu mente</h3>
+            </div>
+          </div>
+          <div class="orb-item" data-tag="Calendario" data-icon="i-calendar" data-title="Un mes lleno de bienestar">
+            <img src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?w=800&q=85" alt="Calendario actividades">
+            <div class="orb-info">
+              <span class="orb-tag"><svg><use href="#i-calendar"/></svg>Calendario</span>
+              <h3 class="orb-title">Un mes lleno de bienestar</h3>
+            </div>
+          </div>
+          <div class="orb-item" data-tag="Mindfulness" data-icon="i-heart" data-title="Cuerpo y mente en equilibrio">
+            <img src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=800&q=85" alt="Mindfulness">
+            <div class="orb-info">
+              <span class="orb-tag"><svg><use href="#i-heart"/></svg>Mindfulness</span>
+              <h3 class="orb-title">Cuerpo y mente en equilibrio</h3>
+            </div>
+          </div>
+          <div class="orb-item" data-tag="Ergonomía" data-icon="i-monitor" data-title="Postura saludable en tu puesto">
+            <img src="https://images.unsplash.com/photo-1496917756835-20cb06e75b4e?w=800&q=85" alt="Ergonomía">
+            <div class="orb-info">
+              <span class="orb-tag"><svg><use href="#i-monitor"/></svg>Ergonomía</span>
+              <h3 class="orb-title">Postura saludable en tu puesto</h3>
+            </div>
+          </div>
+          <div class="orb-item" data-tag="Estiramiento" data-icon="i-activity" data-title="Estiramientos que liberan la tensión">
+            <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800&q=85" alt="Estiramiento">
+            <div class="orb-info">
+              <span class="orb-tag"><svg><use href="#i-activity"/></svg>Estiramiento</span>
+              <h3 class="orb-title">Estiramientos que liberan la tensión</h3>
+            </div>
+          </div>
+          <div class="orb-item" data-tag="Yoga Activo" data-icon="i-leaf" data-title="Yoga corporativo para tu equipo">
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=85" alt="Yoga corporativo">
+            <div class="orb-info">
+              <span class="orb-tag"><svg><use href="#i-leaf"/></svg>Yoga Activo</span>
+              <h3 class="orb-title">Yoga corporativo para tu equipo</h3>
+            </div>
+          </div>
+          <div class="orb-item" data-tag="Bienestar" data-icon="i-leaf" data-title="Equipos que cuidan su energía">
+            <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=800&q=85" alt="Equipo bienestar">
+            <div class="orb-info">
+              <span class="orb-tag"><svg><use href="#i-leaf"/></svg>Bienestar</span>
+              <h3 class="orb-title">Equipos que cuidan su energía</h3>
+            </div>
           </div>
         </div>
-        <div class="hv-badge">
-          <div class="hv-badge-ic"><svg><use href="#i-check"/></svg></div>
-          <div class="hv-badge-tx">
-            +12 min de pausa diaria
-            <em>Estándar OMS</em>
+
+        <!-- Floating stat -->
+        <div class="orbit-badge">
+          <div class="orbit-badge-ic"><svg><use href="#i-trending"/></svg></div>
+          <div class="orbit-badge-tx">
+            <div class="orbit-badge-num">37<sup>%</sup></div>
+            <div class="orbit-badge-lbl">Menos ausentismo</div>
+          </div>
+        </div>
+
+        <!-- Control tray (sin pause, solo navegación + dots) -->
+        <div class="orbit-tray">
+          <button class="orbit-tray-ctrl" id="orb-prev" aria-label="Anterior">
+            <svg><use href="#i-arrow-l"/></svg>
+          </button>
+          <button class="orbit-tray-ctrl" id="orb-next" aria-label="Siguiente">
+            <svg><use href="#i-arrow-r"/></svg>
+          </button>
+          <div class="orbit-progress">
+            <span class="orbit-prog-cur" id="orb-cur">1</span>
+            <span class="orbit-prog-sep">/</span>
+            <span class="orbit-prog-tot">8</span>
+          </div>
+          <div class="orbit-dots" id="orb-dots">
+            <button class="orbit-dot active" data-go="0"></button>
+            <button class="orbit-dot" data-go="1"></button>
+            <button class="orbit-dot" data-go="2"></button>
+            <button class="orbit-dot" data-go="3"></button>
+            <button class="orbit-dot" data-go="4"></button>
+            <button class="orbit-dot" data-go="5"></button>
+            <button class="orbit-dot" data-go="6"></button>
+            <button class="orbit-dot" data-go="7"></button>
           </div>
         </div>
       </div>
@@ -1200,430 +1579,481 @@ footer{
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     MARQUEE — Servicios PAR
+     MARQUEE
 ═══════════════════════════════════════════════════════ -->
-<div class="marquee" aria-hidden="true">
+<div id="stats-strip" aria-hidden="true">
   <div class="marquee-track">
-    <span class="marquee-item"><svg><use href="#i-leaf"/></svg> Pausas Activas</span>
+    <span class="marquee-item"><svg><use href="#i-activity"/></svg> Pausas Activas</span>
     <span class="marquee-dot"></span>
-    <span class="marquee-item"><svg><use href="#i-shield"/></svg> Seguridad Vial PESV</span>
+    <span class="marquee-item"><svg><use href="#i-headphones"/></svg> Terapias de Sonido</span>
     <span class="marquee-dot"></span>
-    <span class="marquee-item"><svg><use href="#i-heart"/></svg> Salud Ocupacional</span>
+    <span class="marquee-item"><svg><use href="#i-calendar"/></svg> Calendario Mensual</span>
     <span class="marquee-dot"></span>
-    <span class="marquee-item"><svg><use href="#i-zap"/></svg> Bienestar Laboral</span>
+    <span class="marquee-item"><svg><use href="#i-brain"/></svg> Mindfulness</span>
     <span class="marquee-dot"></span>
-    <span class="marquee-item"><svg><use href="#i-target"/></svg> Gestión del Riesgo</span>
+    <span class="marquee-item"><svg><use href="#i-shield"/></svg> SG-SST Certificado</span>
     <span class="marquee-dot"></span>
-    <span class="marquee-item"><svg><use href="#i-users"/></svg> Capacitaciones</span>
+    <span class="marquee-item"><svg><use href="#i-target"/></svg> Objetivos Medibles</span>
     <span class="marquee-dot"></span>
-    <!-- Duplicate for seamless loop -->
-    <span class="marquee-item"><svg><use href="#i-leaf"/></svg> Pausas Activas</span>
+    <span class="marquee-item"><svg><use href="#i-activity"/></svg> Pausas Activas</span>
     <span class="marquee-dot"></span>
-    <span class="marquee-item"><svg><use href="#i-shield"/></svg> Seguridad Vial PESV</span>
+    <span class="marquee-item"><svg><use href="#i-headphones"/></svg> Terapias de Sonido</span>
     <span class="marquee-dot"></span>
-    <span class="marquee-item"><svg><use href="#i-heart"/></svg> Salud Ocupacional</span>
+    <span class="marquee-item"><svg><use href="#i-calendar"/></svg> Calendario Mensual</span>
     <span class="marquee-dot"></span>
-    <span class="marquee-item"><svg><use href="#i-zap"/></svg> Bienestar Laboral</span>
+    <span class="marquee-item"><svg><use href="#i-brain"/></svg> Mindfulness</span>
     <span class="marquee-dot"></span>
-    <span class="marquee-item"><svg><use href="#i-target"/></svg> Gestión del Riesgo</span>
+    <span class="marquee-item"><svg><use href="#i-shield"/></svg> SG-SST Certificado</span>
     <span class="marquee-dot"></span>
-    <span class="marquee-item"><svg><use href="#i-users"/></svg> Capacitaciones</span>
-    <span class="marquee-dot"></span>
+    <span class="marquee-item"><svg><use href="#i-target"/></svg> Objetivos Medibles</span>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
-     QUÉ SON
+     CALENDARIO DE ACTIVIDADES
 ═══════════════════════════════════════════════════════ -->
-<section id="que-son" class="sec">
+<section id="calendario" class="sec">
   <div class="wrap">
-    <div class="que-grid">
-      <div class="que-visual reveal">
-        <img src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?w=900&q=80" alt="Sesión grupal de pausas activas en empresa">
-        <div class="que-tag">
-          <div class="que-tag-ic"><svg><use href="#i-heart"/></svg></div>
-          <span>Programa en marcha · Colombia</span>
-        </div>
+    <div class="intro-header">
+      <div class="reveal">
+        <span class="eyebrow">Calendario de actividades</span>
+        <h2 class="h-section">Un mes diseñado para <em>cuidarte</em>.</h2>
       </div>
-      <div class="que-body reveal reveal-d1">
-        <span class="eyebrow">Qué son las pausas activas</span>
-        <h2 class="h-section">Pequeñas pausas con un <em>impacto enorme</em> en tu bienestar.</h2>
-        <p>Las <strong>pausas activas</strong> son interrupciones breves —de 5 a 15 minutos— en la jornada laboral, dedicadas a movilizar el cuerpo, relajar la mente y recuperar la energía. Son obligatorias según la normativa colombiana de Seguridad y Salud en el Trabajo (Resolución 1016/89 y Ley 1562/2012).</p>
-        <div class="que-quote">"El movimiento es la mejor medicina contra el sedentarismo laboral. Cinco minutos cada hora cambian tu día."</div>
-        <ul class="que-list">
-          <li>
-            <span class="que-li-ic"><svg><use href="#i-check"/></svg></span>
-            <span>
-              <strong>Movilización articular</strong>
-              Cuello, hombros, muñecas, lumbar y piernas — las zonas más afectadas por el trabajo sedente.
-            </span>
-          </li>
-          <li>
-            <span class="que-li-ic"><svg><use href="#i-check"/></svg></span>
-            <span>
-              <strong>Estiramientos suaves</strong>
-              Liberan tensión muscular acumulada y previenen lesiones por movimientos repetitivos.
-            </span>
-          </li>
-          <li>
-            <span class="que-li-ic"><svg><use href="#i-check"/></svg></span>
-            <span>
-              <strong>Respiración consciente</strong>
-              Reduce los niveles de cortisol, mejora la concentración y oxigena tu cerebro.
-            </span>
-          </li>
+      <div class="intro-aside reveal reveal-d1">
+        <p>Cada semana hay actividades de pausas activas, terapias de sonido, meditaciones grupales y charlas de salud ocupacional. Todo en tu lugar de trabajo o de forma virtual.</p>
+      </div>
+    </div>
+
+    <div class="cal-toolbar reveal">
+      <div class="cal-month-nav">
+        <button class="cal-arrow" id="cal-prev" aria-label="Mes anterior"><svg><use href="#i-arrow-l"/></svg></button>
+        <div class="cal-month" id="cal-month">Octubre 2024</div>
+        <button class="cal-arrow" id="cal-next" aria-label="Mes siguiente"><svg><use href="#i-arrow-r"/></svg></button>
+      </div>
+      <div class="cal-filters">
+        <button class="cal-fbtn on" data-fil="all">Todas</button>
+        <button class="cal-fbtn fis" data-fil="fis"><span class="cal-fbtn-dot"></span>Pausa Física</button>
+        <button class="cal-fbtn son" data-fil="son"><span class="cal-fbtn-dot"></span>Terapia de Sonido</button>
+        <button class="cal-fbtn med" data-fil="med"><span class="cal-fbtn-dot"></span>Meditación</button>
+        <button class="cal-fbtn gru" data-fil="gru"><span class="cal-fbtn-dot"></span>Sesión Grupal</button>
+      </div>
+    </div>
+
+    <div class="cal-grid-wrap reveal reveal-d1">
+      <div class="cal-weekdays">
+        <div class="cal-weekday">Lun</div>
+        <div class="cal-weekday">Mar</div>
+        <div class="cal-weekday">Mié</div>
+        <div class="cal-weekday">Jue</div>
+        <div class="cal-weekday">Vie</div>
+        <div class="cal-weekday">Sáb</div>
+        <div class="cal-weekday">Dom</div>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+    </div>
+
+    <!-- Featured upcoming -->
+    <div class="cal-feats">
+      <article class="cal-feat reveal reveal-d1" data-event-id="oct-15-1" data-day="15" data-month="9" data-year="2024">
+        <div class="cal-feat-top">
+          <div class="cal-feat-date">
+            <span class="cal-feat-d">15</span>
+            <span class="cal-feat-m">Oct</span>
+          </div>
+          <span class="cal-feat-tag fis">Pausa Física</span>
+        </div>
+        <h4>Estiramiento de Cuello y Hombros</h4>
+        <div class="cal-feat-time">
+          <svg><use href="#i-clock"/></svg>
+          <span>10:00 a.m. · 15 min · Virtual</span>
+        </div>
+      </article>
+      <article class="cal-feat reveal reveal-d2" data-event-id="oct-17-1" data-day="17" data-month="9" data-year="2024">
+        <div class="cal-feat-top">
+          <div class="cal-feat-date">
+            <span class="cal-feat-d">17</span>
+            <span class="cal-feat-m">Oct</span>
+          </div>
+          <span class="cal-feat-tag son">Terapia Sonido</span>
+        </div>
+        <h4>Cuencos Tibetanos · Frecuencia 432 Hz</h4>
+        <div class="cal-feat-time">
+          <svg><use href="#i-clock"/></svg>
+          <span>3:30 p.m. · 30 min · Presencial</span>
+        </div>
+      </article>
+      <article class="cal-feat reveal reveal-d3" data-event-id="oct-22-1" data-day="22" data-month="9" data-year="2024">
+        <div class="cal-feat-top">
+          <div class="cal-feat-date">
+            <span class="cal-feat-d">22</span>
+            <span class="cal-feat-m">Oct</span>
+          </div>
+          <span class="cal-feat-tag med">Meditación</span>
+        </div>
+        <h4>Mindfulness Guiado para el Estrés</h4>
+        <div class="cal-feat-time">
+          <svg><use href="#i-clock"/></svg>
+          <span>9:00 a.m. · 20 min · Híbrido</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     TERAPIAS DE SONIDO
+═══════════════════════════════════════════════════════ -->
+<section id="sonido" class="sec">
+  <div class="sonido-glow"></div>
+  <div class="sonido-glow-2"></div>
+  <div class="wrap">
+    <div class="intro-header">
+      <div class="reveal">
+        <span class="eyebrow">Terapias de sonido</span>
+        <h2 class="h-section">Frecuencias que <em>sanan</em> el sistema nervioso.</h2>
+      </div>
+      <div class="intro-aside reveal reveal-d1">
+        <p>El sonido es una de las terapias más antiguas y efectivas para regular el estrés. Nuestras sesiones combinan frecuencias específicas para inducir estados de calma profunda, mejor concentración y recuperación celular.</p>
+        <p>Todas las terapias son guiadas por especialistas certificados y se realizan en sesiones de 15 a 45 minutos.</p>
+      </div>
+    </div>
+
+    <div class="sonido-grid">
+      <article class="son-card son-1 reveal reveal-d1">
+        <div class="son-head">
+          <div class="son-ico"><svg><use href="#i-radio"/></svg></div>
+          <div class="son-freq">432<sub>Hz</sub></div>
+        </div>
+        <h3>Frecuencia Natural 432 Hz</h3>
+        <p>La afinación universal. Sincroniza el cerebro con la frecuencia natural del planeta y reduce la ansiedad inmediatamente.</p>
+        <div class="son-wave">
+          <div class="son-wave-bar" style="height:14px"></div>
+          <div class="son-wave-bar" style="height:22px"></div>
+          <div class="son-wave-bar" style="height:18px"></div>
+          <div class="son-wave-bar" style="height:26px"></div>
+          <div class="son-wave-bar" style="height:14px"></div>
+          <div class="son-wave-bar" style="height:20px"></div>
+          <div class="son-wave-bar" style="height:24px"></div>
+          <div class="son-wave-bar" style="height:16px"></div>
+          <div class="son-wave-bar" style="height:22px"></div>
+          <div class="son-wave-bar" style="height:18px"></div>
+          <div class="son-wave-bar" style="height:14px"></div>
+        </div>
+        <div class="son-meta">
+          <div class="son-meta-item"><svg><use href="#i-clock"/></svg><span>30 min</span></div>
+          <div class="son-meta-item"><svg><use href="#i-headphones"/></svg><span>Con audífonos</span></div>
+        </div>
+      </article>
+
+      <article class="son-card son-2 reveal reveal-d2">
+        <div class="son-head">
+          <div class="son-ico"><svg><use href="#i-music"/></svg></div>
+          <div class="son-freq">528<sub>Hz</sub></div>
+        </div>
+        <h3>Solfeggio 528 Hz · Reparación</h3>
+        <p>Conocida como la frecuencia del amor y la reparación celular. Eleva la energía y promueve la sanación a nivel profundo.</p>
+        <div class="son-wave">
+          <div class="son-wave-bar" style="height:18px"></div>
+          <div class="son-wave-bar" style="height:24px"></div>
+          <div class="son-wave-bar" style="height:14px"></div>
+          <div class="son-wave-bar" style="height:28px"></div>
+          <div class="son-wave-bar" style="height:18px"></div>
+          <div class="son-wave-bar" style="height:22px"></div>
+          <div class="son-wave-bar" style="height:16px"></div>
+          <div class="son-wave-bar" style="height:24px"></div>
+          <div class="son-wave-bar" style="height:18px"></div>
+          <div class="son-wave-bar" style="height:14px"></div>
+          <div class="son-wave-bar" style="height:20px"></div>
+        </div>
+        <div class="son-meta">
+          <div class="son-meta-item"><svg><use href="#i-clock"/></svg><span>25 min</span></div>
+          <div class="son-meta-item"><svg><use href="#i-heart"/></svg><span>Recuperación</span></div>
+        </div>
+      </article>
+
+      <article class="son-card son-3 reveal reveal-d3">
+        <div class="son-head">
+          <div class="son-ico"><svg><use href="#i-brain"/></svg></div>
+          <div class="son-freq">8–13<sub>Hz</sub></div>
+        </div>
+        <h3>Ondas Alfa · Concentración</h3>
+        <p>Frecuencias binaurales que llevan al cerebro al estado alfa: alta concentración, creatividad y calma alerta.</p>
+        <div class="son-wave">
+          <div class="son-wave-bar" style="height:22px"></div>
+          <div class="son-wave-bar" style="height:14px"></div>
+          <div class="son-wave-bar" style="height:26px"></div>
+          <div class="son-wave-bar" style="height:18px"></div>
+          <div class="son-wave-bar" style="height:24px"></div>
+          <div class="son-wave-bar" style="height:14px"></div>
+          <div class="son-wave-bar" style="height:20px"></div>
+          <div class="son-wave-bar" style="height:28px"></div>
+          <div class="son-wave-bar" style="height:16px"></div>
+          <div class="son-wave-bar" style="height:22px"></div>
+          <div class="son-wave-bar" style="height:18px"></div>
+        </div>
+        <div class="son-meta">
+          <div class="son-meta-item"><svg><use href="#i-clock"/></svg><span>15 min</span></div>
+          <div class="son-meta-item"><svg><use href="#i-target"/></svg><span>Foco</span></div>
+        </div>
+      </article>
+
+      <article class="son-card son-4 reveal reveal-d1">
+        <div class="son-head">
+          <div class="son-ico"><svg><use href="#i-bell"/></svg></div>
+          <div class="son-freq">110<sub>Hz</sub></div>
+        </div>
+        <h3>Cuencos Tibetanos</h3>
+        <p>Vibraciones armónicas naturales que reducen el cortisol, calman el ritmo cardíaco y relajan músculos tensos en sesión grupal.</p>
+        <div class="son-wave">
+          <div class="son-wave-bar" style="height:24px"></div>
+          <div class="son-wave-bar" style="height:18px"></div>
+          <div class="son-wave-bar" style="height:14px"></div>
+          <div class="son-wave-bar" style="height:28px"></div>
+          <div class="son-wave-bar" style="height:20px"></div>
+          <div class="son-wave-bar" style="height:16px"></div>
+          <div class="son-wave-bar" style="height:24px"></div>
+          <div class="son-wave-bar" style="height:18px"></div>
+          <div class="son-wave-bar" style="height:22px"></div>
+          <div class="son-wave-bar" style="height:14px"></div>
+          <div class="son-wave-bar" style="height:18px"></div>
+        </div>
+        <div class="son-meta">
+          <div class="son-meta-item"><svg><use href="#i-clock"/></svg><span>45 min</span></div>
+          <div class="son-meta-item"><svg><use href="#i-users"/></svg><span>Grupal</span></div>
+        </div>
+      </article>
+
+      <article class="son-card son-5 reveal reveal-d2">
+        <div class="son-head">
+          <div class="son-ico"><svg><use href="#i-moon"/></svg></div>
+          <div class="son-freq">4–7<sub>Hz</sub></div>
+        </div>
+        <h3>Ondas Theta · Descanso</h3>
+        <p>Estado theta inducido por audio binaural. Ideal para descanso profundo, liberación de tensión emocional y meditación.</p>
+        <div class="son-wave">
+          <div class="son-wave-bar" style="height:16px"></div>
+          <div class="son-wave-bar" style="height:24px"></div>
+          <div class="son-wave-bar" style="height:18px"></div>
+          <div class="son-wave-bar" style="height:14px"></div>
+          <div class="son-wave-bar" style="height:26px"></div>
+          <div class="son-wave-bar" style="height:20px"></div>
+          <div class="son-wave-bar" style="height:16px"></div>
+          <div class="son-wave-bar" style="height:22px"></div>
+          <div class="son-wave-bar" style="height:14px"></div>
+          <div class="son-wave-bar" style="height:18px"></div>
+          <div class="son-wave-bar" style="height:24px"></div>
+        </div>
+        <div class="son-meta">
+          <div class="son-meta-item"><svg><use href="#i-clock"/></svg><span>20 min</span></div>
+          <div class="son-meta-item"><svg><use href="#i-moon"/></svg><span>Relajación</span></div>
+        </div>
+      </article>
+
+      <article class="son-card son-6 reveal reveal-d3">
+        <div class="son-head">
+          <div class="son-ico"><svg><use href="#i-sun"/></svg></div>
+          <div class="son-freq">741<sub>Hz</sub></div>
+        </div>
+        <h3>Solfeggio 741 Hz · Claridad</h3>
+        <p>Frecuencia que purifica las células y la mente. Ideal antes de tomar decisiones complejas o sesiones de pensamiento crítico.</p>
+        <div class="son-wave">
+          <div class="son-wave-bar" style="height:20px"></div>
+          <div class="son-wave-bar" style="height:14px"></div>
+          <div class="son-wave-bar" style="height:24px"></div>
+          <div class="son-wave-bar" style="height:18px"></div>
+          <div class="son-wave-bar" style="height:22px"></div>
+          <div class="son-wave-bar" style="height:16px"></div>
+          <div class="son-wave-bar" style="height:26px"></div>
+          <div class="son-wave-bar" style="height:14px"></div>
+          <div class="son-wave-bar" style="height:18px"></div>
+          <div class="son-wave-bar" style="height:24px"></div>
+          <div class="son-wave-bar" style="height:20px"></div>
+        </div>
+        <div class="son-meta">
+          <div class="son-meta-item"><svg><use href="#i-clock"/></svg><span>18 min</span></div>
+          <div class="son-meta-item"><svg><use href="#i-sun"/></svg><span>Mañana</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     RECOMENDACIONES (TABS)
+═══════════════════════════════════════════════════════ -->
+<section id="recomendaciones" class="sec">
+  <div class="wrap">
+    <div class="intro-header">
+      <div class="reveal">
+        <span class="eyebrow">Recomendaciones</span>
+        <h2 class="h-section">Hábitos diarios para tu <em>bienestar laboral</em>.</h2>
+      </div>
+      <div class="intro-aside reveal reveal-d1">
+        <p>Consejos prácticos diseñados por nuestro equipo de fisioterapeutas, psicólogos y nutricionistas. Implementa uno cada semana y nota la diferencia.</p>
+      </div>
+    </div>
+
+    <div class="reco-tabs reveal" role="tablist">
+      <button class="reco-tab on" data-tab="postura"><svg><use href="#i-monitor"/></svg>Postura y Ergonomía</button>
+      <button class="reco-tab" data-tab="mental"><svg><use href="#i-brain"/></svg>Salud Mental</button>
+      <button class="reco-tab" data-tab="ocular"><svg><use href="#i-eye"/></svg>Salud Visual</button>
+      <button class="reco-tab" data-tab="nutricion"><svg><use href="#i-coffee"/></svg>Nutrición</button>
+    </div>
+
+    <div class="reco-panel active reveal" data-panel="postura">
+      <div class="reco-content">
+        <h3>Tu <em>postura</em> define tu día.</h3>
+        <p>El 80% de las lesiones laborales se previenen con ergonomía básica. Estos seis ajustes en tu puesto cambian completamente tu fatiga al final del día.</p>
+        <ul class="reco-tips">
+          <li><span class="reco-tip-n">01</span><div class="reco-tip-body"><strong>Pantalla al nivel de los ojos</strong><span>A 50–70 cm de distancia, el borde superior coincide con la altura de tus ojos.</span></div></li>
+          <li><span class="reco-tip-n">02</span><div class="reco-tip-body"><strong>Respaldo lumbar firme</strong><span>La espalda baja debe estar siempre apoyada — usa un cojín si tu silla no lo provee.</span></div></li>
+          <li><span class="reco-tip-n">03</span><div class="reco-tip-body"><strong>Codos en 90°</strong><span>Al teclear, los codos forman ángulo recto y las muñecas se mantienen rectas y relajadas.</span></div></li>
+          <li><span class="reco-tip-n">04</span><div class="reco-tip-body"><strong>Pies firmes en el suelo</strong><span>Si no tocan, usa apoyapiés. La circulación de las piernas depende de esta postura.</span></div></li>
+          <li><span class="reco-tip-n">05</span><div class="reco-tip-body"><strong>Regla 20-20-20</strong><span>Cada 20 minutos, mira algo a 6 metros por 20 segundos para descansar la vista.</span></div></li>
+          <li><span class="reco-tip-n">06</span><div class="reco-tip-body"><strong>Levántate cada 50 minutos</strong><span>Una micro-pausa de 5 minutos cada hora previene el 90% del dolor lumbar laboral.</span></div></li>
         </ul>
       </div>
+      <div class="reco-visual">
+        <img src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=900&q=85" alt="Postura correcta en oficina">
+        <div class="reco-visual-tag">
+          <div class="reco-visual-tag-ic"><svg><use href="#i-shield"/></svg></div>
+          <span>Avalado por fisioterapeutas SST</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reco-panel" data-panel="mental">
+      <div class="reco-content">
+        <h3>La <em>mente</em> también descansa.</h3>
+        <p>El agotamiento mental es la primera causa de rotación de personal. Cuidar la salud emocional es tan importante como cuidar el cuerpo.</p>
+        <ul class="reco-tips">
+          <li><span class="reco-tip-n">01</span><div class="reco-tip-body"><strong>Respiración 4-7-8</strong><span>Inhala 4 segundos, retén 7, exhala 8. Tres ciclos reducen el cortisol al instante.</span></div></li>
+          <li><span class="reco-tip-n">02</span><div class="reco-tip-body"><strong>Técnica Pomodoro</strong><span>25 minutos de trabajo concentrado + 5 minutos de pausa real (sin pantalla).</span></div></li>
+          <li><span class="reco-tip-n">03</span><div class="reco-tip-body"><strong>Desconexión digital al cerrar</strong><span>Apaga notificaciones laborales al salir. Tu cerebro necesita procesar el día.</span></div></li>
+          <li><span class="reco-tip-n">04</span><div class="reco-tip-body"><strong>Comunica tus límites</strong><span>Decir "no" o "no ahora" es un hábito profesional, no una falta de compromiso.</span></div></li>
+          <li><span class="reco-tip-n">05</span><div class="reco-tip-body"><strong>Celebra los logros pequeños</strong><span>El reconocimiento propio aumenta la dopamina y reduce el síndrome del impostor.</span></div></li>
+          <li><span class="reco-tip-n">06</span><div class="reco-tip-body"><strong>5 minutos de mindfulness al día</strong><span>Estudios muestran reducción del estrés del 30% con práctica constante a 4 semanas.</span></div></li>
+        </ul>
+      </div>
+      <div class="reco-visual">
+        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=900&q=85" alt="Meditación y mindfulness">
+        <div class="reco-visual-tag">
+          <div class="reco-visual-tag-ic"><svg><use href="#i-brain"/></svg></div>
+          <span>Diseñado por psicólogos clínicos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reco-panel" data-panel="ocular">
+      <div class="reco-content">
+        <h3><em>Vista</em> sana, mente despejada.</h3>
+        <p>La fatiga visual digital afecta al 70% de quienes trabajan más de 6 horas frente a una pantalla. Estos hábitos protegen tu visión a largo plazo.</p>
+        <ul class="reco-tips">
+          <li><span class="reco-tip-n">01</span><div class="reco-tip-body"><strong>Parpadea conscientemente</strong><span>Frente a la pantalla parpadeamos 60% menos. Hazlo a propósito cada 20 segundos.</span></div></li>
+          <li><span class="reco-tip-n">02</span><div class="reco-tip-body"><strong>Brillo y contraste correctos</strong><span>El brillo de la pantalla debe igualar el ambiente. Demasiado brillo agota músculos oculares.</span></div></li>
+          <li><span class="reco-tip-n">03</span><div class="reco-tip-body"><strong>Filtro de luz azul al atardecer</strong><span>Activa el modo nocturno desde las 6 p.m. para no alterar tu melatonina nocturna.</span></div></li>
+          <li><span class="reco-tip-n">04</span><div class="reco-tip-body"><strong>Hidratación visual</strong><span>Bebe 8 vasos de agua al día. La sequedad ocular empeora con deshidratación.</span></div></li>
+          <li><span class="reco-tip-n">05</span><div class="reco-tip-body"><strong>Ejercicios visuales 2 veces al día</strong><span>Rota los ojos en círculos, mira de cerca y lejos alternando. 60 segundos bastan.</span></div></li>
+          <li><span class="reco-tip-n">06</span><div class="reco-tip-body"><strong>Revisión optométrica anual</strong><span>Cubierta por la EPS. Detecta a tiempo cambios en agudeza y presión intraocular.</span></div></li>
+        </ul>
+      </div>
+      <div class="reco-visual">
+        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=900&q=85" alt="Cuidado de la vista en oficina">
+        <div class="reco-visual-tag">
+          <div class="reco-visual-tag-ic"><svg><use href="#i-eye"/></svg></div>
+          <span>Prevención de fatiga digital</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="reco-panel" data-panel="nutricion">
+      <div class="reco-content">
+        <h3><em>Energía</em> que dura toda la jornada.</h3>
+        <p>Lo que comes y bebes en el trabajo define tu nivel de energía, foco y estado de ánimo. Pequeños cambios, grandes resultados sostenibles.</p>
+        <ul class="reco-tips">
+          <li><span class="reco-tip-n">01</span><div class="reco-tip-body"><strong>Desayuna siempre</strong><span>Saltarse el desayuno baja la glucosa cerebral y reduce la concentración por horas.</span></div></li>
+          <li><span class="reco-tip-n">02</span><div class="reco-tip-body"><strong>Snacks proteicos a media mañana</strong><span>Yogur, almendras o queso fresco mantienen estable la glucosa hasta el almuerzo.</span></div></li>
+          <li><span class="reco-tip-n">03</span><div class="reco-tip-body"><strong>Hidratación constante</strong><span>2 litros de agua al día. La deshidratación leve reduce el foco en un 12%.</span></div></li>
+          <li><span class="reco-tip-n">04</span><div class="reco-tip-body"><strong>Limita el café a 2 tazas</strong><span>Y evítalo después de las 2 p.m. La cafeína vive 6 horas en tu organismo.</span></div></li>
+          <li><span class="reco-tip-n">05</span><div class="reco-tip-body"><strong>Almuerza sin pantalla</strong><span>Comer concentrado mejora la digestión y la sensación de saciedad real.</span></div></li>
+          <li><span class="reco-tip-n">06</span><div class="reco-tip-body"><strong>Frutas en lugar de dulces</strong><span>Te dan energía sin el bajón posterior del azúcar refinada. Mango, banano o uvas.</span></div></li>
+        </ul>
+      </div>
+      <div class="reco-visual">
+        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&q=85" alt="Nutrición saludable en el trabajo">
+        <div class="reco-visual-tag">
+          <div class="reco-visual-tag-ic"><svg><use href="#i-coffee"/></svg></div>
+          <span>Avalado por nutricionistas</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     TIPOS DE PAUSAS
+     RECETAS SALUDABLES
 ═══════════════════════════════════════════════════════ -->
-<section id="tipos" class="sec">
+<section id="recetas" class="sec">
   <div class="wrap">
     <div class="intro-header">
       <div class="reveal">
-        <span class="eyebrow">Cuatro dimensiones</span>
-        <h2 class="h-section">Cuatro tipos de pausas para <em>cuidarte por completo</em>.</h2>
+        <span class="eyebrow">Recetas saludables</span>
+        <h2 class="h-section">Diez recetas que te <em>energizan</em> sin culpa.</h2>
       </div>
       <div class="intro-aside reveal reveal-d1">
-        <p>El bienestar laboral no es solo físico. En PAR Servicios trabajamos con un enfoque holístico que aborda las cuatro dimensiones del agotamiento profesional.</p>
-        <p>Cada tipo de pausa está diseñada por nuestro equipo de fisioterapeutas, psicólogos y especialistas en seguridad y salud en el trabajo.</p>
+        <p>Pensadas por nuestras nutricionistas para personas que pasan muchas horas trabajando. Toma menos de 15 minutos prepararlas y caben en tu rutina más apretada.</p>
+        <p style="margin-top:14px">Toca cualquier receta para ver ingredientes, preparación y beneficios.</p>
       </div>
     </div>
-    <div class="tipos-grid">
-      <article class="tipo reveal reveal-d1">
-        <div class="tipo-ico-wrap"><svg><use href="#i-activity"/></svg></div>
-        <h3>Pausa Física</h3>
-        <p>Ejercicios de movilidad, estiramiento y activación cardiovascular suave para combatir el sedentarismo.</p>
-        <div class="tipo-meta">
-          <svg><use href="#i-clock"/></svg>
-          <span>5–10 MINUTOS · CADA 2H</span>
-        </div>
-      </article>
-      <article class="tipo reveal reveal-d2">
-        <div class="tipo-ico-wrap"><svg><use href="#i-brain"/></svg></div>
-        <h3>Pausa Mental</h3>
-        <p>Técnicas de mindfulness y desconexión que renuevan la atención y previenen el agotamiento cognitivo.</p>
-        <div class="tipo-meta">
-          <svg><use href="#i-clock"/></svg>
-          <span>3–7 MINUTOS · 2 AL DÍA</span>
-        </div>
-      </article>
-      <article class="tipo reveal reveal-d3">
-        <div class="tipo-ico-wrap"><svg><use href="#i-eye"/></svg></div>
-        <h3>Pausa Ocular</h3>
-        <p>Ejercicios visuales para prevenir la fatiga digital, sequedad ocular y dolores de cabeza por pantalla.</p>
-        <div class="tipo-meta">
-          <svg><use href="#i-clock"/></svg>
-          <span>1–2 MINUTOS · CADA 20 MIN</span>
-        </div>
-      </article>
-      <article class="tipo reveal reveal-d4">
-        <div class="tipo-ico-wrap"><svg><use href="#i-wind"/></svg></div>
-        <h3>Pausa Respiratoria</h3>
-        <p>Patrones de respiración diafragmática que regulan el sistema nervioso y reducen el estrés inmediatamente.</p>
-        <div class="tipo-meta">
-          <svg><use href="#i-clock"/></svg>
-          <span>2–5 MINUTOS · CUANDO QUIERAS</span>
-        </div>
-      </article>
+    <div class="rec-grid" id="rec-grid">
+      <!-- Cards generadas por JS -->
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════
-     BENEFICIOS
+     OBJETIVO ALCANZADO
 ═══════════════════════════════════════════════════════ -->
-<section id="beneficios" class="sec">
-  <div class="ben-deco"></div>
-  <div class="wrap ben-wrap">
-    <div class="intro-header">
-      <div class="reveal">
-        <span class="eyebrow">Resultados medibles</span>
-        <h2 class="h-section">El bienestar es una <em>inversión rentable</em>.</h2>
-      </div>
-      <div class="intro-aside reveal reveal-d1">
-        <p>Datos validados por las empresas que han implementado nuestros programas de pausas activas en Colombia durante los últimos cinco años.</p>
-      </div>
-    </div>
-
-    <div class="ben-stats reveal">
-      <div class="ben-stat">
-        <div class="ben-stat-num" data-target="37" data-suffix="%">0</div>
-        <div class="ben-stat-label"><strong>Menos ausentismo</strong>laboral por lesiones musculoesqueletales</div>
-      </div>
-      <div class="ben-stat">
-        <div class="ben-stat-num" data-target="64" data-suffix="%">0</div>
-        <div class="ben-stat-label"><strong>Reduce el estrés</strong>y la fatiga acumulada durante la jornada</div>
-      </div>
-      <div class="ben-stat">
-        <div class="ben-stat-num" data-target="28" data-suffix="%">0</div>
-        <div class="ben-stat-label"><strong>Más productividad</strong>medida en tareas completadas por hora</div>
-      </div>
-      <div class="ben-stat">
-        <div class="ben-stat-num" data-target="500" data-suffix="+">0</div>
-        <div class="ben-stat-label"><strong>Empresas activas</strong>en nuestro programa de bienestar laboral</div>
-      </div>
-    </div>
-
-    <div class="ben-grid">
-      <div class="ben reveal reveal-d1">
-        <span class="ben-num">01 · Salud</span>
-        <h3>Previene lesiones laborales</h3>
-        <p>Reduce dolor lumbar, cervical y síndrome del túnel carpiano — las principales causas de incapacidad médica en oficinas.</p>
-        <div class="ben-arrow"><svg><use href="#i-arrow-ur"/></svg></div>
-      </div>
-      <div class="ben reveal reveal-d2">
-        <span class="ben-num">02 · Mente</span>
-        <h3>Combate el burnout</h3>
-        <p>Las micropausas regulares restauran la capacidad cognitiva, reducen el agotamiento mental y previenen el síndrome de desgaste profesional.</p>
-        <div class="ben-arrow"><svg><use href="#i-arrow-ur"/></svg></div>
-      </div>
-      <div class="ben reveal reveal-d3">
-        <span class="ben-num">03 · Equipo</span>
-        <h3>Mejora el clima laboral</h3>
-        <p>Cuando las pausas son grupales, fortalecen vínculos entre compañeros, mejoran la comunicación y crean cultura de bienestar.</p>
-        <div class="ben-arrow"><svg><use href="#i-arrow-ur"/></svg></div>
-      </div>
-      <div class="ben reveal reveal-d1">
-        <span class="ben-num">04 · Productividad</span>
-        <h3>Más rendimiento real</h3>
-        <p>Equipos descansados toman mejores decisiones, cometen menos errores y entregan trabajo de mayor calidad. Menos horas, más resultados.</p>
-        <div class="ben-arrow"><svg><use href="#i-arrow-ur"/></svg></div>
-      </div>
-      <div class="ben reveal reveal-d2">
-        <span class="ben-num">05 · Cumplimiento</span>
-        <h3>Normatividad SST cubierta</h3>
-        <p>Las pausas activas son obligatorias por ley en Colombia. Implementarlas evita sanciones y cumple los requisitos del SG-SST.</p>
-        <div class="ben-arrow"><svg><use href="#i-arrow-ur"/></svg></div>
-      </div>
-      <div class="ben reveal reveal-d3">
-        <span class="ben-num">06 · Retención</span>
-        <h3>Talento que se queda</h3>
-        <p>El 78% de los empleados valora positivamente el bienestar laboral al evaluar permanecer en una empresa. Tu talento te lo agradecerá.</p>
-        <div class="ben-arrow"><svg><use href="#i-arrow-ur"/></svg></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     PROGRAMA / EJERCICIOS
-═══════════════════════════════════════════════════════ -->
-<section id="programa" class="sec">
-  <div class="wrap">
-    <div class="intro-header">
-      <div class="reveal">
-        <span class="eyebrow">Nuestro programa</span>
-        <h2 class="h-section">Tres rutas guiadas para tu <em>transformación física</em>.</h2>
-      </div>
-      <div class="intro-aside reveal reveal-d1">
-        <p>La Ruta de la Salud PAR Servicios es un programa progresivo de 15 días divididos en 3 niveles. Diseñado para que crees el hábito sin sacrificar tu día laboral.</p>
-        <p style="margin-top:18px">
-          <a href="app.html" class="btn-sec" style="font-size:.9rem;padding:11px 20px">
-            Iniciar la Ruta <svg><use href="#i-arrow-r"/></svg>
+<section id="objetivo">
+  <div class="obj-card reveal">
+    <div class="obj-grid">
+      <div class="obj-left">
+        <div class="obj-mesh"></div>
+        <div class="obj-tag">
+          <svg><use href="#i-target"/></svg>
+          <span>Reporta tu logro</span>
+        </div>
+        <h2 class="obj-h">¿Cumpliste tu <em>objetivo</em><br>de bienestar?</h2>
+        <p class="obj-p">Cuéntanos cómo te fue con las pausas activas, terapias de sonido o actividades del calendario. Tu reporte alimenta el sistema de seguimiento del programa.</p>
+        <div class="obj-btns">
+          <a href="https://forms.office.com/pages/responsepage.aspx?id=XeGN-vyc90KIcPq1ymwzBP-S6A5kRB5MpXcBObPT2LpUQVJTV0dYMVcyOThSNlRER0I3SDFFWDhLSi4u&route=shorturl" target="_blank" rel="noopener" class="btn-obj">
+            <svg><use href="#i-arrow-er"/></svg>
+            Abrir formulario
           </a>
-        </p>
-      </div>
-    </div>
-    <div class="prog-grid">
-      <article class="prog reveal reveal-d1">
-        <div class="prog-img">
-          <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?w=800&q=80" alt="Ejercicios suaves de iniciación">
-          <span class="prog-pill">Nivel 1 · Iniciación</span>
-          <span class="prog-dur"><svg><use href="#i-clock"/></svg>5 días</span>
-        </div>
-        <div class="prog-body">
-          <h3>Iniciación al movimiento</h3>
-          <p>Comienza con ejercicios suaves de respiración, movilidad y activación. Ideal para quienes no han hecho pausas activas antes.</p>
-          <ul class="prog-list">
-            <li><svg><use href="#i-check"/></svg> Respiración diafragmática guiada</li>
-            <li><svg><use href="#i-check"/></svg> Estiramiento de cuello y hombros</li>
-            <li><svg><use href="#i-check"/></svg> Marcha activa en el puesto</li>
-          </ul>
-        </div>
-      </article>
-      <article class="prog reveal reveal-d2">
-        <div class="prog-img">
-          <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&q=80" alt="Ejercicios de activación física">
-          <span class="prog-pill">Nivel 2 · Activación</span>
-          <span class="prog-dur"><svg><use href="#i-clock"/></svg>5 días</span>
-        </div>
-        <div class="prog-body">
-          <h3>Activación corporal</h3>
-          <p>Aumenta la intensidad con sentadillas suaves, estiramientos profundos y flujos de energía. Tu cuerpo empieza a despertar.</p>
-          <ul class="prog-list">
-            <li><svg><use href="#i-check"/></svg> Sentadillas y elevación de talones</li>
-            <li><svg><use href="#i-check"/></svg> Estiramiento lumbar profundo</li>
-            <li><svg><use href="#i-check"/></svg> Apertura de pecho ergonómica</li>
-          </ul>
-        </div>
-      </article>
-      <article class="prog reveal reveal-d3">
-        <div class="prog-img">
-          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&q=80" alt="Entrenamiento de fortaleza completa">
-          <span class="prog-pill">Nivel 3 · Fortaleza</span>
-          <span class="prog-dur"><svg><use href="#i-clock"/></svg>5 días</span>
-        </div>
-        <div class="prog-body">
-          <h3>Fortaleza completa</h3>
-          <p>El nivel maestro combina core, fuerza y cardio. Cierras con la Sesión Maestra: el reto integral de la Ruta de la Salud.</p>
-          <ul class="prog-list">
-            <li><svg><use href="#i-check"/></svg> Plancha isométrica y zancadas</li>
-            <li><svg><use href="#i-check"/></svg> Cardio de bajo impacto</li>
-            <li><svg><use href="#i-check"/></svg> Sesión Maestra integradora</li>
-          </ul>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     PROCESO
-═══════════════════════════════════════════════════════ -->
-<section id="proceso" class="sec">
-  <div class="wrap">
-    <div class="intro-header">
-      <div class="reveal">
-        <span class="eyebrow">Cómo trabajamos</span>
-        <h2 class="h-section">Cuatro pasos para llevar el <em>bienestar a tu empresa</em>.</h2>
-      </div>
-      <div class="intro-aside reveal reveal-d1">
-        <p>Nuestro equipo se integra a tu organización para diagnosticar, diseñar e implementar un programa de pausas activas que se ajuste a tu cultura y operación.</p>
-      </div>
-    </div>
-    <div class="proc-grid">
-      <div class="proc-line"></div>
-      <div class="proc-step reveal reveal-d1">
-        <div class="proc-num">01</div>
-        <h4>Diagnóstico</h4>
-        <p>Evaluamos las posturas, riesgos y necesidades específicas de tu equipo en su puesto de trabajo.</p>
-      </div>
-      <div class="proc-step reveal reveal-d2">
-        <div class="proc-num">02</div>
-        <h4>Diseño</h4>
-        <p>Creamos un programa a medida con rutinas adaptadas a la operación y horarios de tu empresa.</p>
-      </div>
-      <div class="proc-step reveal reveal-d3">
-        <div class="proc-num">03</div>
-        <h4>Implementación</h4>
-        <p>Capacitamos líderes internos, dejamos material visual y la plataforma Ruta de la Salud activa.</p>
-      </div>
-      <div class="proc-step reveal reveal-d4">
-        <div class="proc-num">04</div>
-        <h4>Seguimiento</h4>
-        <p>Medimos adherencia, satisfacción e impacto en indicadores de SST mes a mes.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     TESTIMONIO
-═══════════════════════════════════════════════════════ -->
-<section id="testimonio" class="sec">
-  <div class="tes-glow"></div>
-  <div class="wrap-sm tes-inner reveal">
-    <div class="tes-quote-ico"><svg><use href="#i-quote"/></svg></div>
-    <p class="tes-quote">
-      "Implementamos el programa hace 8 meses y los resultados son innegables. Las <em>incapacidades por dolor lumbar bajaron un 40%</em> y el equipo lo agradece todos los días. PAR Servicios entendió nuestra operación desde el primer día."
-    </p>
-    <div class="tes-author">
-      <div class="tes-avatar"></div>
-      <div class="tes-meta">
-        <div class="tes-name">Carolina Méndez</div>
-        <div class="tes-role">Coordinadora SST · Empresa cliente PAR</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     FAQ
-═══════════════════════════════════════════════════════ -->
-<section id="faq" class="sec">
-  <div class="wrap">
-    <div class="faq-wrap">
-      <div class="reveal">
-        <span class="eyebrow">Preguntas frecuentes</span>
-        <h2 class="h-section">Lo que más nos <em>preguntan</em>.</h2>
-        <p class="lead" style="margin-top:18px">¿No encuentras tu duda? Escríbenos y un asesor especializado te contactará en menos de 24 horas.</p>
-        <a href="#cta" class="btn-sec" style="margin-top:24px;font-size:.92rem">
-          <svg><use href="#i-mail"/></svg>
-          Contactar a un asesor
-        </a>
-      </div>
-      <div class="faq-list reveal reveal-d1">
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            <span>¿Son obligatorias las pausas activas en Colombia?</span>
-            <span class="faq-icon"><svg><use href="#i-plus"/></svg></span>
-          </button>
-          <div class="faq-a"><p>Sí. La Resolución 1016 de 1989 y la Ley 1562 de 2012 establecen que toda empresa con personal vinculado debe implementar pausas activas como parte del Sistema de Gestión de Seguridad y Salud en el Trabajo (SG-SST). El incumplimiento genera sanciones del Ministerio de Trabajo.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            <span>¿Cuánto tiempo se necesita al día?</span>
-            <span class="faq-icon"><svg><use href="#i-plus"/></svg></span>
-          </button>
-          <div class="faq-a"><p>El estándar recomendado por la OMS es entre 10 y 15 minutos al día, distribuidos en 2 o 3 pausas cortas. Nuestro programa Ruta de la Salud propone ejercicios de entre 2 y 6 minutos para que se integren naturalmente a la jornada laboral sin interrumpir la operación.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            <span>¿Funciona para equipos remotos?</span>
-            <span class="faq-icon"><svg><use href="#i-plus"/></svg></span>
-          </button>
-          <div class="faq-a"><p>Absolutamente. La plataforma Ruta de la Salud está diseñada como una app web responsive accesible desde cualquier dispositivo. Tus colaboradores remotos reciben recordatorios y completan sus ejercicios desde casa, oficina o donde trabajen.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            <span>¿Qué pasa si alguien tiene una condición médica?</span>
-            <span class="faq-icon"><svg><use href="#i-plus"/></svg></span>
-          </button>
-          <div class="faq-a"><p>Todos nuestros ejercicios son de bajo impacto y ofrecen alternativas adaptadas. Si un colaborador tiene una condición específica, recomendamos consultar con su médico tratante. Nuestros fisioterapeutas pueden diseñar rutinas personalizadas para casos especiales.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            <span>¿Cómo miden los resultados?</span>
-            <span class="faq-icon"><svg><use href="#i-plus"/></svg></span>
-          </button>
-          <div class="faq-a"><p>Entregamos reportes mensuales con indicadores de adherencia, percepción de bienestar de los colaboradores y correlación con ausentismo, accidentalidad y satisfacción laboral. Conectamos nuestros datos con el SG-SST de tu empresa.</p></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q" aria-expanded="false">
-            <span>¿Cuánto cuesta el programa?</span>
-            <span class="faq-icon"><svg><use href="#i-plus"/></svg></span>
-          </button>
-          <div class="faq-a"><p>El costo depende del tamaño de tu organización, modalidad (presencial, virtual o mixta) y nivel de personalización. Solicita una cotización sin compromiso y te enviamos una propuesta ajustada en menos de 48 horas.</p></div>
+          <a href="#calendario" class="btn-obj-out">
+            <svg><use href="#i-calendar"/></svg>
+            Ver próximas actividades
+          </a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════
-     CTA
-═══════════════════════════════════════════════════════ -->
-<section id="cta">
-  <div class="cta-card reveal">
-    <div class="cta-mesh"></div>
-    <div class="cta-content">
-      <span class="cta-eyebrow">Empieza ahora</span>
-      <h2 class="cta-h">Tu equipo merece <em>cuidado real</em>.<br>Empieza con cinco minutos hoy.</h2>
-      <p class="cta-p">Habla con nuestro equipo de bienestar laboral. Te ayudamos a diseñar un programa de pausas activas hecho a medida para tu organización.</p>
-      <div class="cta-btns">
-        <a href="app.html" class="btn-cta">
-          <svg><use href="#i-play"/></svg>
-          Iniciar Ruta de la Salud
-        </a>
-        <a href="mailto:contacto@parservicios.com" class="btn-cta-out">
-          <svg><use href="#i-mail"/></svg>
-          Hablar con un asesor
-        </a>
+      <div class="obj-right">
+        <div class="obj-img-wrap">
+          <img class="obj-img" src="https://images.unsplash.com/photo-1552581234-26160f608093?w=900&q=85" alt="Equipo cumpliendo objetivos de bienestar">
+        </div>
+        <div class="obj-stat obj-stat-1">
+          <div class="obj-stat-ic"><svg><use href="#i-check"/></svg></div>
+          <div>
+            <div class="obj-stat-num">94<sup>%</sup></div>
+            <div class="obj-stat-lbl">Adherencia</div>
+          </div>
+        </div>
+        <div class="obj-stat obj-stat-2">
+          <div class="obj-stat-ic"><svg><use href="#i-users"/></svg></div>
+          <div>
+            <div class="obj-stat-num">2.4k</div>
+            <div class="obj-stat-lbl">Reportes mes</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1648,7 +2078,7 @@ footer{
             <span class="foot-brand-svc">servicios</span>
           </div>
         </div>
-        <p class="foot-desc">Especialistas colombianos en pausas activas, salud ocupacional, seguridad vial PESV y gestión integral del riesgo. Cuidamos a las personas que mueven tu empresa.</p>
+        <p class="foot-desc">Especialistas colombianos en pausas activas, terapias de sonido, salud ocupacional y bienestar laboral integral. Cuidamos a las personas que mueven tu empresa.</p>
         <div class="foot-social">
           <a href="#" aria-label="LinkedIn"><svg><use href="#i-linkedin"/></svg></a>
           <a href="#" aria-label="Instagram"><svg><use href="#i-instagram"/></svg></a>
@@ -1659,21 +2089,21 @@ footer{
       <div class="foot-col">
         <h5>Programa</h5>
         <ul>
-          <li><a href="#que-son">Qué son las pausas activas</a></li>
-          <li><a href="#tipos">Tipos de pausas</a></li>
-          <li><a href="#beneficios">Beneficios</a></li>
-          <li><a href="#programa">Ruta de la Salud</a></li>
-          <li><a href="app.html">Iniciar la app</a></li>
+          <li><a href="#hero">Inicio</a></li>
+          <li><a href="#calendario">Calendario de Actividades</a></li>
+          <li><a href="#sonido">Terapias de Sonido</a></li>
+          <li><a href="#recomendaciones">Recomendaciones</a></li>
+          <li><a href="#recetas">Recetas Saludables</a></li>
+          <li><a href="app.html">Ruta de la Salud</a></li>
         </ul>
       </div>
       <div class="foot-col">
-        <h5>Servicios PAR</h5>
+        <h5>Objetivo</h5>
         <ul>
-          <li><a href="#">Salud Ocupacional</a></li>
-          <li><a href="#">Seguridad Vial PESV</a></li>
-          <li><a href="#">Capacitaciones SST</a></li>
-          <li><a href="#">Asesoría empresarial</a></li>
-          <li><a href="#">Gestión del riesgo</a></li>
+          <li><a href="https://forms.office.com/pages/responsepage.aspx?id=XeGN-vyc90KIcPq1ymwzBP-S6A5kRB5MpXcBObPT2LpUQVJTV0dYMVcyOThSNlRER0I3SDFFWDhLSi4u&route=shorturl" target="_blank" rel="noopener">Reportar logro</a></li>
+          <li><a href="#">Ver historial</a></li>
+          <li><a href="#">Reportes mensuales</a></li>
+          <li><a href="#">Seguimiento SST</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -1687,14 +2117,97 @@ footer{
     </div>
     <div class="foot-bottom">
       <span>© 2024 <strong>PAR Servicios Integrales</strong>. Todos los derechos reservados.</span>
-      <span>Hecho con cuidado para el bienestar laboral en Colombia</span>
+      <span>Programa de Bienestar Laboral · Colombia</span>
     </div>
   </div>
 </footer>
 
+<!-- ═══════════════════════════════════════════════════════
+     MODAL AGENDA (Calendario)
+═══════════════════════════════════════════════════════ -->
+<div class="modal" id="modal-agenda" role="dialog" aria-modal="true">
+  <div class="modal-box" id="ag-box">
+    <button class="modal-close" data-close-modal aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div id="ag-form-view">
+      <div class="am-hero">
+        <span class="am-tag" id="ag-tag">Pausa Física</span>
+        <h3 class="am-title" id="ag-title">Estiramiento de Cuello y Hombros</h3>
+        <div class="am-meta">
+          <span class="am-meta-chip"><svg><use href="#i-calendar"/></svg><span id="ag-date">15 Octubre 2024</span></span>
+          <span class="am-meta-chip"><svg><use href="#i-clock"/></svg><span id="ag-time">10:00 a.m. · 15 min</span></span>
+          <span class="am-meta-chip"><svg><use href="#i-map-pin"/></svg><span id="ag-mode">Virtual</span></span>
+        </div>
+      </div>
+      <div class="am-body">
+        <div class="am-section-title">Sobre la actividad</div>
+        <p class="am-desc" id="ag-desc">Sesión guiada por nuestro fisioterapeuta para liberar la tensión acumulada en cuello, trapecios y hombros. Ideal para quienes trabajan muchas horas frente al computador.</p>
+
+        <div class="am-form">
+          <div class="am-section-title">Agenda tu cupo</div>
+          <div class="am-field">
+            <label for="ag-name">Tu nombre completo</label>
+            <input type="text" id="ag-name" placeholder="Ej: María González" autocomplete="name">
+            <div class="am-err" id="ag-name-err">Por favor ingresa tu nombre.</div>
+          </div>
+          <div class="am-field">
+            <label for="ag-email">Correo corporativo</label>
+            <input type="email" id="ag-email" placeholder="nombre@parservicios.com" autocomplete="email" inputmode="email">
+            <div class="am-err" id="ag-email-err">Solo correos @parservicios.com.</div>
+          </div>
+          <button class="am-btn" id="ag-submit">
+            <svg><use href="#i-check"/></svg>
+            Confirmar mi inscripción
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="ag-success-view" style="display:none">
+      <div class="am-success">
+        <div class="am-success-ic"><svg><use href="#i-check"/></svg></div>
+        <h4>¡Cupo <em>confirmado</em>!</h4>
+        <p>Te esperamos en la sesión. Recibirás un recordatorio en tu correo el día anterior.</p>
+        <div class="am-success-meta" id="ag-success-meta">15 Oct · 10:00 a.m. · Estiramiento</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     MODAL RECETA (Nutrición)
+═══════════════════════════════════════════════════════ -->
+<div class="modal" id="modal-receta" role="dialog" aria-modal="true">
+  <div class="modal-box" id="rt-box" style="max-width:760px;padding:0">
+    <button class="modal-close" data-close-modal aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div id="rt-content"></div>
+  </div>
+</div>
+
 <script>
 /* ═══════════════════════════════════════════════════════
-   NAV — sticky + mobile menu
+   MODAL — Open/Close helpers
+═══════════════════════════════════════════════════════ */
+function openModal(id){
+  const m = document.getElementById(id);
+  m.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  document.querySelectorAll('.modal.open').forEach(m => m.classList.remove('open'));
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('[data-close-modal]').forEach(b => b.addEventListener('click', closeModal));
+document.querySelectorAll('.modal').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) closeModal(); });
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ═══════════════════════════════════════════════════════
+   NAV — sticky + mobile
 ═══════════════════════════════════════════════════════ */
 const nav = document.getElementById('nav');
 const burger = document.getElementById('burger');
@@ -1726,113 +2239,631 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (!el) return;
     e.preventDefault();
     const top = el.getBoundingClientRect().top + window.scrollY - 60;
-    window.scrollTo({ top, behavior: 'smooth' });
+    window.scrollTo({ top, behavior:'smooth' });
   });
 });
 
 /* ═══════════════════════════════════════════════════════
-   REVEAL ANIMATIONS
+   REVEAL
 ═══════════════════════════════════════════════════════ */
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('in');
-      io.unobserve(e.target);
-    }
+    if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
-
+}, { threshold: 0.12, rootMargin:'0px 0px -50px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
 /* ═══════════════════════════════════════════════════════
-   COUNTERS
+   ORBIT CIRCULAR PLANO — Trigonometric carousel
 ═══════════════════════════════════════════════════════ */
-const counterObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const el = entry.target;
-    const target = parseInt(el.dataset.target);
-    const suffix = el.dataset.suffix || '';
-    const duration = 1600;
-    const start = performance.now();
+(function orbitCircular(){
+  const wrap   = document.getElementById('hero-orbit');
+  const items  = Array.from(document.querySelectorAll('.orb-item'));
+  const dots   = document.querySelectorAll('.orbit-dot');
+  const cur    = document.getElementById('orb-cur');
+  const prevBtn= document.getElementById('orb-prev');
+  const nextBtn= document.getElementById('orb-next');
 
-    function tick(now) {
-      const p = Math.min((now - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      const current = Math.round(target * eased);
-      el.innerHTML = current + (suffix.includes('%') ? '<sup>%</sup>' : (suffix === '+' ? '<sup>+</sup>' : suffix));
-      if (p < 1) requestAnimationFrame(tick);
+  const N      = items.length;            // 8 imágenes
+  const STEP   = 360 / N;                 // 45° entre cada una
+  const RADIUS = 320;                     // radio del arco en px
+  const FRONT  = 180;                     // ángulo donde está la "front" (lado izquierdo del círculo, ya que el centro está a la derecha)
+  const SPEED  = 0.18;                    // grados por frame ~10°/s
+  const SNAP_THRESHOLD = 22;              // dist en grados para considerar "front"
+
+  let rotation = 0;
+  let target   = null;                    // si hay target, animamos hacia él
+  let lastFrontIdx = -1;
+
+  function shortestDelta(from, to){
+    // delta más corto entre 2 ángulos (signed)
+    let d = ((to - from + 540) % 360) - 180;
+    return d;
+  }
+
+  function update(){
+    let frontIdx = 0;
+    let smallestDist = 999;
+
+    items.forEach((it, i) => {
+      // ángulo de esta imagen en el círculo
+      const angle = (rotation + i * STEP) % 360;
+      const a = ((angle % 360) + 360) % 360;
+      const rad = a * Math.PI / 180;
+
+      // posición (centro del círculo es el orbit-center)
+      const x = Math.cos(rad) * RADIUS;
+      const y = Math.sin(rad) * RADIUS;
+
+      // distancia angular al punto frontal (FRONT=180)
+      let dist = Math.abs(((a - FRONT + 540) % 360) - 180);
+      // dist 0 = en el centro frontal, 180 = totalmente atrás
+
+      if (dist < smallestDist){
+        smallestDist = dist;
+        frontIdx = i;
+      }
+
+      // visibilidad: 1 cuando dist=0, 0 cuando dist>=90 (lado opuesto del círculo, no visible)
+      const t = Math.max(0, 1 - dist / 95);
+      const scale = 0.55 + t * 0.45;
+      const opacity = Math.pow(t, .65);
+      const blur = (1 - t) * 5;
+
+      // is it front?
+      const isFront = (dist < SNAP_THRESHOLD);
+      it.classList.toggle('front', isFront);
+
+      // aplicar transformación
+      it.style.transform = `translate(${x}px,${y}px) scale(${scale})`;
+      it.style.opacity   = opacity;
+      it.style.filter    = `blur(${blur.toFixed(2)}px) brightness(${0.75 + t * 0.25})`;
+      it.style.zIndex    = Math.round(t * 50);
+    });
+
+    if (frontIdx !== lastFrontIdx){
+      lastFrontIdx = frontIdx;
+      cur.textContent = frontIdx + 1;
+      dots.forEach((d, k) => d.classList.toggle('active', k === frontIdx));
     }
-    requestAnimationFrame(tick);
-    counterObserver.unobserve(el);
-  });
-}, { threshold: 0.4 });
+  }
 
-document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+  function frame(){
+    if (target !== null){
+      const desiredRot = target;
+      const delta = shortestDelta(rotation, desiredRot);
+      if (Math.abs(delta) < 0.15){
+        rotation = desiredRot;
+        target = null;
+      } else {
+        rotation += delta * 0.10;
+      }
+    } else {
+      rotation += SPEED;
+    }
+    rotation = ((rotation % 360) + 360) % 360;
+    update();
+    requestAnimationFrame(frame);
+  }
+
+  function goToIndex(i){
+    // queremos que esta imagen aparezca en FRONT (180°)
+    // rotation + i * STEP === 180   =>   rotation = 180 - i*STEP
+    target = ((FRONT - i * STEP) % 360 + 360) % 360;
+  }
+
+  function findFrontIdx(){
+    let bestIdx = 0, bestDist = 999;
+    items.forEach((_, i) => {
+      const a = ((rotation + i * STEP) % 360 + 360) % 360;
+      const dist = Math.abs(((a - FRONT + 540) % 360) - 180);
+      if (dist < bestDist){ bestDist = dist; bestIdx = i; }
+    });
+    return bestIdx;
+  }
+
+  // controles
+  prevBtn.addEventListener('click', () => {
+    goToIndex((findFrontIdx() - 1 + N) % N);
+  });
+  nextBtn.addEventListener('click', () => {
+    goToIndex((findFrontIdx() + 1) % N);
+  });
+  dots.forEach((d, i) => d.addEventListener('click', () => goToIndex(i)));
+
+  items.forEach((it, i) => {
+    it.addEventListener('click', e => {
+      if (!it.classList.contains('front')){
+        e.stopPropagation();
+        goToIndex(i);
+      }
+    });
+  });
+
+  // DRAG support
+  let isDragging = false, dragStartX = 0, dragStartRot = 0;
+  function dragStart(clientX){
+    isDragging = true;
+    dragStartX = clientX;
+    dragStartRot = rotation;
+    target = null;
+    wrap.classList.add('dragging');
+  }
+  function dragMove(clientX){
+    if (!isDragging) return;
+    const delta = clientX - dragStartX;
+    rotation = (dragStartRot + delta * 0.4) % 360;
+    rotation = (rotation + 360) % 360;
+  }
+  function dragEnd(){
+    if (!isDragging) return;
+    isDragging = false;
+    wrap.classList.remove('dragging');
+    // snap al más cercano
+    goToIndex(findFrontIdx());
+  }
+
+  wrap.addEventListener('mousedown', e => {
+    if (e.target.closest('.orbit-tray,.orbit-badge,.orbit-live')) return;
+    dragStart(e.clientX);
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', e => dragMove(e.clientX));
+  window.addEventListener('mouseup', dragEnd);
+
+  wrap.addEventListener('touchstart', e => {
+    if (e.target.closest('.orbit-tray,.orbit-badge,.orbit-live')) return;
+    dragStart(e.touches[0].clientX);
+  }, { passive: true });
+  window.addEventListener('touchmove', e => { if (isDragging) dragMove(e.touches[0].clientX); }, { passive: true });
+  window.addEventListener('touchend', dragEnd);
+
+  // Init
+  update();
+  requestAnimationFrame(frame);
+})();
 
 /* ═══════════════════════════════════════════════════════
-   FAQ — accordion (single-open)
+   CALENDARIO INTERACTIVO + MODAL DE AGENDA
 ═══════════════════════════════════════════════════════ */
-document.querySelectorAll('.faq-item').forEach(item => {
-  const q = item.querySelector('.faq-q');
-  q.addEventListener('click', () => {
-    const wasOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
-    });
-    if (!wasOpen) {
-      item.classList.add('open');
-      q.setAttribute('aria-expanded', 'true');
+const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const TYPE_LABEL = {
+  fis: { lbl:'Pausa Física',     cls:'fis', desc:'Sesión guiada por nuestros fisioterapeutas para movilizar articulaciones, liberar tensión muscular y activar la circulación. Diseñada para integrarse a tu jornada laboral sin alterar tu flujo.' },
+  son: { lbl:'Terapia de Sonido', cls:'son', desc:'Sesión con frecuencias terapéuticas, cuencos tibetanos u ondas binaurales. Regula el sistema nervioso, reduce el cortisol y mejora la calidad del sueño desde la primera sesión.' },
+  med: { lbl:'Meditación',        cls:'med', desc:'Práctica guiada de mindfulness, respiración consciente y atención plena. Reduce el estrés y aumenta la claridad mental para tomar mejores decisiones.' },
+  gru: { lbl:'Sesión Grupal',     cls:'gru', desc:'Actividad de equipo que fortalece vínculos, mejora la comunicación y crea cultura de bienestar. Conducida por nuestros facilitadores certificados.' }
+};
+
+const EVENTOS = {
+  2:  [{ id:'oct-02-1', t:'fis', n:'Estiramiento de cuello', h:'10:00', d:'15 min', m:'Virtual' }],
+  4:  [{ id:'oct-04-1', t:'son', n:'432 Hz · Calma profunda', h:'15:30', d:'30 min', m:'Presencial' }],
+  7:  [{ id:'oct-07-1', t:'med', n:'Mindfulness inicial', h:'09:00', d:'20 min', m:'Virtual' }],
+  9:  [{ id:'oct-09-1', t:'fis', n:'Pausa activa hombros', h:'10:30', d:'15 min', m:'Virtual' }],
+  10: [{ id:'oct-10-1', t:'gru', n:'Charla salud ocupacional', h:'14:00', d:'45 min', m:'Híbrido' }],
+  14: [{ id:'oct-14-1', t:'son', n:'Cuencos tibetanos', h:'16:00', d:'45 min', m:'Presencial' }],
+  15: [{ id:'oct-15-1', t:'fis', n:'Estiramiento de cuello y hombros', h:'10:00', d:'15 min', m:'Virtual' }, { id:'oct-15-2', t:'med', n:'Respiración 4-7-8', h:'15:00', d:'10 min', m:'Virtual' }],
+  17: [{ id:'oct-17-1', t:'son', n:'432 Hz · Cuencos', h:'15:30', d:'30 min', m:'Presencial' }],
+  18: [{ id:'oct-18-1', t:'fis', n:'Sentadillas suaves', h:'11:00', d:'15 min', m:'Virtual' }],
+  21: [{ id:'oct-21-1', t:'med', n:'Mindfulness grupal', h:'09:00', d:'25 min', m:'Híbrido' }],
+  22: [{ id:'oct-22-1', t:'med', n:'Mindfulness guiado para el estrés', h:'09:00', d:'20 min', m:'Híbrido' }],
+  23: [{ id:'oct-23-1', t:'gru', n:'Yoga corporativo', h:'17:00', d:'60 min', m:'Presencial' }],
+  24: [{ id:'oct-24-1', t:'son', n:'Ondas alfa · Foco', h:'10:00', d:'15 min', m:'Virtual' }],
+  28: [{ id:'oct-28-1', t:'fis', n:'Apertura de pecho', h:'10:30', d:'15 min', m:'Virtual' }],
+  29: [{ id:'oct-29-1', t:'son', n:'Solfeggio 528 Hz', h:'15:00', d:'25 min', m:'Virtual' }],
+  30: [{ id:'oct-30-1', t:'gru', n:'Cierre mensual', h:'16:00', d:'90 min', m:'Presencial' }]
+};
+
+// localStorage de inscripciones
+function getInscritos(){
+  try { return JSON.parse(localStorage.getItem('par_inscritos') || '[]'); }
+  catch(e){ return []; }
+}
+function isInscrito(eventId){ return getInscritos().some(x => x.eventId === eventId); }
+function addInscripcion(eventId, name, email, evento){
+  const list = getInscritos();
+  list.push({ eventId, name, email, evento, ts: Date.now() });
+  localStorage.setItem('par_inscritos', JSON.stringify(list));
+}
+
+(function calendar(){
+  let curMonth = 9;
+  let curYear  = 2024;
+  let filter = 'all';
+
+  function buildGrid(){
+    const grid = document.getElementById('cal-grid');
+    grid.innerHTML = '';
+
+    const firstDay = new Date(curYear, curMonth, 1).getDay();
+    const lunesFirstDay = firstDay === 0 ? 6 : firstDay - 1;
+    const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+
+    for (let i = 0; i < lunesFirstDay; i++){
+      const c = document.createElement('div');
+      c.className = 'cal-cell empty';
+      grid.appendChild(c);
     }
+
+    const todayDate = new Date();
+    const isCurrentMonth = todayDate.getMonth() === curMonth && todayDate.getFullYear() === curYear;
+    const today = todayDate.getDate();
+
+    for (let d = 1; d <= daysInMonth; d++){
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell';
+      if (isCurrentMonth && d === today) cell.classList.add('today');
+      cell.innerHTML = `<span class="cal-day-num">${d}</span>`;
+
+      const evs = (curMonth === 9 && curYear === 2024) ? (EVENTOS[d] || []) : [];
+      evs.forEach(e => {
+        if (filter === 'all' || filter === e.t){
+          const ev = document.createElement('span');
+          ev.className = `cal-event ${e.t}` + (isInscrito(e.id) ? ' booked' : '');
+          ev.textContent = `${e.h} ${e.n}`;
+          ev.title = `${e.h} · ${e.n}`;
+          ev.addEventListener('click', () => abrirAgenda(e, d, curMonth, curYear));
+          cell.appendChild(ev);
+        }
+      });
+      grid.appendChild(cell);
+    }
+    document.getElementById('cal-month').textContent = `${MESES[curMonth]} ${curYear}`;
+  }
+
+  document.getElementById('cal-prev').addEventListener('click', () => {
+    curMonth--;
+    if (curMonth < 0){ curMonth = 11; curYear--; }
+    buildGrid();
+  });
+  document.getElementById('cal-next').addEventListener('click', () => {
+    curMonth++;
+    if (curMonth > 11){ curMonth = 0; curYear++; }
+    buildGrid();
+  });
+  document.querySelectorAll('.cal-fbtn').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.cal-fbtn').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      filter = b.dataset.fil;
+      buildGrid();
+    });
+  });
+
+  // exponer función global para que cal-feat cards también la usen
+  window.refreshCalendar = buildGrid;
+  buildGrid();
+})();
+
+/* ── ABRIR MODAL DE AGENDA ─────────────────────────────── */
+function abrirAgenda(evento, day, month, year){
+  const tipo = TYPE_LABEL[evento.t];
+  // Cargar datos en el modal
+  const tagEl = document.getElementById('ag-tag');
+  tagEl.textContent = tipo.lbl;
+  tagEl.className = `am-tag ${tipo.cls}`;
+
+  document.getElementById('ag-title').textContent = evento.n;
+  document.getElementById('ag-date').textContent  = `${day} ${MESES[month]} ${year}`;
+  document.getElementById('ag-time').textContent  = `${evento.h} · ${evento.d}`;
+  document.getElementById('ag-mode').textContent  = evento.m;
+  document.getElementById('ag-desc').textContent  = tipo.desc;
+
+  // limpiar inputs
+  document.getElementById('ag-name').value = '';
+  document.getElementById('ag-email').value = '';
+  document.getElementById('ag-name-err').classList.remove('show');
+  document.getElementById('ag-email-err').classList.remove('show');
+  document.getElementById('ag-name').classList.remove('err');
+  document.getElementById('ag-email').classList.remove('err');
+
+  document.getElementById('ag-form-view').style.display = '';
+  document.getElementById('ag-success-view').style.display = 'none';
+
+  // si ya está inscrito, mostrar directamente success
+  if (isInscrito(evento.id)){
+    const inscrito = getInscritos().find(x => x.eventId === evento.id);
+    document.getElementById('ag-form-view').style.display = 'none';
+    document.getElementById('ag-success-view').style.display = '';
+    document.querySelector('#ag-success-view .am-success h4').innerHTML = 'Ya estás <em>inscrito</em>';
+    document.querySelector('#ag-success-view .am-success p').textContent =
+      `Tu cupo está confirmado a nombre de ${inscrito.name}. Te enviaremos un recordatorio.`;
+    document.getElementById('ag-success-meta').textContent =
+      `${day} ${MESES[month]} · ${evento.h} · ${evento.n}`;
+  }
+
+  // Listener del submit
+  const submitBtn = document.getElementById('ag-submit');
+  submitBtn.onclick = () => {
+    const name  = document.getElementById('ag-name').value.trim();
+    const email = document.getElementById('ag-email').value.trim().toLowerCase();
+    let ok = true;
+    if (!name || name.length < 2){
+      document.getElementById('ag-name').classList.add('err');
+      document.getElementById('ag-name-err').classList.add('show');
+      ok = false;
+    }
+    if (!email.endsWith('@parservicios.com') || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      document.getElementById('ag-email').classList.add('err');
+      document.getElementById('ag-email-err').classList.add('show');
+      ok = false;
+    }
+    if (!ok) return;
+
+    addInscripcion(evento.id, name, email, evento);
+    document.getElementById('ag-form-view').style.display = 'none';
+    document.getElementById('ag-success-view').style.display = '';
+    document.querySelector('#ag-success-view .am-success h4').innerHTML = '¡Cupo <em>confirmado</em>!';
+    document.querySelector('#ag-success-view .am-success p').textContent =
+      'Te esperamos en la sesión. Recibirás un recordatorio en tu correo el día anterior.';
+    document.getElementById('ag-success-meta').textContent =
+      `${day} ${MESES[month]} · ${evento.h} · ${evento.n}`;
+
+    if (window.refreshCalendar) window.refreshCalendar();
+    actualizarFeats();
+  };
+
+  // input clearing on type
+  ['ag-name','ag-email'].forEach(id => {
+    document.getElementById(id).oninput = function(){
+      this.classList.remove('err');
+      document.getElementById(id === 'ag-name' ? 'ag-name-err' : 'ag-email-err').classList.remove('show');
+    };
+  });
+
+  openModal('modal-agenda');
+}
+
+/* ── Featured cards (cal-feat) clickeables ─────────────── */
+function actualizarFeats(){
+  const feats = document.querySelectorAll('.cal-feat[data-event-id]');
+  feats.forEach(f => {
+    f.classList.toggle('booked-feat', isInscrito(f.dataset.eventId));
+  });
+}
+document.querySelectorAll('.cal-feat[data-event-id]').forEach(f => {
+  const day = parseInt(f.dataset.day);
+  const month = parseInt(f.dataset.month);
+  const year = parseInt(f.dataset.year);
+  const eventId = f.dataset.eventId;
+  f.addEventListener('click', () => {
+    // Encuentra el evento en EVENTOS
+    const evs = EVENTOS[day] || [];
+    const ev = evs.find(x => x.id === eventId);
+    if (ev) abrirAgenda(ev, day, month, year);
+  });
+});
+actualizarFeats();
+
+/* ═══════════════════════════════════════════════════════
+   RECOMENDACIONES TABS
+═══════════════════════════════════════════════════════ */
+document.querySelectorAll('.reco-tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.reco-tab').forEach(x => x.classList.remove('on'));
+    document.querySelectorAll('.reco-panel').forEach(p => p.classList.remove('active'));
+    t.classList.add('on');
+    const tab = t.dataset.tab;
+    document.querySelector(`.reco-panel[data-panel="${tab}"]`).classList.add('active');
   });
 });
 
 /* ═══════════════════════════════════════════════════════
-   HERO CAROUSEL
+   RECETAS SALUDABLES — 10 recetas con modal detallado
 ═══════════════════════════════════════════════════════ */
-(function carousel(){
-  const slides = document.querySelectorAll('.h-slide');
-  const dots = document.querySelectorAll('.h-dot');
-  const curr = document.getElementById('h-curr');
-  const prev = document.getElementById('h-prev');
-  const next = document.getElementById('h-next');
-  let idx = 0, timer = null;
-  const total = slides.length;
-
-  function go(i){
-    idx = (i + total) % total;
-    slides.forEach((s, k) => s.classList.toggle('active', k === idx));
-    dots.forEach((d, k) => d.classList.toggle('active', k === idx));
-    curr.textContent = String(idx + 1).padStart(2, '0');
+const RECETAS = [
+  {
+    id:'r1', tipo:'Desayuno', nombre:'Bowl de avena con frutas y nueces',
+    img:'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=900&q=85',
+    desc:'Energía sostenida toda la mañana con fibra, proteína y antioxidantes.',
+    tiempo:'10 min', cal:'320', porciones:'1 porción', dificultad:'Fácil',
+    ingredientes:['1/2 taza de avena en hojuelas','1 taza de leche o bebida vegetal','1 banano en rodajas','1/4 taza de fresas','1 cdita miel de abejas','1 cda nueces o almendras','Canela al gusto','Pizca de sal'],
+    pasos:['En una olla mediana, mezcla la avena con la leche y una pizca de sal.','Cocina a fuego medio durante 5 minutos, removiendo constantemente.','Cuando espese, retira del fuego y agrega la miel y la canela.','Sirve en un bowl y decora con el banano, las fresas y las nueces.','Disfruta tibio o frío según prefieras.'],
+    beneficio:'La avena reduce el colesterol LDL, mejora la digestión y mantiene estable la glucosa toda la mañana. Las frutas aportan vitamina C y las nueces dan grasas saludables omega-3.'
+  },
+  {
+    id:'r2', tipo:'Smoothie', nombre:'Smoothie verde detox de espinaca y mango',
+    img:'https://images.unsplash.com/photo-1610970881699-44a5587cabec?w=900&q=85',
+    desc:'Hidratación + vitaminas + fibra en un vaso. Perfecto a media mañana.',
+    tiempo:'5 min', cal:'180', porciones:'1 porción', dificultad:'Muy fácil',
+    ingredientes:['1 taza de espinaca fresca','1/2 mango maduro','1/2 banano congelado','1 taza de agua de coco','1 cda chia','Jugo de 1/2 limón','Jengibre fresco (opcional)'],
+    pasos:['Lava bien la espinaca y reserva.','Coloca todos los ingredientes en la licuadora.','Licúa por 60 segundos a alta velocidad hasta obtener consistencia cremosa.','Si está muy espeso, agrega más agua de coco; si muy líquido, más banano.','Sirve inmediatamente para conservar nutrientes.'],
+    beneficio:'La espinaca aporta hierro y ácido fólico. El mango y limón son fuentes de vitamina C que ayudan a absorber el hierro. Las chía dan omega-3 y saciedad por horas.'
+  },
+  {
+    id:'r3', tipo:'Almuerzo', nombre:'Bowl de quinoa con vegetales asados',
+    img:'https://images.unsplash.com/photo-1543339494-b4cd2dffe2cb?w=900&q=85',
+    desc:'Proteína completa vegetal con vegetales coloridos y aliño de tahini.',
+    tiempo:'25 min', cal:'410', porciones:'2 porciones', dificultad:'Media',
+    ingredientes:['1 taza de quinoa','2 tazas de caldo de vegetales','1 zanahoria en cubos','1 zucchini','1/2 brócoli','1/2 cebolla morada','2 cdas aceite de oliva','2 cdas tahini','Jugo de 1 limón','Sal y pimienta'],
+    pasos:['Precalienta el horno a 200°C.','Lava la quinoa y cocínala con el caldo durante 15 min a fuego bajo.','Corta los vegetales en cubos similares y mézclalos con aceite, sal y pimienta.','Lleva los vegetales al horno por 20 minutos hasta que estén dorados.','Mezcla tahini con limón y un poco de agua para hacer el aliño.','Sirve la quinoa como base, encima los vegetales y baña con el aliño.'],
+    beneficio:'La quinoa es proteína completa con los 9 aminoácidos esenciales. Los vegetales asados conservan más nutrientes que cocidos. Tahini aporta calcio y grasas saludables.'
+  },
+  {
+    id:'r4', tipo:'Snack', nombre:'Tostada de aguacate con huevo pochado',
+    img:'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=900&q=85',
+    desc:'Snack inteligente a media tarde — proteína, grasa buena y carbohidrato lento.',
+    tiempo:'8 min', cal:'285', porciones:'1 porción', dificultad:'Fácil',
+    ingredientes:['1 rebanada pan integral','1/2 aguacate maduro','1 huevo fresco','1 cda vinagre blanco','Jugo de 1/4 limón','Sal y pimienta','Chile en hojuelas (opcional)','Semillas de sésamo'],
+    pasos:['Tuesta el pan integral hasta que esté dorado.','Pisa el aguacate con limón, sal y pimienta directamente sobre el pan.','En una olla pequeña, calienta agua con vinagre — sin que hierva fuerte.','Crea un remolino con cuchara, cae el huevo al centro y cocina 3 minutos.','Saca el huevo con cuchara perforada y déjalo en papel absorbente.','Coloca el huevo sobre el aguacate, agrega semillas y chile.'],
+    beneficio:'El aguacate da grasas monoinsaturadas que protegen el corazón. El huevo aporta proteína completa y colina (vital para memoria). El pan integral fibra que regula la digestión.'
+  },
+  {
+    id:'r5', tipo:'Almuerzo', nombre:'Salmón al horno con vegetales mediterráneos',
+    img:'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=900&q=85',
+    desc:'Omega-3 antiinflamatorio + vegetales coloridos. Lo más fácil del menú.',
+    tiempo:'30 min', cal:'460', porciones:'2 porciones', dificultad:'Media',
+    ingredientes:['2 filetes de salmón fresco','1 zucchini','1 pimentón rojo','1 pimentón amarillo','10 tomates cherry','2 dientes de ajo','Hierbas mediterráneas','3 cdas aceite de oliva','Jugo de 1 limón','Sal marina'],
+    pasos:['Precalienta el horno a 200°C.','Corta los vegetales en cubos medianos y colócalos en una bandeja.','Aliña con aceite de oliva, ajo picado, hierbas y sal.','Hornea los vegetales por 10 minutos.','Coloca los filetes de salmón encima, rocía con limón.','Vuelve al horno por 12-15 minutos hasta que el salmón se desmenuce fácil.','Sirve caliente con el jugo de cocción.'],
+    beneficio:'El salmón es la mejor fuente de omega-3 EPA y DHA que reducen inflamación cerebral, mejoran memoria y protegen el corazón. Los vegetales aportan antioxidantes.'
+  },
+  {
+    id:'r6', tipo:'Bowl', nombre:'Buddha bowl con garbanzos crocantes',
+    img:'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=85',
+    desc:'Plato completo y vegano con proteína vegetal, fibra y sabor.',
+    tiempo:'30 min', cal:'440', porciones:'1 porción', dificultad:'Media',
+    ingredientes:['1 taza garbanzos cocidos','1 batata pequeña en cubos','2 tazas espinaca o kale','1/2 aguacate','1/4 taza arroz integral cocido','2 cdas hummus','Semillas de sésamo','Aceite de oliva, pimentón, comino','Sal y pimienta'],
+    pasos:['Precalienta el horno a 200°C.','Mezcla los garbanzos con aceite, pimentón, comino y sal.','Hornea los garbanzos por 25 minutos hasta que estén crocantes.','En la misma bandeja, asa la batata por 20 minutos.','Calienta el arroz integral.','Saltea la espinaca con un poco de ajo durante 2 minutos.','Monta el bowl: base de arroz, garbanzos, batata, espinaca, aguacate.','Termina con hummus y semillas de sésamo.'],
+    beneficio:'Plato completo vegano con proteína (garbanzos), carbohidratos complejos (arroz integral, batata), grasas saludables (aguacate) y minerales (espinaca). Saciedad por 5 horas.'
+  },
+  {
+    id:'r7', tipo:'Snack', nombre:'Yogurt griego con granola casera y arándanos',
+    img:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=900&q=85',
+    desc:'Snack proteico ideal antes o después de hacer ejercicio.',
+    tiempo:'5 min', cal:'250', porciones:'1 porción', dificultad:'Muy fácil',
+    ingredientes:['1 taza yogurt griego natural','1/4 taza granola sin azúcar','1/2 taza arándanos frescos','1 cda miel','1 cda almendras laminadas','Canela al gusto','Ralladura de limón (opcional)'],
+    pasos:['Coloca el yogurt griego en un bowl o copa transparente.','Agrega la granola por encima formando una capa.','Coloca los arándanos frescos.','Rocía con miel y espolvorea canela.','Termina con almendras laminadas y ralladura de limón.','Sirve inmediatamente para que la granola conserve la crocancia.'],
+    beneficio:'El yogurt griego tiene el doble de proteína que el regular y probióticos que mejoran la salud intestinal. Los arándanos son top en antioxidantes para el cerebro.'
+  },
+  {
+    id:'r8', tipo:'Cena ligera', nombre:'Sopa cremosa de zanahoria y jengibre',
+    img:'https://images.unsplash.com/photo-1547592180-85f173990554?w=900&q=85',
+    desc:'Cena cálida y reconfortante. Anti-inflamatoria natural por el jengibre.',
+    tiempo:'25 min', cal:'195', porciones:'4 porciones', dificultad:'Fácil',
+    ingredientes:['6 zanahorias grandes','1 cebolla blanca','2 dientes de ajo','1 trozo jengibre fresco','3 tazas caldo de vegetales','1 cda aceite oliva','1/2 taza leche de coco','Jugo de 1 limón','Cilantro fresco','Sal y pimienta blanca'],
+    pasos:['Pela y corta las zanahorias en cubos. Pica fino la cebolla y ajo.','En una olla, sofríe la cebolla y ajo con aceite hasta dorar (3 min).','Agrega el jengibre rallado y cocina 1 minuto más.','Añade las zanahorias y caldo, cocina por 15 minutos.','Cuando la zanahoria esté tierna, licúa todo hasta consistencia cremosa.','Regresa a la olla, agrega leche de coco y limón. Calienta sin hervir.','Sirve con cilantro fresco encima.'],
+    beneficio:'El jengibre reduce inflamación articular y mejora la digestión. Las zanahorias dan betacaroteno para la vista y la piel. La leche de coco aporta grasas saludables MCT.'
+  },
+  {
+    id:'r9', tipo:'Desayuno', nombre:'Pancakes integrales de banano y avena',
+    img:'https://images.unsplash.com/photo-1528207776546-365bb710ee93?w=900&q=85',
+    desc:'Sin azúcar añadida, sin harina blanca. Dulces porque sí, sin culpa.',
+    tiempo:'15 min', cal:'320', porciones:'2 porciones', dificultad:'Fácil',
+    ingredientes:['2 bananos maduros','2 huevos','1 taza avena en hojuelas','1 cdita polvo de hornear','1/2 cdita canela','1 cdita extracto de vainilla','Pizca de sal','Aceite de coco para la sartén','Frutas y miel para servir'],
+    pasos:['En un bowl, machaca los bananos con tenedor hasta que queden cremosos.','Agrega los huevos y bate hasta integrar bien.','Procesa la avena en licuadora para hacerla harina, agrégala al bowl.','Mezcla con polvo de hornear, canela, vainilla y sal.','Calienta una sartén con poco aceite de coco a fuego medio-bajo.','Cocina porciones de 1/4 taza por lado durante 2-3 minutos.','Sirve con fresas, arándanos y un toque de miel.'],
+    beneficio:'Sin azúcar refinada — el banano da el dulce natural y mantiene la glucosa estable. La avena aporta fibra beta-glucano que mejora el colesterol. Los huevos dan proteína completa.'
+  },
+  {
+    id:'r10', tipo:'Snack', nombre:'Energy balls de dátiles, cacao y almendras',
+    img:'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=900&q=85',
+    desc:'Snack energético natural sin necesidad de horno. Duran 2 semanas refrigeradas.',
+    tiempo:'15 min', cal:'95 c/u', porciones:'12 bolitas', dificultad:'Muy fácil',
+    ingredientes:['1 taza dátiles deshuesados','1 taza almendras','3 cdas cacao puro en polvo','2 cdas semillas de chía','1 cdita extracto de vainilla','Pizca de sal','Coco rallado para cubrir (opcional)'],
+    pasos:['Remoja los dátiles en agua tibia por 10 minutos para ablandarlos.','En procesador de alimentos, tritura las almendras hasta dejarlas en trozos pequeños.','Agrega los dátiles escurridos y procesa hasta formar una pasta.','Añade el cacao, chía, vainilla y sal. Procesa hasta integrar.','Con las manos húmedas, forma bolitas del tamaño de una nuez.','Rebozalas en coco rallado si gustas.','Refrigera por 30 minutos antes de comer.'],
+    beneficio:'Los dátiles dan azúcares naturales con fibra que liberan energía gradualmente. El cacao puro es rico en magnesio y antioxidantes. Almendras dan vitamina E y grasas saludables.'
   }
-  function autoplay(){
-    clearInterval(timer);
-    timer = setInterval(() => go(idx + 1), 6000);
-  }
-  function pause(){ clearInterval(timer); }
+];
 
-  dots.forEach(d => d.addEventListener('click', () => { go(parseInt(d.dataset.go)); autoplay(); }));
-  prev.addEventListener('click', () => { go(idx - 1); autoplay(); });
-  next.addEventListener('click', () => { go(idx + 1); autoplay(); });
+const RECETA_ICON = {
+  'Desayuno':'i-sun','Smoothie':'i-droplet','Almuerzo':'i-leaf',
+  'Snack':'i-zap','Bowl':'i-heart','Cena ligera':'i-moon'
+};
 
-  // Pause on hover
-  const wrap = document.querySelector('.hero-carousel');
-  wrap.addEventListener('mouseenter', pause);
-  wrap.addEventListener('mouseleave', autoplay);
+function renderRecetas(){
+  const grid = document.getElementById('rec-grid');
+  if (!grid) return;
+  grid.innerHTML = RECETAS.map(r => `
+    <article class="rec-card" data-rid="${r.id}">
+      <div class="rec-img">
+        <img src="${r.img}" alt="${r.nombre}" loading="lazy">
+        <span class="rec-tag">${r.tipo}</span>
+        <span class="rec-cal">${r.cal}<sub>kcal</sub></span>
+      </div>
+      <div class="rec-body">
+        <h3>${r.nombre}</h3>
+        <p class="rec-desc">${r.desc}</p>
+        <div class="rec-foot">
+          <span class="rec-time">
+            <svg><use href="#i-clock"/></svg>
+            ${r.tiempo}
+          </span>
+          <span class="rec-cta">
+            Ver receta
+            <svg><use href="#i-arrow-r"/></svg>
+          </span>
+        </div>
+      </div>
+    </article>
+  `).join('');
 
-  autoplay();
-})();
+  grid.querySelectorAll('.rec-card').forEach(c => {
+    c.addEventListener('click', () => {
+      const r = RECETAS.find(x => x.id === c.dataset.rid);
+      if (r) abrirReceta(r);
+    });
+  });
+}
+
+function abrirReceta(r){
+  const content = document.getElementById('rt-content');
+  const ico = RECETA_ICON[r.tipo] || 'i-leaf';
+  content.innerHTML = `
+    <div class="rt-hero">
+      <img src="${r.img.replace('w=900','w=1200')}" alt="${r.nombre}">
+      <div class="rt-hero-info">
+        <span class="rt-tag"><svg><use href="#${ico}"/></svg>${r.tipo}</span>
+        <h3 class="rt-name">${r.nombre}</h3>
+      </div>
+    </div>
+    <div class="rt-meta">
+      <div class="rt-meta-item">
+        <div class="rt-meta-ic"><svg><use href="#i-clock"/></svg></div>
+        <div>
+          <div class="rt-meta-lbl">Tiempo</div>
+          <div class="rt-meta-val">${r.tiempo}</div>
+        </div>
+      </div>
+      <div class="rt-meta-item">
+        <div class="rt-meta-ic"><svg><use href="#i-zap"/></svg></div>
+        <div>
+          <div class="rt-meta-lbl">Calorías</div>
+          <div class="rt-meta-val">${r.cal} kcal</div>
+        </div>
+      </div>
+      <div class="rt-meta-item">
+        <div class="rt-meta-ic"><svg><use href="#i-users"/></svg></div>
+        <div>
+          <div class="rt-meta-lbl">Rinde</div>
+          <div class="rt-meta-val">${r.porciones}</div>
+        </div>
+      </div>
+      <div class="rt-meta-item">
+        <div class="rt-meta-ic"><svg><use href="#i-target"/></svg></div>
+        <div>
+          <div class="rt-meta-lbl">Dificultad</div>
+          <div class="rt-meta-val">${r.dificultad}</div>
+        </div>
+      </div>
+    </div>
+    <div class="rt-body">
+      <div class="rt-block">
+        <div class="rt-block-title">Ingredientes</div>
+        <ul class="rt-ingr">
+          ${r.ingredientes.map(i => `<li>${i}</li>`).join('')}
+        </ul>
+      </div>
+      <div class="rt-block">
+        <div class="rt-block-title">Preparación</div>
+        <ol class="rt-steps">
+          ${r.pasos.map((p,i) => `<li><span class="rt-step-n">${String(i+1).padStart(2,'0')}</span><span class="rt-step-tx">${p}</span></li>`).join('')}
+        </ol>
+      </div>
+      <div class="rt-block">
+        <div class="rt-block-title">Por qué te hace bien</div>
+        <div class="rt-benefit">
+          <div class="rt-benefit-ic"><svg><use href="#i-heart"/></svg></div>
+          <div class="rt-benefit-tx">
+            <strong>Beneficio principal</strong>
+            ${r.beneficio}
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  document.querySelector('#modal-receta .modal-box').scrollTop = 0;
+  openModal('modal-receta');
+}
+
+renderRecetas();
 
 /* ═══════════════════════════════════════════════════════
-   PARALLAX hero glow
+   PARALLAX HERO
 ═══════════════════════════════════════════════════════ */
 const heroGlow = document.querySelector('.hero-glow');
 window.addEventListener('scroll', () => {
-  if (window.scrollY < 800 && heroGlow) {
+  if (window.scrollY < 800 && heroGlow){
     heroGlow.style.transform = `translateY(${window.scrollY * 0.3}px)`;
   }
-}, { passive: true });
+}, { passive:true });
 </script>
 </body>
 </html>

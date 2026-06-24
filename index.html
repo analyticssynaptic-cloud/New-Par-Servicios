@@ -660,6 +660,130 @@ ul,ol{list-style:none}
   .cal-toolbar{flex-direction:column;align-items:flex-start}
 }
 
+/* ── VISTA TOGGLE + GANTT ────────────────────────────────── */
+.cal-view-tog{
+  display:inline-flex;background:var(--bg);
+  border:1.5px solid var(--line);border-radius:30px;padding:3px;
+}
+.cal-view-tog button{
+  padding:7px 14px;border-radius:30px;
+  font-family:var(--cond);font-size:.72rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+  display:inline-flex;align-items:center;gap:6px;
+  transition:background var(--t1),color var(--t1);
+}
+.cal-view-tog button svg{width:13px;height:13px}
+.cal-view-tog button.on{background:var(--ink);color:#fff;box-shadow:var(--sh-1)}
+
+.cal-add{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 16px;background:var(--g);color:#fff;
+  border-radius:30px;font-size:.84rem;font-weight:600;
+  transition:transform var(--bounce),background var(--t1);
+  box-shadow:var(--sh-1);margin-left:auto;
+}
+.cal-add:hover{transform:translateY(-1px);background:var(--g-d)}
+.cal-add svg{width:13px;height:13px}
+
+/* GANTT */
+#gantt-view{display:none}
+.gantt-wrap{
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-xl);overflow:hidden;
+  box-shadow:var(--sh-1);
+}
+.gantt-ruler{
+  position:relative;background:var(--g-tint);
+  border-bottom:1px solid var(--line);
+  height:42px;padding:0 16px 0 180px;
+}
+.gantt-tick{
+  position:absolute;top:0;bottom:0;
+  font-family:var(--cond);font-size:.7rem;font-weight:700;
+  letter-spacing:1.5px;color:var(--g-deep);
+  padding-top:14px;transform:translateX(-50%);
+  white-space:nowrap;
+}
+.gantt-tick::before{
+  content:'';position:absolute;left:50%;top:0;
+  width:1px;height:6px;background:var(--line-2);
+}
+.gantt-row{
+  position:relative;display:flex;align-items:center;
+  border-bottom:1px solid var(--line);
+  min-height:74px;
+}
+.gantt-row:last-child{border-bottom:none}
+.gantt-row-head{
+  width:180px;flex-shrink:0;padding:14px 18px;
+  background:var(--bg);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;justify-content:center;
+  height:100%;
+}
+.gantt-row-name{
+  font-family:var(--display);font-weight:700;font-size:.94rem;
+  color:var(--ink);line-height:1.2;letter-spacing:-.012em;
+}
+.gantt-row-meta{
+  font-family:var(--cond);font-size:.66rem;font-weight:600;
+  letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);
+  margin-top:3px;
+}
+.gantt-row-track{
+  position:relative;flex:1;height:74px;
+}
+.gantt-bar{
+  position:absolute;top:14px;bottom:14px;
+  border-radius:10px;
+  display:flex;align-items:center;gap:7px;
+  padding:0 11px;cursor:pointer;
+  font-size:.78rem;font-weight:600;color:#fff;
+  white-space:nowrap;overflow:hidden;
+  transition:transform var(--t1),box-shadow var(--t1),filter var(--t1);
+  box-shadow:0 2px 8px rgba(13,27,42,.12);
+  min-width:90px;
+}
+.gantt-bar:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(13,27,42,.18);filter:brightness(1.08);z-index:5}
+.gantt-bar.fis{background:linear-gradient(135deg,var(--g),var(--g-deep))}
+.gantt-bar.med{background:linear-gradient(135deg,var(--blue),var(--blue-d))}
+.gantt-bar.son{background:linear-gradient(135deg,var(--purple),var(--purple-d))}
+.gantt-bar.gru{background:linear-gradient(135deg,var(--gold),var(--gold-d))}
+.gantt-bar-h{
+  font-family:var(--display);font-weight:700;font-size:.86rem;
+  letter-spacing:-.01em;flex-shrink:0;
+}
+.gantt-bar-n{
+  font-size:.74rem;font-weight:500;opacity:.92;
+  overflow:hidden;text-overflow:ellipsis;
+}
+
+/* Booked indicator on gantt bar */
+.gantt-bar.booked::after{
+  content:'✓';position:absolute;right:6px;top:50%;transform:translateY(-50%);
+  width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.96);
+  color:var(--ink);font-size:.7rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+}
+
+@media(max-width:880px){
+  .gantt-row-head{width:130px;padding:10px 12px}
+  .gantt-row-name{font-size:.84rem}
+  .gantt-ruler{padding-left:130px}
+  .gantt-bar{font-size:.7rem;padding:0 8px}
+}
+
+/* Delete button inside agenda modal (editor mode) */
+.am-del{
+  width:100%;padding:11px;margin-top:8px;
+  background:transparent;color:#DC2626;
+  border:1.5px solid #FECACA;border-radius:11px;
+  font-weight:600;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  transition:background var(--t1);
+}
+.am-del:hover{background:#FEF2F2}
+.am-del svg{width:14px;height:14px}
+
 /* ════════════════════════════════════════════════════════
    MODAL (compartido)
 ═══════════════════════════════════════════════════════ */
@@ -674,11 +798,19 @@ ul,ol{list-style:none}
 .modal.open{display:flex;opacity:1}
 .modal-box{
   background:var(--surface);border-radius:var(--r-xl);
-  width:100%;max-width:680px;max-height:90vh;
-  overflow:hidden;display:flex;flex-direction:column;
-  box-shadow:var(--sh-3);
+  width:100%;max-width:680px;max-height:92vh;
+  overflow-y:auto;overflow-x:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:var(--sh-3);position:relative;
   transform:scale(.95);opacity:0;
   transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .25s ease;
+  -webkit-overflow-scrolling:touch;
+}
+.modal-box::-webkit-scrollbar{width:6px}
+.modal-box::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px}
+@media(max-width:560px){
+  .modal{padding:0;align-items:flex-end}
+  .modal-box{max-height:96vh;border-radius:var(--r-l) var(--r-l) 0 0;max-width:100%}
 }
 .modal.open .modal-box{transform:scale(1);opacity:1}
 .modal-close{
@@ -915,10 +1047,14 @@ ul,ol{list-style:none}
 .son-5 .son-wave-bar{background:#EC4899}
 .son-6 .son-wave-bar{background:#F59E0B}
 
-.son-card:hover .son-wave-bar{animation:wave-1 1.2s ease-in-out infinite}
-.son-card:hover .son-wave-bar:nth-child(2n){animation:wave-2 1.2s ease-in-out infinite}
-.son-card:hover .son-wave-bar:nth-child(3n){animation-delay:.1s}
-.son-card:hover .son-wave-bar:nth-child(5n){animation-delay:.3s}
+.son-card:hover .son-wave-bar,
+.son-card.playing .son-wave-bar{animation:wave-1 1.2s ease-in-out infinite}
+.son-card:hover .son-wave-bar:nth-child(2n),
+.son-card.playing .son-wave-bar:nth-child(2n){animation:wave-2 1.2s ease-in-out infinite}
+.son-card:hover .son-wave-bar:nth-child(3n),
+.son-card.playing .son-wave-bar:nth-child(3n){animation-delay:.1s}
+.son-card:hover .son-wave-bar:nth-child(5n),
+.son-card.playing .son-wave-bar:nth-child(5n){animation-delay:.3s}
 
 .son-meta{
   display:flex;align-items:center;gap:14px;
@@ -927,6 +1063,28 @@ ul,ol{list-style:none}
 }
 .son-meta-item{display:flex;align-items:center;gap:6px}
 .son-meta-item svg{width:13px;height:13px;color:var(--g-d)}
+
+/* Player button for audio */
+.son-play{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-left:auto;padding:7px 13px 7px 9px;
+  background:var(--ink);color:#fff;
+  border-radius:30px;font-size:.78rem;font-weight:600;
+  transition:background var(--t1),transform var(--t1);
+  cursor:pointer;
+}
+.son-card.playing .son-play{background:var(--g)}
+.son-play:hover{transform:translateY(-1px)}
+.son-play-ic{
+  width:22px;height:22px;border-radius:50%;
+  background:rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.son-play-ic svg{width:9px;height:9px;color:#fff}
+.son-play .ic-pause{display:none}
+.son-card.playing .son-play .ic-play{display:none}
+.son-card.playing .son-play .ic-pause{display:block}
 
 @media(max-width:960px){.sonido-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:580px){.sonido-grid{grid-template-columns:1fr}}
@@ -1011,18 +1169,78 @@ ul,ol{list-style:none}
 ═══════════════════════════════════════════════════════ */
 #recetas{background:linear-gradient(180deg,var(--surface),var(--cream))}
 
-.rec-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
-  gap:24px;margin-top:56px;
+/* Hero featured + 3x3 grid (total 10 = 1 + 9) */
+.rec-featured{
+  background:var(--surface);border-radius:32px;overflow:hidden;
+  border:1px solid var(--line);box-shadow:var(--sh-2);
+  display:grid;grid-template-columns:1.05fr 1fr;align-items:stretch;
+  margin-top:56px;margin-bottom:32px;cursor:pointer;
+  transition:transform var(--t2),box-shadow var(--t2);
 }
+.rec-featured:hover{transform:translateY(-4px);box-shadow:var(--sh-3)}
+.rec-featured .rec-img{aspect-ratio:auto;height:100%;min-height:380px}
+.rec-featured .rec-body{padding:42px 44px;display:flex;flex-direction:column;justify-content:center}
+.rec-featured-tag{
+  display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+  background:var(--g);color:#fff;
+  border-radius:30px;padding:6px 14px;
+  font-family:var(--cond);font-size:.7rem;font-weight:700;
+  letter-spacing:2.2px;text-transform:uppercase;margin-bottom:18px;
+}
+.rec-featured-tag svg{width:12px;height:12px}
+.rec-featured h3{
+  font-family:var(--display);font-weight:700;font-size:1.85rem !important;
+  line-height:1.15;letter-spacing:-.022em;color:var(--ink);margin-bottom:12px !important;
+}
+.rec-featured-desc{font-size:1.02rem !important;color:var(--slate) !important;line-height:1.65 !important;margin-bottom:24px !important}
+.rec-featured-stats{
+  display:flex;gap:24px;padding-top:20px;border-top:1px solid var(--line);
+}
+.rec-featured-stat{flex:0 1 auto}
+.rec-featured-stat-n{
+  font-family:var(--display);font-weight:700;font-size:1.4rem;color:var(--g-d);
+  letter-spacing:-.02em;line-height:1;
+}
+.rec-featured-stat-n sub{font-size:.65rem;font-weight:500;color:var(--muted);margin-left:2px}
+.rec-featured-stat-l{
+  font-family:var(--cond);font-size:.66rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:4px;
+}
+@media(max-width:880px){
+  .rec-featured{grid-template-columns:1fr}
+  .rec-featured .rec-img{min-height:280px;aspect-ratio:4/3}
+  .rec-featured .rec-body{padding:32px 28px}
+  .rec-featured h3{font-size:1.5rem !important}
+}
+
+.rec-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+@media(max-width:960px){.rec-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.rec-grid{grid-template-columns:1fr}}
+
+@keyframes rec-tilt{
+  0%,100%{transform:rotate(-1.2deg) translateY(0)}
+  50%{transform:rotate(1.2deg) translateY(-4px)}
+}
+
 .rec-card{
   background:var(--surface);border-radius:24px;
   overflow:hidden;border:1px solid var(--line);
   cursor:pointer;
   transition:transform var(--t2),box-shadow var(--t2);
   display:flex;flex-direction:column;
+  animation:rec-tilt 6s ease-in-out infinite;
+  transform-origin:center;
 }
-.rec-card:hover{transform:translateY(-6px);box-shadow:var(--sh-3)}
+.rec-card:nth-child(2n){animation-duration:7s;animation-delay:-1.5s}
+.rec-card:nth-child(3n){animation-duration:5.5s;animation-delay:-3s}
+.rec-card:hover{
+  animation-play-state:paused;
+  transform:translateY(-8px) rotate(0deg) scale(1.02);
+  box-shadow:var(--sh-3);z-index:3;
+}
 .rec-img{
   position:relative;aspect-ratio:4/3;overflow:hidden;background:#eee;
 }
@@ -1549,19 +1767,8 @@ footer{
           </div>
         </div>
 
-        <!-- Control tray (sin pause, solo navegación + dots) -->
+        <!-- Solo dots, sin flechas (las imágenes rotan automáticas) -->
         <div class="orbit-tray">
-          <button class="orbit-tray-ctrl" id="orb-prev" aria-label="Anterior">
-            <svg><use href="#i-arrow-l"/></svg>
-          </button>
-          <button class="orbit-tray-ctrl" id="orb-next" aria-label="Siguiente">
-            <svg><use href="#i-arrow-r"/></svg>
-          </button>
-          <div class="orbit-progress">
-            <span class="orbit-prog-cur" id="orb-cur">1</span>
-            <span class="orbit-prog-sep">/</span>
-            <span class="orbit-prog-tot">8</span>
-          </div>
           <div class="orbit-dots" id="orb-dots">
             <button class="orbit-dot active" data-go="0"></button>
             <button class="orbit-dot" data-go="1"></button>
@@ -1625,11 +1832,22 @@ footer{
     </div>
 
     <div class="cal-toolbar reveal">
-      <div class="cal-month-nav">
+      <div class="cal-month-nav" id="cal-month-nav">
         <button class="cal-arrow" id="cal-prev" aria-label="Mes anterior"><svg><use href="#i-arrow-l"/></svg></button>
-        <div class="cal-month" id="cal-month">Octubre 2024</div>
+        <div class="cal-month" id="cal-month">Octubre 2026</div>
         <button class="cal-arrow" id="cal-next" aria-label="Mes siguiente"><svg><use href="#i-arrow-r"/></svg></button>
       </div>
+      <div class="cal-view-tog">
+        <button id="view-mes" class="on"><svg><use href="#i-calendar"/></svg>Mes</button>
+        <button id="view-gantt"><svg><use href="#i-trending"/></svg>Gantt</button>
+      </div>
+      <button class="cal-add" id="cal-add">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Nueva actividad
+      </button>
+    </div>
+
+    <div class="cal-toolbar reveal" style="margin-top:-12px;padding-bottom:20px">
       <div class="cal-filters">
         <button class="cal-fbtn on" data-fil="all">Todas</button>
         <button class="cal-fbtn fis" data-fil="fis"><span class="cal-fbtn-dot"></span>Pausa Física</button>
@@ -1639,6 +1857,7 @@ footer{
       </div>
     </div>
 
+    <div id="mes-view">
     <div class="cal-grid-wrap reveal reveal-d1">
       <div class="cal-weekdays">
         <div class="cal-weekday">Lun</div>
@@ -1652,51 +1871,18 @@ footer{
       <div class="cal-grid" id="cal-grid"></div>
     </div>
 
-    <!-- Featured upcoming -->
-    <div class="cal-feats">
-      <article class="cal-feat reveal reveal-d1" data-event-id="oct-15-1" data-day="15" data-month="9" data-year="2024">
-        <div class="cal-feat-top">
-          <div class="cal-feat-date">
-            <span class="cal-feat-d">15</span>
-            <span class="cal-feat-m">Oct</span>
-          </div>
-          <span class="cal-feat-tag fis">Pausa Física</span>
-        </div>
-        <h4>Estiramiento de Cuello y Hombros</h4>
-        <div class="cal-feat-time">
-          <svg><use href="#i-clock"/></svg>
-          <span>10:00 a.m. · 15 min · Virtual</span>
-        </div>
-      </article>
-      <article class="cal-feat reveal reveal-d2" data-event-id="oct-17-1" data-day="17" data-month="9" data-year="2024">
-        <div class="cal-feat-top">
-          <div class="cal-feat-date">
-            <span class="cal-feat-d">17</span>
-            <span class="cal-feat-m">Oct</span>
-          </div>
-          <span class="cal-feat-tag son">Terapia Sonido</span>
-        </div>
-        <h4>Cuencos Tibetanos · Frecuencia 432 Hz</h4>
-        <div class="cal-feat-time">
-          <svg><use href="#i-clock"/></svg>
-          <span>3:30 p.m. · 30 min · Presencial</span>
-        </div>
-      </article>
-      <article class="cal-feat reveal reveal-d3" data-event-id="oct-22-1" data-day="22" data-month="9" data-year="2024">
-        <div class="cal-feat-top">
-          <div class="cal-feat-date">
-            <span class="cal-feat-d">22</span>
-            <span class="cal-feat-m">Oct</span>
-          </div>
-          <span class="cal-feat-tag med">Meditación</span>
-        </div>
-        <h4>Mindfulness Guiado para el Estrés</h4>
-        <div class="cal-feat-time">
-          <svg><use href="#i-clock"/></svg>
-          <span>9:00 a.m. · 20 min · Híbrido</span>
-        </div>
-      </article>
+    </div><!-- /mes-view -->
+
+    <!-- VISTA GANTT -->
+    <div id="gantt-view">
+      <div class="gantt-wrap reveal">
+        <div class="gantt-ruler" id="gantt-ruler"></div>
+        <div id="gantt-body"></div>
+      </div>
     </div>
+
+    <!-- Featured upcoming -->
+    <div class="cal-feats" id="cal-feats"></div>
   </div>
 </section>
 
@@ -1719,7 +1905,7 @@ footer{
     </div>
 
     <div class="sonido-grid">
-      <article class="son-card son-1 reveal reveal-d1">
+      <article class="son-card son-1 reveal reveal-d1" data-freq="432" data-name="432 Hz">
         <div class="son-head">
           <div class="son-ico"><svg><use href="#i-radio"/></svg></div>
           <div class="son-freq">432<sub>Hz</sub></div>
@@ -1741,11 +1927,15 @@ footer{
         </div>
         <div class="son-meta">
           <div class="son-meta-item"><svg><use href="#i-clock"/></svg><span>30 min</span></div>
-          <div class="son-meta-item"><svg><use href="#i-headphones"/></svg><span>Con audífonos</span></div>
+          <div class="son-meta-item"><svg><use href="#i-headphones"/></svg><span>Audífonos</span></div>
+          <button class="son-play" data-play>
+            <span class="son-play-ic"><svg class="ic-play"><use href="#i-play"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></span>
+            Escuchar
+          </button>
         </div>
       </article>
 
-      <article class="son-card son-2 reveal reveal-d2">
+      <article class="son-card son-2 reveal reveal-d2" data-freq="528" data-name="528 Hz · Reparación">
         <div class="son-head">
           <div class="son-ico"><svg><use href="#i-music"/></svg></div>
           <div class="son-freq">528<sub>Hz</sub></div>
@@ -1767,11 +1957,15 @@ footer{
         </div>
         <div class="son-meta">
           <div class="son-meta-item"><svg><use href="#i-clock"/></svg><span>25 min</span></div>
-          <div class="son-meta-item"><svg><use href="#i-heart"/></svg><span>Recuperación</span></div>
+          <div class="son-meta-item"><svg><use href="#i-heart"/></svg><span>Reparación</span></div>
+          <button class="son-play" data-play>
+            <span class="son-play-ic"><svg class="ic-play"><use href="#i-play"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></span>
+            Escuchar
+          </button>
         </div>
       </article>
 
-      <article class="son-card son-3 reveal reveal-d3">
+      <article class="son-card son-3 reveal reveal-d3" data-base="200" data-binaural="10" data-name="Ondas Alfa · 10 Hz">
         <div class="son-head">
           <div class="son-ico"><svg><use href="#i-brain"/></svg></div>
           <div class="son-freq">8–13<sub>Hz</sub></div>
@@ -1794,10 +1988,14 @@ footer{
         <div class="son-meta">
           <div class="son-meta-item"><svg><use href="#i-clock"/></svg><span>15 min</span></div>
           <div class="son-meta-item"><svg><use href="#i-target"/></svg><span>Foco</span></div>
+          <button class="son-play" data-play>
+            <span class="son-play-ic"><svg class="ic-play"><use href="#i-play"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></span>
+            Escuchar
+          </button>
         </div>
       </article>
 
-      <article class="son-card son-4 reveal reveal-d1">
+      <article class="son-card son-4 reveal reveal-d1" data-freq="110" data-name="Cuencos Tibetanos · 110 Hz">
         <div class="son-head">
           <div class="son-ico"><svg><use href="#i-bell"/></svg></div>
           <div class="son-freq">110<sub>Hz</sub></div>
@@ -1820,10 +2018,14 @@ footer{
         <div class="son-meta">
           <div class="son-meta-item"><svg><use href="#i-clock"/></svg><span>45 min</span></div>
           <div class="son-meta-item"><svg><use href="#i-users"/></svg><span>Grupal</span></div>
+          <button class="son-play" data-play>
+            <span class="son-play-ic"><svg class="ic-play"><use href="#i-play"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></span>
+            Escuchar
+          </button>
         </div>
       </article>
 
-      <article class="son-card son-5 reveal reveal-d2">
+      <article class="son-card son-5 reveal reveal-d2" data-base="200" data-binaural="5" data-name="Ondas Theta · 5 Hz">
         <div class="son-head">
           <div class="son-ico"><svg><use href="#i-moon"/></svg></div>
           <div class="son-freq">4–7<sub>Hz</sub></div>
@@ -1845,11 +2047,15 @@ footer{
         </div>
         <div class="son-meta">
           <div class="son-meta-item"><svg><use href="#i-clock"/></svg><span>20 min</span></div>
-          <div class="son-meta-item"><svg><use href="#i-moon"/></svg><span>Relajación</span></div>
+          <div class="son-meta-item"><svg><use href="#i-moon"/></svg><span>Descanso</span></div>
+          <button class="son-play" data-play>
+            <span class="son-play-ic"><svg class="ic-play"><use href="#i-play"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></span>
+            Escuchar
+          </button>
         </div>
       </article>
 
-      <article class="son-card son-6 reveal reveal-d3">
+      <article class="son-card son-6 reveal reveal-d3" data-freq="741" data-name="741 Hz · Claridad">
         <div class="son-head">
           <div class="son-ico"><svg><use href="#i-sun"/></svg></div>
           <div class="son-freq">741<sub>Hz</sub></div>
@@ -1871,7 +2077,11 @@ footer{
         </div>
         <div class="son-meta">
           <div class="son-meta-item"><svg><use href="#i-clock"/></svg><span>18 min</span></div>
-          <div class="son-meta-item"><svg><use href="#i-sun"/></svg><span>Mañana</span></div>
+          <div class="son-meta-item"><svg><use href="#i-sun"/></svg><span>Claridad</span></div>
+          <button class="son-play" data-play>
+            <span class="son-play-ic"><svg class="ic-play"><use href="#i-play"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></span>
+            Escuchar
+          </button>
         </div>
       </article>
     </div>
@@ -2005,6 +2215,7 @@ footer{
         <p style="margin-top:14px">Toca cualquier receta para ver ingredientes, preparación y beneficios.</p>
       </div>
     </div>
+    <div id="rec-featured-wrap"><!-- Receta destacada generada por JS --></div>
     <div class="rec-grid" id="rec-grid">
       <!-- Cards generadas por JS -->
     </div>
@@ -2116,7 +2327,7 @@ footer{
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2024 <strong>PAR Servicios Integrales</strong>. Todos los derechos reservados.</span>
+      <span>© 2026 <strong>PAR Servicios Integrales</strong>. Todos los derechos reservados.</span>
       <span>Programa de Bienestar Laboral · Colombia</span>
     </div>
   </div>
@@ -2260,9 +2471,6 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   const wrap   = document.getElementById('hero-orbit');
   const items  = Array.from(document.querySelectorAll('.orb-item'));
   const dots   = document.querySelectorAll('.orbit-dot');
-  const cur    = document.getElementById('orb-cur');
-  const prevBtn= document.getElementById('orb-prev');
-  const nextBtn= document.getElementById('orb-next');
 
   const N      = items.length;            // 8 imágenes
   const STEP   = 360 / N;                 // 45° entre cada una
@@ -2323,7 +2531,6 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
     if (frontIdx !== lastFrontIdx){
       lastFrontIdx = frontIdx;
-      cur.textContent = frontIdx + 1;
       dots.forEach((d, k) => d.classList.toggle('active', k === frontIdx));
     }
   }
@@ -2362,13 +2569,7 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     return bestIdx;
   }
 
-  // controles
-  prevBtn.addEventListener('click', () => {
-    goToIndex((findFrontIdx() - 1 + N) % N);
-  });
-  nextBtn.addEventListener('click', () => {
-    goToIndex((findFrontIdx() + 1) % N);
-  });
+  // controles (solo dots)
   dots.forEach((d, i) => d.addEventListener('click', () => goToIndex(i)));
 
   items.forEach((it, i) => {
@@ -2424,9 +2625,11 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 })();
 
 /* ═══════════════════════════════════════════════════════
-   CALENDARIO INTERACTIVO + MODAL DE AGENDA
+   CALENDARIO + GANTT + EDICIÓN + DATOS DEL CRONOGRAMA
 ═══════════════════════════════════════════════════════ */
 const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const MESES_C = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+
 const TYPE_LABEL = {
   fis: { lbl:'Pausa Física',     cls:'fis', desc:'Sesión guiada por nuestros fisioterapeutas para movilizar articulaciones, liberar tensión muscular y activar la circulación. Diseñada para integrarse a tu jornada laboral sin alterar tu flujo.' },
   son: { lbl:'Terapia de Sonido', cls:'son', desc:'Sesión con frecuencias terapéuticas, cuencos tibetanos u ondas binaurales. Regula el sistema nervioso, reduce el cortisol y mejora la calidad del sueño desde la primera sesión.' },
@@ -2434,29 +2637,30 @@ const TYPE_LABEL = {
   gru: { lbl:'Sesión Grupal',     cls:'gru', desc:'Actividad de equipo que fortalece vínculos, mejora la comunicación y crea cultura de bienestar. Conducida por nuestros facilitadores certificados.' }
 };
 
-const EVENTOS = {
-  2:  [{ id:'oct-02-1', t:'fis', n:'Estiramiento de cuello', h:'10:00', d:'15 min', m:'Virtual' }],
-  4:  [{ id:'oct-04-1', t:'son', n:'432 Hz · Calma profunda', h:'15:30', d:'30 min', m:'Presencial' }],
-  7:  [{ id:'oct-07-1', t:'med', n:'Mindfulness inicial', h:'09:00', d:'20 min', m:'Virtual' }],
-  9:  [{ id:'oct-09-1', t:'fis', n:'Pausa activa hombros', h:'10:30', d:'15 min', m:'Virtual' }],
-  10: [{ id:'oct-10-1', t:'gru', n:'Charla salud ocupacional', h:'14:00', d:'45 min', m:'Híbrido' }],
-  14: [{ id:'oct-14-1', t:'son', n:'Cuencos tibetanos', h:'16:00', d:'45 min', m:'Presencial' }],
-  15: [{ id:'oct-15-1', t:'fis', n:'Estiramiento de cuello y hombros', h:'10:00', d:'15 min', m:'Virtual' }, { id:'oct-15-2', t:'med', n:'Respiración 4-7-8', h:'15:00', d:'10 min', m:'Virtual' }],
-  17: [{ id:'oct-17-1', t:'son', n:'432 Hz · Cuencos', h:'15:30', d:'30 min', m:'Presencial' }],
-  18: [{ id:'oct-18-1', t:'fis', n:'Sentadillas suaves', h:'11:00', d:'15 min', m:'Virtual' }],
-  21: [{ id:'oct-21-1', t:'med', n:'Mindfulness grupal', h:'09:00', d:'25 min', m:'Híbrido' }],
-  22: [{ id:'oct-22-1', t:'med', n:'Mindfulness guiado para el estrés', h:'09:00', d:'20 min', m:'Híbrido' }],
-  23: [{ id:'oct-23-1', t:'gru', n:'Yoga corporativo', h:'17:00', d:'60 min', m:'Presencial' }],
-  24: [{ id:'oct-24-1', t:'son', n:'Ondas alfa · Foco', h:'10:00', d:'15 min', m:'Virtual' }],
-  28: [{ id:'oct-28-1', t:'fis', n:'Apertura de pecho', h:'10:30', d:'15 min', m:'Virtual' }],
-  29: [{ id:'oct-29-1', t:'son', n:'Solfeggio 528 Hz', h:'15:00', d:'25 min', m:'Virtual' }],
-  30: [{ id:'oct-30-1', t:'gru', n:'Cierre mensual', h:'16:00', d:'90 min', m:'Presencial' }]
+// Tipo por día de la semana (Lun=fis, Mar=med, Mié=fis, Jue=son, Vie=gru)
+const DOW_TYPE = { 1:'fis', 2:'med', 3:'fis', 4:'son', 5:'gru' };
+
+// Áreas y sus pausas según el cronograma
+const AREAS = [
+  { id:'bpo',        name:'BPO',                          cargos:32, times:['07:30','13:30'], dur:{fis:8, med:5, son:10,gru:12} },
+  { id:'comercial',  name:'Comercial',                    cargos:8,  times:['11:30'],         dur:{fis:10,med:6, son:12,gru:15} },
+  { id:'operaciones',name:'Operaciones',                  cargos:7,  times:['09:45'],         dur:{fis:10,med:6, son:12,gru:15} },
+  { id:'planeacion', name:'Planeación y Sol. Financieras',cargos:4,  times:['10:30'],         dur:{fis:10,med:6, son:12,gru:15} },
+  { id:'th',         name:'Talento Humano',               cargos:3,  times:['14:00'],         dur:{fis:10,med:6, son:12,gru:15} },
+  { id:'tecnologia', name:'Tecnología',                   cargos:9,  times:['09:00'],         dur:{fis:10,med:6, son:12,gru:15} },
+  { id:'dg',         name:'Dirección General',            cargos:6,  times:['16:30'],         dur:{fis:6, med:5, son:8, gru:10} },
+];
+
+const NOMBRE_PAUSA = {
+  fis:['Estiramiento de cuello y hombros','Movilidad de muñecas','Apertura de pecho','Activación de piernas','Rotación de hombros'],
+  med:['Respiración 4-7-8','Mindfulness para el estrés','Atención plena guiada','Meditación de inicio','Pausa mental consciente'],
+  son:['432 Hz · Calma profunda','Cuencos tibetanos','Ondas alfa · Foco','Solfeggio 528 Hz','Frecuencia natural'],
+  gru:['Yoga corporativo','Charla salud ocupacional','Pausa activa grupal','Cierre semanal','Bienestar en equipo']
 };
 
-// localStorage de inscripciones
+// localStorage
 function getInscritos(){
-  try { return JSON.parse(localStorage.getItem('par_inscritos') || '[]'); }
-  catch(e){ return []; }
+  try { return JSON.parse(localStorage.getItem('par_inscritos') || '[]'); } catch(e){ return []; }
 }
 function isInscrito(eventId){ return getInscritos().some(x => x.eventId === eventId); }
 function addInscripcion(eventId, name, email, evento){
@@ -2464,14 +2668,66 @@ function addInscripcion(eventId, name, email, evento){
   list.push({ eventId, name, email, evento, ts: Date.now() });
   localStorage.setItem('par_inscritos', JSON.stringify(list));
 }
+function getEventosCustom(){
+  try { return JSON.parse(localStorage.getItem('par_eventos_custom') || '{}'); } catch(e){ return {}; }
+}
+function setEventosCustom(obj){ localStorage.setItem('par_eventos_custom', JSON.stringify(obj)); }
+function delEventoCustom(year, month, day, eventId){
+  const all = getEventosCustom();
+  const key = `${year}-${month}-${day}`;
+  if (all[key]) all[key] = all[key].filter(e => e.id !== eventId);
+  setEventosCustom(all);
+}
+function addEventoCustom(year, month, day, evento){
+  const all = getEventosCustom();
+  const key = `${year}-${month}-${day}`;
+  if (!all[key]) all[key] = [];
+  all[key].push(evento);
+  setEventosCustom(all);
+}
+
+// Genera eventos para un día específico (combina cronograma + custom)
+function eventosDelDia(year, month, day){
+  const date = new Date(year, month, day);
+  const dow = date.getDay(); // 0=dom..6=sab
+  const tipo = DOW_TYPE[dow];
+  const eventos = [];
+
+  if (tipo){
+    AREAS.forEach((a, ai) => {
+      a.times.forEach((h, hi) => {
+        const nombres = NOMBRE_PAUSA[tipo];
+        const nombre = nombres[(ai + hi) % nombres.length];
+        eventos.push({
+          id: `c-${year}-${month}-${day}-${a.id}-${hi}`,
+          t: tipo, n: nombre, h, d: a.dur[tipo] + ' min',
+          m: ai % 2 === 0 ? 'Virtual' : 'Presencial',
+          area: a.id, areaName: a.name, cargos: a.cargos,
+          editable: false
+        });
+      });
+    });
+  }
+
+  // custom events
+  const key = `${year}-${month}-${day}`;
+  const custom = getEventosCustom()[key] || [];
+  custom.forEach(e => eventos.push({ ...e, editable: true }));
+
+  return eventos.sort((a,b) => a.h.localeCompare(b.h));
+}
+
+let curMonth, curYear, filter = 'all', view = 'mes';
 
 (function calendar(){
-  let curMonth = 9;
-  let curYear  = 2024;
-  let filter = 'all';
+  // Inicializar en mes actual
+  const now = new Date();
+  curMonth = now.getMonth();
+  curYear = now.getFullYear();
 
   function buildGrid(){
     const grid = document.getElementById('cal-grid');
+    if (!grid) return;
     grid.innerHTML = '';
 
     const firstDay = new Date(curYear, curMonth, 1).getDay();
@@ -2494,50 +2750,188 @@ function addInscripcion(eventId, name, email, evento){
       if (isCurrentMonth && d === today) cell.classList.add('today');
       cell.innerHTML = `<span class="cal-day-num">${d}</span>`;
 
-      const evs = (curMonth === 9 && curYear === 2024) ? (EVENTOS[d] || []) : [];
-      evs.forEach(e => {
-        if (filter === 'all' || filter === e.t){
-          const ev = document.createElement('span');
-          ev.className = `cal-event ${e.t}` + (isInscrito(e.id) ? ' booked' : '');
-          ev.textContent = `${e.h} ${e.n}`;
-          ev.title = `${e.h} · ${e.n}`;
-          ev.addEventListener('click', () => abrirAgenda(e, d, curMonth, curYear));
-          cell.appendChild(ev);
-        }
+      const evs = eventosDelDia(curYear, curMonth, d).filter(e => filter === 'all' || filter === e.t);
+      const maxShow = 3;
+      evs.slice(0, maxShow).forEach(e => {
+        const ev = document.createElement('span');
+        ev.className = `cal-event ${e.t}` + (isInscrito(e.id) ? ' booked' : '');
+        ev.textContent = `${e.h} ${e.n}`;
+        ev.title = `${e.h} · ${e.areaName || ''} · ${e.n}`;
+        ev.addEventListener('click', () => abrirAgenda(e, d, curMonth, curYear));
+        cell.appendChild(ev);
       });
+      if (evs.length > maxShow){
+        const more = document.createElement('span');
+        more.className = 'cal-event';
+        more.style.cssText = 'background:var(--bg);color:var(--muted);font-weight:500';
+        more.textContent = `+${evs.length - maxShow} más`;
+        cell.appendChild(more);
+      }
       grid.appendChild(cell);
     }
     document.getElementById('cal-month').textContent = `${MESES[curMonth]} ${curYear}`;
+    renderFeats();
+  }
+
+  function buildGantt(){
+    // Encuentra el día actual (lun-vie) o el próximo lunes
+    const now = new Date();
+    let probe = new Date(curYear, curMonth, Math.max(1, now.getDate()));
+    if (probe.getMonth() !== curMonth) probe = new Date(curYear, curMonth, 1);
+    // Avanzar hasta lun-vie
+    while (probe.getDay() === 0 || probe.getDay() === 6){
+      probe.setDate(probe.getDate() + 1);
+      if (probe.getMonth() !== curMonth) break;
+    }
+    const day = probe.getDate();
+    const dow = probe.getDay();
+    const tipoDow = DOW_TYPE[dow];
+
+    // Ruler 7am-6pm
+    const ruler = document.getElementById('gantt-ruler');
+    ruler.innerHTML = '';
+    const START = 7*60, END = 18*60, SPAN = END - START;
+    for (let h = 7; h <= 18; h++){
+      const pct = ((h*60 - START) / SPAN) * 100;
+      const label = h === 12 ? '12 p' : (h > 12 ? `${h-12} p` : `${h} a`);
+      const tick = document.createElement('div');
+      tick.className = 'gantt-tick';
+      tick.style.left = `calc(${pct}% )`;
+      tick.textContent = label;
+      ruler.appendChild(tick);
+    }
+
+    // Body — una fila por área
+    const body = document.getElementById('gantt-body');
+    body.innerHTML = '';
+    const dayEvts = eventosDelDia(curYear, curMonth, day);
+
+    AREAS.forEach(area => {
+      const row = document.createElement('div');
+      row.className = 'gantt-row';
+      const evtsArea = dayEvts.filter(e => e.area === area.id || (!e.area && e.editable));
+      row.innerHTML = `
+        <div class="gantt-row-head">
+          <div class="gantt-row-name">${area.name}</div>
+          <div class="gantt-row-meta">${area.cargos} cargos · ${area.times.length} pausa${area.times.length>1?'s':''}</div>
+        </div>
+        <div class="gantt-row-track" data-area="${area.id}"></div>
+      `;
+      const track = row.querySelector('.gantt-row-track');
+      evtsArea.forEach(e => {
+        const [eh, em] = e.h.split(':').map(Number);
+        const startMin = eh*60 + em;
+        const durMin = parseInt(e.d) || 15;
+        const leftPct = ((startMin - START) / SPAN) * 100;
+        const widthPct = (durMin / SPAN) * 100;
+        const bar = document.createElement('div');
+        bar.className = `gantt-bar ${e.t}` + (isInscrito(e.id) ? ' booked' : '');
+        bar.style.left = leftPct + '%';
+        bar.style.minWidth = Math.max(widthPct, 8) + '%';
+        bar.innerHTML = `<span class="gantt-bar-h">${e.h}</span><span class="gantt-bar-n">${e.n}</span>`;
+        bar.title = `${e.h} · ${e.n} (${e.d})`;
+        bar.addEventListener('click', () => abrirAgenda(e, day, curMonth, curYear));
+        track.appendChild(bar);
+      });
+      body.appendChild(row);
+    });
+
+    // Update header showing the day
+    document.getElementById('cal-month').textContent =
+      `${['Dom','Lunes','Martes','Miércoles','Jueves','Viernes','Sáb'][dow]} ${day} de ${MESES[curMonth]} ${curYear}`;
+  }
+
+  function renderFeats(){
+    const wrap = document.getElementById('cal-feats');
+    if (!wrap) return;
+    // 3 próximas actividades de hoy hacia adelante
+    const today = new Date();
+    const all = [];
+    const refDate = (curYear === today.getFullYear() && curMonth === today.getMonth()) ? today.getDate() : 1;
+    const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
+    for (let d = refDate; d <= daysInMonth && all.length < 3; d++){
+      eventosDelDia(curYear, curMonth, d).forEach(e => {
+        if (all.length < 3) all.push({ ...e, day: d });
+      });
+    }
+    wrap.innerHTML = all.map((e, i) => `
+      <article class="cal-feat ${isInscrito(e.id) ? 'booked-feat' : ''}" data-fid="${i}">
+        <div class="cal-feat-top">
+          <div class="cal-feat-date">
+            <span class="cal-feat-d">${e.day}</span>
+            <span class="cal-feat-m">${MESES_C[curMonth]}</span>
+          </div>
+          <span class="cal-feat-tag ${e.t}">${TYPE_LABEL[e.t].lbl}</span>
+        </div>
+        <h4>${e.n}</h4>
+        <div class="cal-feat-time">
+          <svg><use href="#i-clock"/></svg>
+          <span>${e.h} · ${e.d} · ${e.m}${e.areaName ? ' · ' + e.areaName : ''}</span>
+        </div>
+      </article>
+    `).join('');
+    wrap.querySelectorAll('.cal-feat').forEach((c, i) => {
+      c.addEventListener('click', () => abrirAgenda(all[i], all[i].day, curMonth, curYear));
+    });
+  }
+
+  function rebuild(){
+    if (view === 'mes') buildGrid();
+    else buildGantt();
   }
 
   document.getElementById('cal-prev').addEventListener('click', () => {
     curMonth--;
     if (curMonth < 0){ curMonth = 11; curYear--; }
-    buildGrid();
+    rebuild();
   });
   document.getElementById('cal-next').addEventListener('click', () => {
     curMonth++;
     if (curMonth > 11){ curMonth = 0; curYear++; }
-    buildGrid();
+    rebuild();
   });
   document.querySelectorAll('.cal-fbtn').forEach(b => {
     b.addEventListener('click', () => {
       document.querySelectorAll('.cal-fbtn').forEach(x => x.classList.remove('on'));
       b.classList.add('on');
       filter = b.dataset.fil;
-      buildGrid();
+      rebuild();
     });
   });
 
-  // exponer función global para que cal-feat cards también la usen
-  window.refreshCalendar = buildGrid;
-  buildGrid();
+  // Toggle vista
+  const tMes = document.getElementById('view-mes');
+  const tGan = document.getElementById('view-gantt');
+  const wMes = document.getElementById('mes-view');
+  const wGan = document.getElementById('gantt-view');
+  function setView(v){
+    view = v;
+    tMes.classList.toggle('on', v === 'mes');
+    tGan.classList.toggle('on', v === 'gantt');
+    wMes.style.display = v === 'mes' ? '' : 'none';
+    wGan.style.display = v === 'gantt' ? '' : 'none';
+    rebuild();
+  }
+  tMes.addEventListener('click', () => setView('mes'));
+  tGan.addEventListener('click', () => setView('gantt'));
+
+  // Botón Nueva actividad
+  document.getElementById('cal-add').addEventListener('click', () => abrirAgendaNueva());
+
+  // Exponer
+  window.refreshCalendar = rebuild;
+  rebuild();
 })();
 
-/* ── ABRIR MODAL DE AGENDA ─────────────────────────────── */
+/* ── MODAL DE AGENDA — Inscripción + Edición ──────────── */
+let currentAgendaEvent = null;
+let currentAgendaContext = null; // {day, month, year, custom}
+
 function abrirAgenda(evento, day, month, year){
+  currentAgendaEvent = evento;
+  currentAgendaContext = { day, month, year, custom: !!evento.editable };
   const tipo = TYPE_LABEL[evento.t];
-  // Cargar datos en el modal
+
   const tagEl = document.getElementById('ag-tag');
   tagEl.textContent = tipo.lbl;
   tagEl.className = `am-tag ${tipo.cls}`;
@@ -2545,10 +2939,9 @@ function abrirAgenda(evento, day, month, year){
   document.getElementById('ag-title').textContent = evento.n;
   document.getElementById('ag-date').textContent  = `${day} ${MESES[month]} ${year}`;
   document.getElementById('ag-time').textContent  = `${evento.h} · ${evento.d}`;
-  document.getElementById('ag-mode').textContent  = evento.m;
+  document.getElementById('ag-mode').textContent  = evento.m + (evento.areaName ? ' · ' + evento.areaName : '');
   document.getElementById('ag-desc').textContent  = tipo.desc;
 
-  // limpiar inputs
   document.getElementById('ag-name').value = '';
   document.getElementById('ag-email').value = '';
   document.getElementById('ag-name-err').classList.remove('show');
@@ -2559,7 +2952,28 @@ function abrirAgenda(evento, day, month, year){
   document.getElementById('ag-form-view').style.display = '';
   document.getElementById('ag-success-view').style.display = 'none';
 
-  // si ya está inscrito, mostrar directamente success
+  // mostrar/ocultar botón eliminar (solo eventos custom)
+  let delBtn = document.getElementById('ag-del');
+  if (evento.editable){
+    if (!delBtn){
+      delBtn = document.createElement('button');
+      delBtn.id = 'ag-del';
+      delBtn.className = 'am-del';
+      delBtn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Eliminar esta actividad`;
+      document.querySelector('#ag-form-view .am-form').appendChild(delBtn);
+    }
+    delBtn.style.display = '';
+    delBtn.onclick = () => {
+      if (confirm('¿Eliminar esta actividad del calendario?')){
+        delEventoCustom(year, month, day, evento.id);
+        if (window.refreshCalendar) window.refreshCalendar();
+        closeModal();
+      }
+    };
+  } else if (delBtn){
+    delBtn.style.display = 'none';
+  }
+
   if (isInscrito(evento.id)){
     const inscrito = getInscritos().find(x => x.eventId === evento.id);
     document.getElementById('ag-form-view').style.display = 'none';
@@ -2571,7 +2985,6 @@ function abrirAgenda(evento, day, month, year){
       `${day} ${MESES[month]} · ${evento.h} · ${evento.n}`;
   }
 
-  // Listener del submit
   const submitBtn = document.getElementById('ag-submit');
   submitBtn.onclick = () => {
     const name  = document.getElementById('ag-name').value.trim();
@@ -2599,10 +3012,8 @@ function abrirAgenda(evento, day, month, year){
       `${day} ${MESES[month]} · ${evento.h} · ${evento.n}`;
 
     if (window.refreshCalendar) window.refreshCalendar();
-    actualizarFeats();
   };
 
-  // input clearing on type
   ['ag-name','ag-email'].forEach(id => {
     document.getElementById(id).oninput = function(){
       this.classList.remove('err');
@@ -2613,26 +3024,27 @@ function abrirAgenda(evento, day, month, year){
   openModal('modal-agenda');
 }
 
-/* ── Featured cards (cal-feat) clickeables ─────────────── */
-function actualizarFeats(){
-  const feats = document.querySelectorAll('.cal-feat[data-event-id]');
-  feats.forEach(f => {
-    f.classList.toggle('booked-feat', isInscrito(f.dataset.eventId));
-  });
+// Nueva actividad (creación) — usa el mismo modal pero con form de creación
+function abrirAgendaNueva(){
+  const today = new Date();
+  const year = today.getFullYear(), month = today.getMonth();
+  const evento = {
+    id: 'cust-' + Date.now(),
+    t: 'fis', n: 'Nueva actividad de pausa',
+    h: '10:00', d: '15 min', m: 'Virtual',
+    editable: true
+  };
+  // mostrar selector inline antes de inscribir
+  abrirAgenda(evento, today.getDate(), month, year);
+
+  // Después de inscribir, también guardamos como custom event
+  const submitBtn = document.getElementById('ag-submit');
+  const origHandler = submitBtn.onclick;
+  submitBtn.onclick = () => {
+    addEventoCustom(year, month, today.getDate(), evento);
+    origHandler();
+  };
 }
-document.querySelectorAll('.cal-feat[data-event-id]').forEach(f => {
-  const day = parseInt(f.dataset.day);
-  const month = parseInt(f.dataset.month);
-  const year = parseInt(f.dataset.year);
-  const eventId = f.dataset.eventId;
-  f.addEventListener('click', () => {
-    // Encuentra el evento en EVENTOS
-    const evs = EVENTOS[day] || [];
-    const ev = evs.find(x => x.id === eventId);
-    if (ev) abrirAgenda(ev, day, month, year);
-  });
-});
-actualizarFeats();
 
 /* ═══════════════════════════════════════════════════════
    RECOMENDACIONES TABS
@@ -2653,7 +3065,7 @@ document.querySelectorAll('.reco-tab').forEach(t => {
 const RECETAS = [
   {
     id:'r1', tipo:'Desayuno', nombre:'Bowl de avena con frutas y nueces',
-    img:'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=900&q=85',
+    img:'https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=900&q=85',
     desc:'Energía sostenida toda la mañana con fibra, proteína y antioxidantes.',
     tiempo:'10 min', cal:'320', porciones:'1 porción', dificultad:'Fácil',
     ingredientes:['1/2 taza de avena en hojuelas','1 taza de leche o bebida vegetal','1 banano en rodajas','1/4 taza de fresas','1 cdita miel de abejas','1 cda nueces o almendras','Canela al gusto','Pizca de sal'],
@@ -2662,7 +3074,7 @@ const RECETAS = [
   },
   {
     id:'r2', tipo:'Smoothie', nombre:'Smoothie verde detox de espinaca y mango',
-    img:'https://images.unsplash.com/photo-1610970881699-44a5587cabec?w=900&q=85',
+    img:'https://images.unsplash.com/photo-1638176067000-9e89c95c7f96?w=900&q=85',
     desc:'Hidratación + vitaminas + fibra en un vaso. Perfecto a media mañana.',
     tiempo:'5 min', cal:'180', porciones:'1 porción', dificultad:'Muy fácil',
     ingredientes:['1 taza de espinaca fresca','1/2 mango maduro','1/2 banano congelado','1 taza de agua de coco','1 cda chia','Jugo de 1/2 limón','Jengibre fresco (opcional)'],
@@ -2671,7 +3083,7 @@ const RECETAS = [
   },
   {
     id:'r3', tipo:'Almuerzo', nombre:'Bowl de quinoa con vegetales asados',
-    img:'https://images.unsplash.com/photo-1543339494-b4cd2dffe2cb?w=900&q=85',
+    img:'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&q=85',
     desc:'Proteína completa vegetal con vegetales coloridos y aliño de tahini.',
     tiempo:'25 min', cal:'410', porciones:'2 porciones', dificultad:'Media',
     ingredientes:['1 taza de quinoa','2 tazas de caldo de vegetales','1 zanahoria en cubos','1 zucchini','1/2 brócoli','1/2 cebolla morada','2 cdas aceite de oliva','2 cdas tahini','Jugo de 1 limón','Sal y pimienta'],
@@ -2680,7 +3092,7 @@ const RECETAS = [
   },
   {
     id:'r4', tipo:'Snack', nombre:'Tostada de aguacate con huevo pochado',
-    img:'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=900&q=85',
+    img:'https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=900&q=85',
     desc:'Snack inteligente a media tarde — proteína, grasa buena y carbohidrato lento.',
     tiempo:'8 min', cal:'285', porciones:'1 porción', dificultad:'Fácil',
     ingredientes:['1 rebanada pan integral','1/2 aguacate maduro','1 huevo fresco','1 cda vinagre blanco','Jugo de 1/4 limón','Sal y pimienta','Chile en hojuelas (opcional)','Semillas de sésamo'],
@@ -2689,7 +3101,7 @@ const RECETAS = [
   },
   {
     id:'r5', tipo:'Almuerzo', nombre:'Salmón al horno con vegetales mediterráneos',
-    img:'https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=900&q=85',
+    img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=900&q=85',
     desc:'Omega-3 antiinflamatorio + vegetales coloridos. Lo más fácil del menú.',
     tiempo:'30 min', cal:'460', porciones:'2 porciones', dificultad:'Media',
     ingredientes:['2 filetes de salmón fresco','1 zucchini','1 pimentón rojo','1 pimentón amarillo','10 tomates cherry','2 dientes de ajo','Hierbas mediterráneas','3 cdas aceite de oliva','Jugo de 1 limón','Sal marina'],
@@ -2698,7 +3110,7 @@ const RECETAS = [
   },
   {
     id:'r6', tipo:'Bowl', nombre:'Buddha bowl con garbanzos crocantes',
-    img:'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=85',
+    img:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900&q=85',
     desc:'Plato completo y vegano con proteína vegetal, fibra y sabor.',
     tiempo:'30 min', cal:'440', porciones:'1 porción', dificultad:'Media',
     ingredientes:['1 taza garbanzos cocidos','1 batata pequeña en cubos','2 tazas espinaca o kale','1/2 aguacate','1/4 taza arroz integral cocido','2 cdas hummus','Semillas de sésamo','Aceite de oliva, pimentón, comino','Sal y pimienta'],
@@ -2707,7 +3119,7 @@ const RECETAS = [
   },
   {
     id:'r7', tipo:'Snack', nombre:'Yogurt griego con granola casera y arándanos',
-    img:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=900&q=85',
+    img:'https://images.unsplash.com/photo-1517959105821-eaf2591984ca?w=900&q=85',
     desc:'Snack proteico ideal antes o después de hacer ejercicio.',
     tiempo:'5 min', cal:'250', porciones:'1 porción', dificultad:'Muy fácil',
     ingredientes:['1 taza yogurt griego natural','1/4 taza granola sin azúcar','1/2 taza arándanos frescos','1 cda miel','1 cda almendras laminadas','Canela al gusto','Ralladura de limón (opcional)'],
@@ -2716,7 +3128,7 @@ const RECETAS = [
   },
   {
     id:'r8', tipo:'Cena ligera', nombre:'Sopa cremosa de zanahoria y jengibre',
-    img:'https://images.unsplash.com/photo-1547592180-85f173990554?w=900&q=85',
+    img:'https://images.unsplash.com/photo-1604152135912-04a022e23696?w=900&q=85',
     desc:'Cena cálida y reconfortante. Anti-inflamatoria natural por el jengibre.',
     tiempo:'25 min', cal:'195', porciones:'4 porciones', dificultad:'Fácil',
     ingredientes:['6 zanahorias grandes','1 cebolla blanca','2 dientes de ajo','1 trozo jengibre fresco','3 tazas caldo de vegetales','1 cda aceite oliva','1/2 taza leche de coco','Jugo de 1 limón','Cilantro fresco','Sal y pimienta blanca'],
@@ -2750,8 +3162,52 @@ const RECETA_ICON = {
 
 function renderRecetas(){
   const grid = document.getElementById('rec-grid');
+  const featuredWrap = document.getElementById('rec-featured-wrap');
   if (!grid) return;
-  grid.innerHTML = RECETAS.map(r => `
+
+  // Receta destacada = la 1ra
+  const featured = RECETAS[0];
+  const rest = RECETAS.slice(1);
+
+  if (featuredWrap){
+    featuredWrap.innerHTML = `
+      <article class="rec-featured" data-rid="${featured.id}">
+        <div class="rec-img">
+          <img src="${featured.img.replace('w=900','w=1200')}" alt="${featured.nombre}">
+          <span class="rec-cal">${featured.cal}<sub>kcal</sub></span>
+        </div>
+        <div class="rec-body">
+          <span class="rec-featured-tag">
+            <svg><use href="#i-${(RECETA_ICON[featured.tipo]||'i-leaf').replace('i-','')}"/></svg>
+            Receta del mes · ${featured.tipo}
+          </span>
+          <h3>${featured.nombre}</h3>
+          <p class="rec-featured-desc">${featured.desc}</p>
+          <div class="rec-featured-stats">
+            <div class="rec-featured-stat">
+              <div class="rec-featured-stat-n">${featured.tiempo.split(' ')[0]}<sub>min</sub></div>
+              <div class="rec-featured-stat-l">Tiempo</div>
+            </div>
+            <div class="rec-featured-stat">
+              <div class="rec-featured-stat-n">${featured.porciones.split(' ')[0]}<sub>p</sub></div>
+              <div class="rec-featured-stat-l">Porciones</div>
+            </div>
+            <div class="rec-featured-stat">
+              <div class="rec-featured-stat-n">${featured.dificultad}</div>
+              <div class="rec-featured-stat-l">Dificultad</div>
+            </div>
+            <div class="rec-featured-stat">
+              <div class="rec-featured-stat-n">${featured.ingredientes.length}<sub>ing</sub></div>
+              <div class="rec-featured-stat-l">Ingredientes</div>
+            </div>
+          </div>
+        </div>
+      </article>
+    `;
+    featuredWrap.querySelector('.rec-featured').addEventListener('click', () => abrirReceta(featured));
+  }
+
+  grid.innerHTML = rest.map(r => `
     <article class="rec-card" data-rid="${r.id}">
       <div class="rec-img">
         <img src="${r.img}" alt="${r.nombre}" loading="lazy">
@@ -2854,6 +3310,108 @@ function abrirReceta(r){
 }
 
 renderRecetas();
+
+/* ═══════════════════════════════════════════════════════
+   TERAPIAS DE SONIDO — Web Audio reales
+═══════════════════════════════════════════════════════ */
+(function audioTherapy(){
+  let ctx = null;
+  let activeCard = null;
+  let nodes = null;
+
+  function getCtx(){
+    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+    return ctx;
+  }
+
+  function stop(){
+    if (nodes){
+      try { nodes.gain.gain.cancelScheduledValues(ctx.currentTime); } catch(e){}
+      try { nodes.gain.gain.setTargetAtTime(0, ctx.currentTime, 0.05); } catch(e){}
+      const oscs = nodes.oscs;
+      setTimeout(() => { oscs.forEach(o => { try { o.stop(); } catch(e){} }); }, 250);
+      nodes = null;
+    }
+    if (activeCard){
+      activeCard.classList.remove('playing');
+      const lbl = activeCard.querySelector('.son-play');
+      if (lbl) lbl.lastChild.textContent = ' Escuchar';
+      activeCard = null;
+    }
+  }
+
+  function play(card){
+    const c = getCtx();
+    if (c.state === 'suspended') c.resume();
+
+    const gain = c.createGain();
+    gain.gain.value = 0;
+    gain.gain.linearRampToValueAtTime(0.08, c.currentTime + 0.4);
+    gain.connect(c.destination);
+
+    const oscs = [];
+    const binaural = card.dataset.binaural;
+    if (binaural){
+      const base = parseFloat(card.dataset.base) || 200;
+      const diff = parseFloat(binaural);
+      // izquierdo
+      const splitterL = c.createStereoPanner();
+      splitterL.pan.value = -1;
+      const o1 = c.createOscillator();
+      o1.type = 'sine'; o1.frequency.value = base;
+      o1.connect(splitterL); splitterL.connect(gain);
+      o1.start();
+      // derecho
+      const splitterR = c.createStereoPanner();
+      splitterR.pan.value = 1;
+      const o2 = c.createOscillator();
+      o2.type = 'sine'; o2.frequency.value = base + diff;
+      o2.connect(splitterR); splitterR.connect(gain);
+      o2.start();
+      oscs.push(o1, o2);
+    } else {
+      const freq = parseFloat(card.dataset.freq);
+      const o = c.createOscillator();
+      o.type = 'sine'; o.frequency.value = freq;
+      o.connect(gain);
+      o.start();
+      oscs.push(o);
+      // armónico sutil para más cuerpo
+      const o2 = c.createOscillator();
+      o2.type = 'sine'; o2.frequency.value = freq * 2;
+      const g2 = c.createGain();
+      g2.gain.value = 0.18;
+      o2.connect(g2); g2.connect(gain);
+      o2.start();
+      oscs.push(o2);
+    }
+
+    nodes = { oscs, gain };
+    activeCard = card;
+    card.classList.add('playing');
+    const lbl = card.querySelector('.son-play');
+    if (lbl) lbl.lastChild.textContent = ' Detener';
+  }
+
+  document.querySelectorAll('.son-card[data-play], .son-card .son-play').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const card = btn.closest('.son-card');
+      if (!card) return;
+      if (activeCard === card){
+        stop();
+      } else {
+        stop();
+        play(card);
+      }
+    });
+  });
+
+  // Parar al cambiar de pestaña
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop();
+  });
+})();
 
 /* ═══════════════════════════════════════════════════════
    PARALLAX HERO

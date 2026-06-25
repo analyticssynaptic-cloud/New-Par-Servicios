@@ -2627,6 +2627,17 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 /* ═══════════════════════════════════════════════════════
    CALENDARIO + GANTT + EDICIÓN + DATOS DEL CRONOGRAMA
 ═══════════════════════════════════════════════════════ */
+// URL del Apps Script (reemplazar después del deploy)
+const GAS_CAL_URL = "https://script.google.com/macros/s/AKfycbxIx6Q8lzt5D08PcsuWVq9yDeS7A4Juj349HKZqHDZ115G92IM1yzSSaw-Je0bEiHroWw/exec";
+
+// Helper sin bloquear: hace fire-and-forget al GAS
+function gasCallSilent(params){
+  try {
+    const url = GAS_CAL_URL + '?' + Object.keys(params).map(k => k + '=' + encodeURIComponent(params[k])).join('&');
+    fetch(url, { mode:'no-cors' }).catch(() => {});
+  } catch(e){}
+}
+
 const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 const MESES_C = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
 
@@ -2667,6 +2678,14 @@ function addInscripcion(eventId, name, email, evento){
   const list = getInscritos();
   list.push({ eventId, name, email, evento, ts: Date.now() });
   localStorage.setItem('par_inscritos', JSON.stringify(list));
+
+  // Sincronizar con Google Sheets
+  gasCallSilent({
+    action: 'inscribir',
+    id: eventId,
+    nombre: name,
+    email: email
+  });
 }
 function getEventosCustom(){
   try { return JSON.parse(localStorage.getItem('par_eventos_custom') || '{}'); } catch(e){ return {}; }
@@ -2677,6 +2696,9 @@ function delEventoCustom(year, month, day, eventId){
   const key = `${year}-${month}-${day}`;
   if (all[key]) all[key] = all[key].filter(e => e.id !== eventId);
   setEventosCustom(all);
+
+  // Sincronizar con Google Sheets
+  gasCallSilent({ action: 'eliminar', id: eventId });
 }
 function addEventoCustom(year, month, day, evento){
   const all = getEventosCustom();
@@ -2684,6 +2706,18 @@ function addEventoCustom(year, month, day, evento){
   if (!all[key]) all[key] = [];
   all[key].push(evento);
   setEventosCustom(all);
+
+  // Sincronizar con Google Sheets
+  const fechaStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+  gasCallSilent({
+    action: 'crear',
+    fecha: fechaStr,
+    hora: evento.h,
+    tipo: evento.t,
+    nombre: evento.n,
+    duracion: parseInt(evento.d) || 15,
+    modalidad: evento.m || 'Virtual'
+  });
 }
 
 // EVENTOS DESTACADOS — solo actividades abiertas a todo el equipo (calendario)
@@ -3113,7 +3147,7 @@ const RECETAS = [
   },
   {
     id:'r2', tipo:'Smoothie', nombre:'Smoothie verde detox de espinaca y mango',
-    img:'https://images.unsplash.com/photo-1502741338009-cac2772e18bc?w=900&q=85',
+    img:'https://drive.google.com/thumbnail?id=1xd2hR8ONbU8XAbowEP1uXj2_tUVETIXj&sz=w1200',
     desc:'Hidratación + vitaminas + fibra en un vaso. Perfecto a media mañana.',
     tiempo:'5 min', cal:'180', porciones:'1 porción', dificultad:'Muy fácil',
     ingredientes:['1 taza de espinaca fresca','1/2 mango maduro','1/2 banano congelado','1 taza de agua de coco','1 cda chia','Jugo de 1/2 limón','Jengibre fresco (opcional)'],
@@ -3131,7 +3165,7 @@ const RECETAS = [
   },
   {
     id:'r4', tipo:'Snack', nombre:'Tostada de aguacate con huevo pochado',
-    img:'https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=900&q=85',
+    img:'https://drive.google.com/thumbnail?id=1D9eGiuH1fBJtZJ8gpTkkcRcLQASW1fgI&sz=w1200',
     desc:'Snack inteligente a media tarde — proteína, grasa buena y carbohidrato lento.',
     tiempo:'8 min', cal:'285', porciones:'1 porción', dificultad:'Fácil',
     ingredientes:['1 rebanada pan integral','1/2 aguacate maduro','1 huevo fresco','1 cda vinagre blanco','Jugo de 1/4 limón','Sal y pimienta','Chile en hojuelas (opcional)','Semillas de sésamo'],
@@ -3140,7 +3174,7 @@ const RECETAS = [
   },
   {
     id:'r5', tipo:'Almuerzo', nombre:'Salmón al horno con vegetales mediterráneos',
-    img:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=900&q=85',
+    img:'https://drive.google.com/thumbnail?id=1XnV6GuTyb5km__S84HEPXoJymV4j2V0Q&sz=w1200',
     desc:'Omega-3 antiinflamatorio + vegetales coloridos. Lo más fácil del menú.',
     tiempo:'30 min', cal:'460', porciones:'2 porciones', dificultad:'Media',
     ingredientes:['2 filetes de salmón fresco','1 zucchini','1 pimentón rojo','1 pimentón amarillo','10 tomates cherry','2 dientes de ajo','Hierbas mediterráneas','3 cdas aceite de oliva','Jugo de 1 limón','Sal marina'],
@@ -3149,7 +3183,7 @@ const RECETAS = [
   },
   {
     id:'r6', tipo:'Bowl', nombre:'Buddha bowl con garbanzos crocantes',
-    img:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900&q=85',
+    img:'https://drive.google.com/thumbnail?id=1TFB0mDkl4n98gl_MaduGG8J_LQcETpaP&sz=w1200',
     desc:'Plato completo y vegano con proteína vegetal, fibra y sabor.',
     tiempo:'30 min', cal:'440', porciones:'1 porción', dificultad:'Media',
     ingredientes:['1 taza garbanzos cocidos','1 batata pequeña en cubos','2 tazas espinaca o kale','1/2 aguacate','1/4 taza arroz integral cocido','2 cdas hummus','Semillas de sésamo','Aceite de oliva, pimentón, comino','Sal y pimienta'],
@@ -3158,7 +3192,7 @@ const RECETAS = [
   },
   {
     id:'r7', tipo:'Snack', nombre:'Yogurt griego con granola casera y arándanos',
-    img:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=900&q=85',
+    img:'https://drive.google.com/thumbnail?id=1GgsxtKXCLs59Vuc22Ve4vbtmCh72mapX&sz=w1200',
     desc:'Snack proteico ideal antes o después de hacer ejercicio.',
     tiempo:'5 min', cal:'250', porciones:'1 porción', dificultad:'Muy fácil',
     ingredientes:['1 taza yogurt griego natural','1/4 taza granola sin azúcar','1/2 taza arándanos frescos','1 cda miel','1 cda almendras laminadas','Canela al gusto','Ralladura de limón (opcional)'],
@@ -3287,17 +3321,18 @@ function renderRecetas(){
       if (!img.dataset.fb){ img.dataset.fb = '1'; setFallback(img); }
     });
   });
-  // Backup: si no terminó de cargar a los 4s, asumimos roto y cambiamos a picsum
+  // Backup: si está EXPLÍCITAMENTE rota (complete=true + naturalWidth=0), cambiamos
+  // Damos hasta 12s para imágenes lentas (Drive, redes con latencia)
   setTimeout(() => {
     document.querySelectorAll('.rec-card img, .rec-featured img').forEach(img => {
       if (img.dataset.fb) return;
-      // Si la imagen aún no cargó o está rota: fallback
-      if (!img.complete || img.naturalWidth === 0){
+      // Solo si está COMPLETA y rota — no si sigue cargando
+      if (img.complete && img.naturalWidth === 0){
         img.dataset.fb = '1';
         setFallback(img);
       }
     });
-  }, 4000);
+  }, 12000);
 }
 
 function abrirReceta(r){

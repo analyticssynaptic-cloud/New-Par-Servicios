@@ -926,8 +926,20 @@ ul,ol{list-style:none}
 }
 
 /* Calendar interactive cell tweaks */
-.cal-event{cursor:pointer;transition:transform var(--t1),box-shadow var(--t1)}
+.cal-event{
+  cursor:pointer;transition:transform var(--t1),box-shadow var(--t1);
+  display:flex;flex-direction:column;gap:1px;line-height:1.2;
+}
 .cal-event:hover{transform:translateX(3px);box-shadow:0 2px 8px rgba(13,27,42,.1)}
+.cal-ev-area{
+  font-family:var(--cond);font-size:.6rem;font-weight:700;
+  letter-spacing:1.2px;text-transform:uppercase;opacity:.85;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.cal-ev-title{
+  font-size:.74rem;font-weight:600;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
 .cal-event.booked{
   position:relative;
   font-weight:700;
@@ -2342,35 +2354,106 @@ footer{
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <div id="ag-form-view">
-      <div class="am-hero">
+      <div class="am-hero" id="ag-hero">
         <span class="am-tag" id="ag-tag">Pausa Física</span>
+        <span id="ag-area-pill" style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.7);border-radius:30px;padding:4px 11px;font-family:var(--cond);font-size:.66rem;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;margin-left:6px;margin-bottom:14px"><span id="ag-area-dot" style="width:9px;height:9px;border-radius:50%"></span><span id="ag-area-name">BPO</span></span>
         <h3 class="am-title" id="ag-title">Estiramiento de Cuello y Hombros</h3>
         <div class="am-meta">
-          <span class="am-meta-chip"><svg><use href="#i-calendar"/></svg><span id="ag-date">15 Octubre 2024</span></span>
+          <span class="am-meta-chip"><svg><use href="#i-calendar"/></svg><span id="ag-date">15 Junio 2026</span></span>
           <span class="am-meta-chip"><svg><use href="#i-clock"/></svg><span id="ag-time">10:00 a.m. · 15 min</span></span>
           <span class="am-meta-chip"><svg><use href="#i-map-pin"/></svg><span id="ag-mode">Virtual</span></span>
         </div>
       </div>
       <div class="am-body">
-        <div class="am-section-title">Sobre la actividad</div>
-        <p class="am-desc" id="ag-desc">Sesión guiada por nuestro fisioterapeuta para liberar la tensión acumulada en cuello, trapecios y hombros. Ideal para quienes trabajan muchas horas frente al computador.</p>
-
-        <div class="am-form">
-          <div class="am-section-title">Agenda tu cupo</div>
-          <div class="am-field">
-            <label for="ag-name">Tu nombre completo</label>
-            <input type="text" id="ag-name" placeholder="Ej: María González" autocomplete="name">
-            <div class="am-err" id="ag-name-err">Por favor ingresa tu nombre.</div>
-          </div>
-          <div class="am-field">
-            <label for="ag-email">Correo corporativo</label>
-            <input type="email" id="ag-email" placeholder="nombre@parservicios.com" autocomplete="email" inputmode="email">
-            <div class="am-err" id="ag-email-err">Solo correos @parservicios.com.</div>
-          </div>
-          <button class="am-btn" id="ag-submit">
-            <svg><use href="#i-check"/></svg>
-            Confirmar mi inscripción
+        <!-- TOGGLE editar (solo eventos custom) -->
+        <div id="ag-edit-toggle" style="display:none;margin-bottom:18px">
+          <button class="cal-fbtn" id="ag-edit-btn" style="padding:8px 14px;font-size:.82rem">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <span style="margin-left:6px">Editar actividad</span>
           </button>
+        </div>
+
+        <div id="ag-info-view">
+          <div class="am-section-title">Sobre la actividad</div>
+          <p class="am-desc" id="ag-desc">Sesión guiada por nuestro fisioterapeuta para liberar la tensión acumulada en cuello, trapecios y hombros. Ideal para quienes trabajan muchas horas frente al computador.</p>
+
+          <div class="am-form">
+            <div class="am-section-title">Agenda tu cupo</div>
+            <div class="am-field">
+              <label for="ag-name">Tu nombre completo</label>
+              <input type="text" id="ag-name" placeholder="Ej: María González" autocomplete="name">
+              <div class="am-err" id="ag-name-err">Por favor ingresa tu nombre.</div>
+            </div>
+            <div class="am-field">
+              <label for="ag-email">Correo corporativo</label>
+              <input type="email" id="ag-email" placeholder="nombre@parservicios.com" autocomplete="email" inputmode="email">
+              <div class="am-err" id="ag-email-err">Solo correos @parservicios.com.</div>
+            </div>
+            <button class="am-btn" id="ag-submit">
+              <svg><use href="#i-check"/></svg>
+              Confirmar mi inscripción
+            </button>
+          </div>
+        </div>
+
+        <!-- EDIT VIEW — solo para actividades custom -->
+        <div id="ag-edit-view" style="display:none">
+          <div class="am-section-title">Editar actividad</div>
+          <div class="am-form" style="background:var(--surface);border:1px solid var(--line)">
+            <div class="am-field">
+              <label for="ag-edit-name">Nombre de la actividad</label>
+              <input type="text" id="ag-edit-name" placeholder="Ej: Estiramiento de cuello">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div class="am-field">
+                <label for="ag-edit-hora">Hora</label>
+                <input type="time" id="ag-edit-hora">
+              </div>
+              <div class="am-field">
+                <label for="ag-edit-duracion">Duración (min)</label>
+                <input type="number" id="ag-edit-duracion" min="5" max="180" step="5">
+              </div>
+            </div>
+            <div class="am-field">
+              <label for="ag-edit-area">Área</label>
+              <select id="ag-edit-area" style="width:100%;padding:13px 15px;background:#fff;border:1.5px solid var(--line);border-radius:11px;font-size:.93rem;color:var(--ink);font-family:inherit;outline:none">
+                <option value="todos">Todas las áreas</option>
+                <option value="bpo">BPO</option>
+                <option value="comercial">Comercial</option>
+                <option value="operaciones">Operaciones</option>
+                <option value="planeacion">Planeación y Sol. Financieras</option>
+                <option value="th">Talento Humano</option>
+                <option value="tecnologia">Tecnología</option>
+                <option value="dg">Dirección General</option>
+              </select>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div class="am-field">
+                <label for="ag-edit-tipo">Tipo</label>
+                <select id="ag-edit-tipo" style="width:100%;padding:13px 15px;background:#fff;border:1.5px solid var(--line);border-radius:11px;font-size:.93rem;color:var(--ink);font-family:inherit;outline:none">
+                  <option value="fis">Pausa Física</option>
+                  <option value="med">Meditación</option>
+                  <option value="son">Terapia de Sonido</option>
+                  <option value="gru">Sesión Grupal</option>
+                </select>
+              </div>
+              <div class="am-field">
+                <label for="ag-edit-modalidad">Modalidad</label>
+                <select id="ag-edit-modalidad" style="width:100%;padding:13px 15px;background:#fff;border:1.5px solid var(--line);border-radius:11px;font-size:.93rem;color:var(--ink);font-family:inherit;outline:none">
+                  <option value="Virtual">Virtual</option>
+                  <option value="Presencial">Presencial</option>
+                  <option value="Híbrido">Híbrido</option>
+                </select>
+              </div>
+            </div>
+            <button class="am-btn" id="ag-save-edit" style="background:var(--g);margin-top:12px">
+              <svg><use href="#i-check"/></svg>
+              Guardar cambios
+            </button>
+            <button class="am-del" id="ag-cancel-edit" style="margin-top:6px;color:var(--muted);border-color:var(--line)">
+              Cancelar
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -2648,6 +2731,18 @@ const TYPE_LABEL = {
   gru: { lbl:'Sesión Grupal',     cls:'gru', desc:'Actividad de equipo que fortalece vínculos, mejora la comunicación y crea cultura de bienestar. Conducida por nuestros facilitadores certificados.' }
 };
 
+// Áreas con su color para la agenda
+const AREAS_COLOR = {
+  bpo:         { name:'BPO',                          color:'#0FBF8B', tint:'#E6F9F2', font:'#086B4D' },
+  comercial:   { name:'Comercial',                    color:'#0EA8E8', tint:'#E0F5FD', font:'#0670AB' },
+  operaciones: { name:'Operaciones',                  color:'#F59E0B', tint:'#FEF3C7', font:'#A8854D' },
+  planeacion:  { name:'Planeación y Sol. Financieras',color:'#EC4899', tint:'#FCE7F3', font:'#BE185D' },
+  th:          { name:'Talento Humano',               color:'#8B5CF6', tint:'#EDE9FE', font:'#6D28D9' },
+  tecnologia:  { name:'Tecnología',                   color:'#06B6D4', tint:'#CFFAFE', font:'#0E7490' },
+  dg:          { name:'Dirección General',            color:'#A8854D', tint:'#F4F1E5', font:'#A8854D' },
+  todos:       { name:'Todas las áreas',              color:'#0D1B2A', tint:'#F4F7F6', font:'#0D1B2A' }
+};
+
 // Tipo por día de la semana (Lun=fis, Mar=med, Mié=fis, Jue=son, Vie=gru)
 const DOW_TYPE = { 1:'fis', 2:'med', 3:'fis', 4:'son', 5:'gru' };
 
@@ -2723,17 +2818,17 @@ function addEventoCustom(year, month, day, evento){
 // EVENTOS DESTACADOS — solo actividades abiertas a todo el equipo (calendario)
 // Estos son distintos a las pausas internas de cada área (las del Gantt)
 const EVENTOS_DESTACADOS_SEMANALES = [
-  { dow:2, h:'15:30', t:'son', n:'Terapia 432 Hz · Calma profunda', d:'30 min', m:'Virtual' },
-  { dow:3, h:'09:00', t:'med', n:'Mindfulness Guiado para el Estrés', d:'20 min', m:'Híbrido' },
-  { dow:4, h:'16:00', t:'son', n:'Cuencos Tibetanos · Sesión Grupal', d:'45 min', m:'Presencial' },
-  { dow:5, h:'17:00', t:'gru', n:'Yoga Corporativo de Cierre', d:'60 min', m:'Presencial' }
+  { dow:2, h:'15:30', t:'son', n:'Terapia 432 Hz · Calma profunda',     d:'30 min', m:'Virtual',    a:'bpo' },
+  { dow:3, h:'09:00', t:'med', n:'Mindfulness Guiado para el Estrés',   d:'20 min', m:'Híbrido',    a:'th' },
+  { dow:4, h:'16:00', t:'son', n:'Cuencos Tibetanos · Sesión Grupal',   d:'45 min', m:'Presencial', a:'tecnologia' },
+  { dow:5, h:'17:00', t:'gru', n:'Yoga Corporativo de Cierre',          d:'60 min', m:'Presencial', a:'todos' }
 ];
 
 const EVENTOS_DESTACADOS_FIJOS = {
   // dia del mes: array de eventos especiales
-  5:  [{ t:'gru', n:'Charla SST · Apertura del mes', h:'09:00', d:'45 min', m:'Híbrido' }],
-  15: [{ t:'gru', n:'Día PAR · Bienestar Laboral',    h:'14:00', d:'90 min', m:'Presencial' }],
-  26: [{ t:'gru', n:'Cierre Bienestar · Reunión General', h:'16:00', d:'90 min', m:'Presencial' }]
+  5:  [{ t:'gru', n:'Charla SST · Apertura del mes',       h:'09:00', d:'45 min', m:'Híbrido',    a:'todos' }],
+  15: [{ t:'gru', n:'Día PAR · Bienestar Laboral',          h:'14:00', d:'90 min', m:'Presencial', a:'todos' }],
+  26: [{ t:'gru', n:'Cierre Bienestar · Reunión General',  h:'16:00', d:'90 min', m:'Presencial', a:'dg' }]
 };
 
 // Eventos del CALENDARIO — destacados + custom
@@ -2833,8 +2928,16 @@ let curMonth, curYear, filter = 'all', view = 'mes';
       evs.forEach(e => {
         const ev = document.createElement('span');
         ev.className = `cal-event ${e.t}` + (isInscrito(e.id) ? ' booked' : '');
-        ev.textContent = `${e.h} ${e.n}`;
-        ev.title = `${e.h} · ${e.n} (${e.d})`;
+        const ar = AREAS_COLOR[e.a || 'todos'] || AREAS_COLOR.todos;
+        // override del color por ÁREA
+        ev.style.borderLeftColor = ar.color;
+        ev.style.background = ar.tint;
+        ev.style.color = ar.font;
+        ev.innerHTML = `
+          <span class="cal-ev-area">${ar.name} · ${e.h}</span>
+          <span class="cal-ev-title">${e.n}</span>
+        `;
+        ev.title = `${ar.name} · ${e.h} — ${e.n} (${e.d}, ${e.m})`;
         ev.addEventListener('click', () => abrirAgenda(e, d, curMonth, curYear));
         cell.appendChild(ev);
       });
@@ -3004,16 +3107,28 @@ function abrirAgenda(evento, day, month, year){
   currentAgendaEvent = evento;
   currentAgendaContext = { day, month, year, custom: !!evento.editable };
   const tipo = TYPE_LABEL[evento.t];
+  const areaInfo = AREAS_COLOR[evento.a || evento.area || 'todos'] || AREAS_COLOR.todos;
 
   const tagEl = document.getElementById('ag-tag');
   tagEl.textContent = tipo.lbl;
   tagEl.className = `am-tag ${tipo.cls}`;
+
+  // Pill de área
+  document.getElementById('ag-area-name').textContent = areaInfo.name;
+  document.getElementById('ag-area-dot').style.background = areaInfo.color;
+  // Header con tint del área
+  document.getElementById('ag-hero').style.background = `linear-gradient(135deg, ${areaInfo.tint}, ${areaInfo.tint})`;
 
   document.getElementById('ag-title').textContent = evento.n;
   document.getElementById('ag-date').textContent  = `${day} ${MESES[month]} ${year}`;
   document.getElementById('ag-time').textContent  = `${evento.h} · ${evento.d}`;
   document.getElementById('ag-mode').textContent  = evento.m + (evento.areaName ? ' · ' + evento.areaName : '');
   document.getElementById('ag-desc').textContent  = tipo.desc;
+
+  // Mostrar/ocultar toggle de edición (solo eventos custom)
+  document.getElementById('ag-edit-toggle').style.display = evento.editable ? 'block' : 'none';
+  document.getElementById('ag-info-view').style.display = '';
+  document.getElementById('ag-edit-view').style.display = 'none';
 
   document.getElementById('ag-name').value = '';
   document.getElementById('ag-email').value = '';
@@ -3094,6 +3209,63 @@ function abrirAgenda(evento, day, month, year){
     };
   });
 
+  // Handler del botón EDITAR (solo se ve para custom)
+  const editBtn = document.getElementById('ag-edit-btn');
+  editBtn.onclick = () => {
+    // Cargar valores actuales en el form de edición
+    document.getElementById('ag-edit-name').value = evento.n;
+    document.getElementById('ag-edit-hora').value = evento.h;
+    document.getElementById('ag-edit-duracion').value = parseInt(evento.d) || 15;
+    document.getElementById('ag-edit-area').value = evento.a || 'todos';
+    document.getElementById('ag-edit-tipo').value = evento.t;
+    document.getElementById('ag-edit-modalidad').value = evento.m || 'Virtual';
+    document.getElementById('ag-info-view').style.display = 'none';
+    document.getElementById('ag-edit-view').style.display = '';
+  };
+
+  // Handler cancelar edición
+  document.getElementById('ag-cancel-edit').onclick = () => {
+    document.getElementById('ag-info-view').style.display = '';
+    document.getElementById('ag-edit-view').style.display = 'none';
+  };
+
+  // Handler guardar edición
+  document.getElementById('ag-save-edit').onclick = () => {
+    const newNombre  = document.getElementById('ag-edit-name').value.trim();
+    const newHora    = document.getElementById('ag-edit-hora').value;
+    const newDur     = parseInt(document.getElementById('ag-edit-duracion').value) || 15;
+    const newArea    = document.getElementById('ag-edit-area').value;
+    const newTipo    = document.getElementById('ag-edit-tipo').value;
+    const newMod     = document.getElementById('ag-edit-modalidad').value;
+    if (!newNombre || !newHora) return;
+
+    // Actualizar en localStorage
+    const all = getEventosCustom();
+    const key = `${year}-${month}-${day}`;
+    if (all[key]){
+      const idx = all[key].findIndex(e => e.id === evento.id);
+      if (idx >= 0){
+        all[key][idx] = {
+          ...all[key][idx],
+          n: newNombre, h: newHora, d: newDur + ' min',
+          a: newArea, t: newTipo, m: newMod
+        };
+        setEventosCustom(all);
+      }
+    }
+
+    // Sincronizar con GAS
+    const fechaStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    gasCallSilent({
+      action:'editar', id: evento.id,
+      fecha: fechaStr, hora: newHora, tipo: newTipo,
+      nombre: newNombre, duracion: newDur, modalidad: newMod, area: newArea
+    });
+
+    if (window.refreshCalendar) window.refreshCalendar();
+    closeModal();
+  };
+
   openModal('modal-agenda');
 }
 
@@ -3105,18 +3277,13 @@ function abrirAgendaNueva(){
     id: 'cust-' + Date.now(),
     t: 'fis', n: 'Nueva actividad de pausa',
     h: '10:00', d: '15 min', m: 'Virtual',
-    editable: true
+    a: 'todos', editable: true
   };
-  // mostrar selector inline antes de inscribir
+  // Guardar inmediatamente y abrir en modo editar
+  addEventoCustom(year, month, today.getDate(), evento);
   abrirAgenda(evento, today.getDate(), month, year);
-
-  // Después de inscribir, también guardamos como custom event
-  const submitBtn = document.getElementById('ag-submit');
-  const origHandler = submitBtn.onclick;
-  submitBtn.onclick = () => {
-    addEventoCustom(year, month, today.getDate(), evento);
-    origHandler();
-  };
+  // Auto-disparar modo edición
+  setTimeout(() => document.getElementById('ag-edit-btn')?.click(), 200);
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -3138,7 +3305,7 @@ document.querySelectorAll('.reco-tab').forEach(t => {
 const RECETAS = [
   {
     id:'r1', tipo:'Desayuno', nombre:'Bowl de avena con frutas y nueces',
-    img:'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=900&q=85',
+    img:'https://drive.google.com/thumbnail?id=1xd2hR8ONbU8XAbowEP1uXj2_tUVETIXj&sz=w1200',
     desc:'Energía sostenida toda la mañana con fibra, proteína y antioxidantes.',
     tiempo:'10 min', cal:'320', porciones:'1 porción', dificultad:'Fácil',
     ingredientes:['1/2 taza de avena en hojuelas','1 taza de leche o bebida vegetal','1 banano en rodajas','1/4 taza de fresas','1 cdita miel de abejas','1 cda nueces o almendras','Canela al gusto','Pizca de sal'],
@@ -3147,7 +3314,7 @@ const RECETAS = [
   },
   {
     id:'r2', tipo:'Smoothie', nombre:'Smoothie verde detox de espinaca y mango',
-    img:'https://drive.google.com/thumbnail?id=1xd2hR8ONbU8XAbowEP1uXj2_tUVETIXj&sz=w1200',
+    img:'https://drive.google.com/thumbnail?id=1D9eGiuH1fBJtZJ8gpTkkcRcLQASW1fgI&sz=w1200',
     desc:'Hidratación + vitaminas + fibra en un vaso. Perfecto a media mañana.',
     tiempo:'5 min', cal:'180', porciones:'1 porción', dificultad:'Muy fácil',
     ingredientes:['1 taza de espinaca fresca','1/2 mango maduro','1/2 banano congelado','1 taza de agua de coco','1 cda chia','Jugo de 1/2 limón','Jengibre fresco (opcional)'],
@@ -3165,7 +3332,7 @@ const RECETAS = [
   },
   {
     id:'r4', tipo:'Snack', nombre:'Tostada de aguacate con huevo pochado',
-    img:'https://drive.google.com/thumbnail?id=1D9eGiuH1fBJtZJ8gpTkkcRcLQASW1fgI&sz=w1200',
+    img:'https://drive.google.com/thumbnail?id=1XnV6GuTyb5km__S84HEPXoJymV4j2V0Q&sz=w1200',
     desc:'Snack inteligente a media tarde — proteína, grasa buena y carbohidrato lento.',
     tiempo:'8 min', cal:'285', porciones:'1 porción', dificultad:'Fácil',
     ingredientes:['1 rebanada pan integral','1/2 aguacate maduro','1 huevo fresco','1 cda vinagre blanco','Jugo de 1/4 limón','Sal y pimienta','Chile en hojuelas (opcional)','Semillas de sésamo'],
@@ -3174,7 +3341,7 @@ const RECETAS = [
   },
   {
     id:'r5', tipo:'Almuerzo', nombre:'Salmón al horno con vegetales mediterráneos',
-    img:'https://drive.google.com/thumbnail?id=1XnV6GuTyb5km__S84HEPXoJymV4j2V0Q&sz=w1200',
+    img:'https://drive.google.com/thumbnail?id=1TFB0mDkl4n98gl_MaduGG8J_LQcETpaP&sz=w1200',
     desc:'Omega-3 antiinflamatorio + vegetales coloridos. Lo más fácil del menú.',
     tiempo:'30 min', cal:'460', porciones:'2 porciones', dificultad:'Media',
     ingredientes:['2 filetes de salmón fresco','1 zucchini','1 pimentón rojo','1 pimentón amarillo','10 tomates cherry','2 dientes de ajo','Hierbas mediterráneas','3 cdas aceite de oliva','Jugo de 1 limón','Sal marina'],
@@ -3183,7 +3350,7 @@ const RECETAS = [
   },
   {
     id:'r6', tipo:'Bowl', nombre:'Buddha bowl con garbanzos crocantes',
-    img:'https://drive.google.com/thumbnail?id=1TFB0mDkl4n98gl_MaduGG8J_LQcETpaP&sz=w1200',
+    img:'https://drive.google.com/thumbnail?id=1GgsxtKXCLs59Vuc22Ve4vbtmCh72mapX&sz=w1200',
     desc:'Plato completo y vegano con proteína vegetal, fibra y sabor.',
     tiempo:'30 min', cal:'440', porciones:'1 porción', dificultad:'Media',
     ingredientes:['1 taza garbanzos cocidos','1 batata pequeña en cubos','2 tazas espinaca o kale','1/2 aguacate','1/4 taza arroz integral cocido','2 cdas hummus','Semillas de sésamo','Aceite de oliva, pimentón, comino','Sal y pimienta'],
@@ -3192,7 +3359,7 @@ const RECETAS = [
   },
   {
     id:'r7', tipo:'Snack', nombre:'Yogurt griego con granola casera y arándanos',
-    img:'https://drive.google.com/thumbnail?id=1GgsxtKXCLs59Vuc22Ve4vbtmCh72mapX&sz=w1200',
+    img:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=900&q=85',
     desc:'Snack proteico ideal antes o después de hacer ejercicio.',
     tiempo:'5 min', cal:'250', porciones:'1 porción', dificultad:'Muy fácil',
     ingredientes:['1 taza yogurt griego natural','1/4 taza granola sin azúcar','1/2 taza arándanos frescos','1 cda miel','1 cda almendras laminadas','Canela al gusto','Ralladura de limón (opcional)'],

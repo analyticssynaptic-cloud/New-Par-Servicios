@@ -685,6 +685,29 @@ ul,ol{list-style:none}
 .cal-add:hover{transform:translateY(-1px);background:var(--g-d)}
 .cal-add svg{width:13px;height:13px}
 
+.cal-inscribir{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 16px;background:var(--ink);color:#fff;
+  border-radius:30px;font-size:.84rem;font-weight:600;
+  transition:transform var(--bounce),background var(--t1);
+  box-shadow:var(--sh-1);
+}
+.cal-inscribir:hover{transform:translateY(-1px);background:var(--g-d)}
+.cal-inscribir svg{width:13px;height:13px}
+
+.ins-select{
+  width:100%;padding:13px 15px;
+  background:#fff;border:1.5px solid var(--line);
+  border-radius:11px;font-size:.93rem;color:var(--ink);
+  font-family:inherit;outline:none;cursor:pointer;
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235B6878' stroke-width='2.5' stroke-linecap='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:38px;
+  transition:border-color var(--t1),box-shadow var(--t1);
+}
+.ins-select:focus{border-color:var(--g);box-shadow:0 0 0 4px rgba(15,191,139,.1)}
+.ins-select.err{border-color:#DC2626;background-color:#FEF2F2}
+
 /* GANTT */
 #gantt-view{display:none}
 .gantt-wrap{
@@ -1853,6 +1876,10 @@ footer{
         <button id="view-mes" class="on"><svg><use href="#i-calendar"/></svg>Mes</button>
         <button id="view-gantt"><svg><use href="#i-trending"/></svg>Gantt</button>
       </div>
+      <button class="cal-inscribir" id="cal-inscribir">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Inscríbete a actividad
+      </button>
       <button class="cal-add" id="cal-add">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
         Nueva actividad
@@ -2363,6 +2390,10 @@ footer{
           <span class="am-meta-chip"><svg><use href="#i-clock"/></svg><span id="ag-time">10:00 a.m. · 15 min</span></span>
           <span class="am-meta-chip"><svg><use href="#i-map-pin"/></svg><span id="ag-mode">Virtual</span></span>
         </div>
+        <a id="ag-link-btn" href="#" target="_blank" rel="noopener" style="display:none;align-items:center;gap:8px;margin-top:14px;padding:11px 18px;background:var(--ink);color:#fff;border-radius:11px;font-weight:600;font-size:.86rem;text-decoration:none;width:fit-content;transition:transform var(--bounce),background var(--t1);box-shadow:var(--sh-1)">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Abrir actividad
+        </a>
       </div>
       <div class="am-body">
         <!-- TOGGLE editar (solo eventos custom) -->
@@ -2446,6 +2477,11 @@ footer{
                 </select>
               </div>
             </div>
+            <div class="am-field">
+              <label for="ag-edit-url">Link de la actividad (URL)</label>
+              <input type="url" id="ag-edit-url" placeholder="https://… (link al juego, video, documento)" style="width:100%;padding:13px 15px;background:#fff;border:1.5px solid var(--line);border-radius:11px;font-size:.93rem;color:var(--ink);font-family:inherit;outline:none">
+              <div style="font-size:.74rem;color:var(--muted);margin-top:5px">Este link aparecerá como botón al abrir la actividad y se guardará en el Sheet.</div>
+            </div>
             <button class="am-btn" id="ag-save-edit" style="background:var(--g);margin-top:12px">
               <svg><use href="#i-check"/></svg>
               Guardar cambios
@@ -2478,6 +2514,90 @@ footer{
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
     <div id="rt-content"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     MODAL INSCRIPCIÓN (dropdowns Sheet)
+═══════════════════════════════════════════════════════ -->
+<div class="modal" id="modal-inscribir" role="dialog" aria-modal="true">
+  <div class="modal-box" style="max-width:620px">
+    <button class="modal-close" data-close-modal aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="am-hero" style="background:linear-gradient(135deg,var(--g-tint),var(--g-soft))">
+      <span class="am-tag" style="background:var(--g);color:#fff">Inscríbete</span>
+      <h3 class="am-title">Elige tu actividad de <em>bienestar</em></h3>
+      <p style="font-size:.9rem;color:var(--slate);margin-top:8px;line-height:1.55">Selecciona el área, la fecha y la actividad disponible. Las opciones se actualizan en tiempo real desde nuestro sistema.</p>
+    </div>
+    <div class="am-body">
+      <div id="ins-loading" style="text-align:center;padding:28px;color:var(--muted);font-size:.92rem">
+        <div style="display:inline-block;width:24px;height:24px;border:2.5px solid var(--g-soft);border-top-color:var(--g);border-radius:50%;animation:rot .8s linear infinite;margin-bottom:12px"></div>
+        <div>Cargando actividades disponibles...</div>
+      </div>
+      <div id="ins-content" style="display:none">
+        <div class="am-section-title">Filtrar por</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="am-field">
+            <label for="ins-area">Área</label>
+            <select id="ins-area" class="ins-select"></select>
+          </div>
+          <div class="am-field">
+            <label for="ins-fecha">Fecha</label>
+            <select id="ins-fecha" class="ins-select"></select>
+          </div>
+        </div>
+        <div class="am-field">
+          <label for="ins-act">Actividad disponible</label>
+          <select id="ins-act" class="ins-select"></select>
+          <div class="am-err" id="ins-act-err">Selecciona una actividad.</div>
+        </div>
+
+        <div id="ins-detalle" style="display:none;background:var(--g-tint);border:1px solid rgba(15,191,139,.18);border-radius:14px;padding:14px 16px;margin-bottom:18px">
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <div style="width:36px;height:36px;border-radius:10px;background:var(--g);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div style="flex:1;font-size:.86rem;color:var(--g-deep);line-height:1.55">
+              <div id="ins-detalle-nombre" style="font-weight:700;font-family:var(--display);font-size:1rem;color:var(--ink);margin-bottom:4px">—</div>
+              <div id="ins-detalle-meta">—</div>
+              <a id="ins-detalle-link" href="#" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;margin-top:8px;font-weight:700;font-size:.82rem;color:var(--g-d);text-decoration:none">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Ver la actividad
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="am-section-title" style="margin-top:8px">Tus datos</div>
+        <div class="am-field">
+          <label for="ins-nombre">Nombre completo</label>
+          <input type="text" id="ins-nombre" placeholder="Ej: María González" autocomplete="name">
+          <div class="am-err" id="ins-nombre-err">Por favor ingresa tu nombre.</div>
+        </div>
+        <div class="am-field">
+          <label for="ins-email">Correo corporativo</label>
+          <input type="email" id="ins-email" placeholder="nombre@parservicios.com" autocomplete="email" inputmode="email">
+          <div class="am-err" id="ins-email-err">Solo correos @parservicios.com.</div>
+        </div>
+        <button class="am-btn" id="ins-submit">
+          <svg><use href="#i-check"/></svg>
+          Confirmar mi inscripción
+        </button>
+
+        <div id="ins-success" style="display:none">
+          <div class="am-success" style="padding-top:16px">
+            <div class="am-success-ic"><svg><use href="#i-check"/></svg></div>
+            <h4>¡Inscrito <em>correctamente</em>!</h4>
+            <p id="ins-success-msg">Tu cupo quedó confirmado. Recibirás un recordatorio.</p>
+            <a id="ins-success-link" href="#" target="_blank" rel="noopener" class="btn-pri" style="margin-top:14px">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Abrir actividad
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -2710,15 +2830,16 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 /* ═══════════════════════════════════════════════════════
    CALENDARIO + GANTT + EDICIÓN + DATOS DEL CRONOGRAMA
 ═══════════════════════════════════════════════════════ */
-// URL del Apps Script (reemplazar después del deploy)
+// URL del Apps Script (reemplazar después del deploy de Calendario.gs)
 const GAS_CAL_URL = "https://script.google.com/macros/s/AKfycbxIx6Q8lzt5D08PcsuWVq9yDeS7A4Juj349HKZqHDZ115G92IM1yzSSaw-Je0bEiHroWw/exec";
 
-// Helper sin bloquear: hace fire-and-forget al GAS
+// Llamada silenciosa al GAS (devuelve promesa si quieres esperar)
 function gasCallSilent(params){
-  try {
-    const url = GAS_CAL_URL + '?' + Object.keys(params).map(k => k + '=' + encodeURIComponent(params[k])).join('&');
-    fetch(url, { mode:'no-cors' }).catch(() => {});
-  } catch(e){}
+  if (!GAS_CAL_URL || GAS_CAL_URL.includes('TU_GAS_ID_AQUI')) return Promise.resolve(null);
+  const qs = Object.keys(params).map(k => `${k}=${encodeURIComponent(params[k])}`).join('&');
+  return fetch(GAS_CAL_URL + '?' + qs, { mode: 'cors' })
+    .then(r => r.json())
+    .catch(e => { console.warn('GAS silent error:', e.message); return null; });
 }
 
 const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
@@ -2979,38 +3100,71 @@ let curMonth, curYear, filter = 'all', view = 'mes';
     const body = document.getElementById('gantt-body');
     body.innerHTML = '';
     const pausasPorArea = pausasDelDiaPorArea(curYear, curMonth, day);
+    const eventosCal = eventosCalendario(curYear, curMonth, day); // Eventos del calendario destacados/custom
+
+    // Las actividades del calendario se asignan a su área (e.a)
+    const eventosPorArea = {};
+    eventosCal.forEach(e => {
+      const aid = e.a || 'todos';
+      if (!eventosPorArea[aid]) eventosPorArea[aid] = [];
+      eventosPorArea[aid].push(e);
+    });
+
+    function renderBar(track, p, areaName){
+      const [eh, em] = p.h.split(':').map(Number);
+      const startMin = eh*60 + em;
+      const durMin = parseInt(p.d) || 15;
+      const leftPct = ((startMin - START) / SPAN) * 100;
+      const widthPct = (durMin / SPAN) * 100;
+      const bar = document.createElement('div');
+      bar.className = `gantt-bar ${p.t}` + (isInscrito(p.id) ? ' booked' : '');
+      bar.style.left = leftPct + '%';
+      bar.style.minWidth = Math.max(widthPct, 8) + '%';
+      bar.innerHTML = `<span class="gantt-bar-h">${p.h}</span><span class="gantt-bar-n">${p.n} · ${p.d}</span>`;
+      bar.title = `${p.h} · ${p.n} (${p.d}) — ${areaName}`;
+      bar.addEventListener('click', () => abrirAgenda(p, day, curMonth, curYear));
+      track.appendChild(bar);
+    }
 
     AREAS.forEach(area => {
       const row = document.createElement('div');
       row.className = 'gantt-row';
       const pausasArea = pausasPorArea[area.id] || [];
-      // Calcular duración total
-      const totalMin = pausasArea.reduce((sum, p) => sum + (parseInt(p.d) || 0), 0);
+      const eventosArea = eventosPorArea[area.id] || [];
+      // Calcular duración total combinada
+      const totalMin = pausasArea.reduce((s, p) => s + (parseInt(p.d) || 0), 0)
+                     + eventosArea.reduce((s, p) => s + (parseInt(p.d) || 0), 0);
+      const totalAct = pausasArea.length + eventosArea.length;
       row.innerHTML = `
         <div class="gantt-row-head">
           <div class="gantt-row-name">${area.name}</div>
-          <div class="gantt-row-meta">${area.cargos} cargos · ${totalMin} min/día</div>
+          <div class="gantt-row-meta">${area.cargos} cargos · ${totalAct} act · ${totalMin} min</div>
         </div>
         <div class="gantt-row-track" data-area="${area.id}"></div>
       `;
       const track = row.querySelector('.gantt-row-track');
-      pausasArea.forEach(p => {
-        const [eh, em] = p.h.split(':').map(Number);
-        const startMin = eh*60 + em;
-        const durMin = parseInt(p.d) || 15;
-        const leftPct = ((startMin - START) / SPAN) * 100;
-        const widthPct = (durMin / SPAN) * 100;
-        const bar = document.createElement('div');
-        bar.className = `gantt-bar ${p.t}` + (isInscrito(p.id) ? ' booked' : '');
-        bar.style.left = leftPct + '%';
-        bar.style.minWidth = Math.max(widthPct, 8) + '%';
-        bar.innerHTML = `<span class="gantt-bar-h">${p.h}</span><span class="gantt-bar-n">${p.n} · ${p.d}</span>`;
-        bar.title = `${p.h} · ${p.n} (${p.d}) — ${area.name}`;
-        bar.addEventListener('click', () => abrirAgenda(p, day, curMonth, curYear));
-        track.appendChild(bar);
-      });
+      pausasArea.forEach(p => renderBar(track, p, area.name));
+      eventosArea.forEach(p => renderBar(track, { ...p, d: p.d || '15 min' }, area.name));
       body.appendChild(row);
     });
+
+    // Fila extra para "Todas las áreas" si hay eventos transversales
+    const eventosTodos = eventosPorArea['todos'] || [];
+    if (eventosTodos.length > 0){
+      const row = document.createElement('div');
+      row.className = 'gantt-row';
+      const totalMin = eventosTodos.reduce((s, p) => s + (parseInt(p.d) || 0), 0);
+      row.innerHTML = `
+        <div class="gantt-row-head" style="background:linear-gradient(135deg,var(--g-tint),#fff)">
+          <div class="gantt-row-name">Todas las áreas</div>
+          <div class="gantt-row-meta">${eventosTodos.length} actividad${eventosTodos.length>1?'es':''} · ${totalMin} min</div>
+        </div>
+        <div class="gantt-row-track"></div>
+      `;
+      const track = row.querySelector('.gantt-row-track');
+      eventosTodos.forEach(p => renderBar(track, p, 'Todas las áreas'));
+      body.appendChild(row);
+    }
 
     // Update header showing the day
     document.getElementById('cal-month').textContent =
@@ -3125,6 +3279,16 @@ function abrirAgenda(evento, day, month, year){
   document.getElementById('ag-mode').textContent  = evento.m + (evento.areaName ? ' · ' + evento.areaName : '');
   document.getElementById('ag-desc').textContent  = tipo.desc;
 
+  // Botón "Abrir actividad" — visible si la actividad tiene URL
+  const linkBtn = document.getElementById('ag-link-btn');
+  const eventUrl = evento.url || 'https://analyticssynaptic-cloud.github.io/Propuestas-de-Juegos/';
+  if (eventUrl){
+    linkBtn.href = eventUrl;
+    linkBtn.style.display = 'inline-flex';
+  } else {
+    linkBtn.style.display = 'none';
+  }
+
   // Mostrar/ocultar toggle de edición (solo eventos custom)
   document.getElementById('ag-edit-toggle').style.display = evento.editable ? 'block' : 'none';
   document.getElementById('ag-info-view').style.display = '';
@@ -3219,6 +3383,7 @@ function abrirAgenda(evento, day, month, year){
     document.getElementById('ag-edit-area').value = evento.a || 'todos';
     document.getElementById('ag-edit-tipo').value = evento.t;
     document.getElementById('ag-edit-modalidad').value = evento.m || 'Virtual';
+    document.getElementById('ag-edit-url').value = evento.url || '';
     document.getElementById('ag-info-view').style.display = 'none';
     document.getElementById('ag-edit-view').style.display = '';
   };
@@ -3237,6 +3402,7 @@ function abrirAgenda(evento, day, month, year){
     const newArea    = document.getElementById('ag-edit-area').value;
     const newTipo    = document.getElementById('ag-edit-tipo').value;
     const newMod     = document.getElementById('ag-edit-modalidad').value;
+    const newUrl     = document.getElementById('ag-edit-url').value.trim() || 'https://analyticssynaptic-cloud.github.io/Propuestas-de-Juegos/';
     if (!newNombre || !newHora) return;
 
     // Actualizar en localStorage
@@ -3248,18 +3414,19 @@ function abrirAgenda(evento, day, month, year){
         all[key][idx] = {
           ...all[key][idx],
           n: newNombre, h: newHora, d: newDur + ' min',
-          a: newArea, t: newTipo, m: newMod
+          a: newArea, t: newTipo, m: newMod, url: newUrl
         };
         setEventosCustom(all);
       }
     }
 
-    // Sincronizar con GAS
+    // Sincronizar con GAS (crea si no existe, edita si sí)
     const fechaStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
     gasCallSilent({
       action:'editar', id: evento.id,
       fecha: fechaStr, hora: newHora, tipo: newTipo,
-      nombre: newNombre, duracion: newDur, modalidad: newMod, area: newArea
+      nombre: newNombre, participantes: newDur, modalidad: newMod, area: newArea,
+      url: newUrl
     });
 
     if (window.refreshCalendar) window.refreshCalendar();
@@ -3285,6 +3452,219 @@ function abrirAgendaNueva(){
   // Auto-disparar modo edición
   setTimeout(() => document.getElementById('ag-edit-btn')?.click(), 200);
 }
+
+/* ═══════════════════════════════════════════════════════
+   GAS — Inscripción con dropdown desde Sheet
+═══════════════════════════════════════════════════════ */
+// Fallback local cuando no hay GAS: genera dropdown desde las funciones del index
+function generarDropdownLocal(year, month){
+  const acts = [];
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  for (let d = 1; d <= daysInMonth; d++){
+    const eventos = eventosCalendario(year, month, d);
+    eventos.forEach(e => {
+      const areaInfo = AREAS_COLOR[e.a || 'todos'] || AREAS_COLOR.todos;
+      acts.push({
+        id: e.id,
+        fecha: `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`,
+        hora: e.h,
+        area: areaInfo.name,
+        areaId: e.a || 'todos',
+        tipo: e.t,
+        nombre: e.n,
+        modalidad: e.m,
+        participantes: parseInt(e.d) || 15,
+        url: e.url || 'https://analyticssynaptic-cloud.github.io/Propuestas-de-Juegos/'
+      });
+    });
+  }
+  const fechas = [...new Set(acts.map(a => a.fecha))].sort();
+  const areas = [...new Set(acts.map(a => a.area))].sort();
+  return { ok:true, total: acts.length, fechas, areas, actividades: acts };
+}
+
+/* ═══════════════════════════════════════════════════════
+   MODAL INSCRIPCIÓN — con dropdowns desde GAS/Sheet
+═══════════════════════════════════════════════════════ */
+let CACHE_DROPDOWN = null;
+
+async function abrirModalInscripcion(){
+  openModal('modal-inscribir');
+  document.getElementById('ins-loading').style.display = '';
+  document.getElementById('ins-content').style.display = 'none';
+  document.getElementById('ins-success').style.display = 'none';
+
+  const now = new Date();
+  const year = now.getFullYear(), month = now.getMonth() + 1;
+
+  // Intentar cargar del GAS primero, luego fallback local
+  let data = null;
+  if (GAS_CAL_URL && !GAS_CAL_URL.includes('TU_GAS_ID_AQUI')){
+    try {
+      const res = await fetch(`${GAS_CAL_URL}?action=dropdown&year=${year}&month=${month}`, { mode:'cors' });
+      data = await res.json();
+    } catch(e){ console.warn('GAS dropdown error, usando fallback local'); }
+  }
+  if (!data || !data.ok){
+    data = generarDropdownLocal(year, month - 1);
+  }
+  CACHE_DROPDOWN = data;
+  llenarDropdowns(data);
+
+  document.getElementById('ins-loading').style.display = 'none';
+  document.getElementById('ins-content').style.display = '';
+}
+
+function llenarDropdowns(data){
+  const areaSel  = document.getElementById('ins-area');
+  const fechaSel = document.getElementById('ins-fecha');
+  const actSel   = document.getElementById('ins-act');
+
+  // Área
+  areaSel.innerHTML = '<option value="">Todas las áreas</option>' +
+    (data.areas || []).map(a => `<option value="${a}">${a}</option>`).join('');
+
+  // Fecha
+  fechaSel.innerHTML = '<option value="">Cualquier fecha</option>' +
+    (data.fechas || []).map(f => {
+      const [y,m,d] = f.split('-').map(Number);
+      const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+      return `<option value="${f}">${d} ${meses[m-1]} ${y}</option>`;
+    }).join('');
+
+  refrescarActividadesSelect();
+
+  areaSel.onchange = refrescarActividadesSelect;
+  fechaSel.onchange = refrescarActividadesSelect;
+  actSel.onchange = mostrarDetalleActividad;
+}
+
+function refrescarActividadesSelect(){
+  const data = CACHE_DROPDOWN; if (!data) return;
+  const areaFilter  = document.getElementById('ins-area').value;
+  const fechaFilter = document.getElementById('ins-fecha').value;
+  const actSel = document.getElementById('ins-act');
+
+  const filtradas = (data.actividades || []).filter(a => {
+    if (areaFilter && a.area !== areaFilter) return false;
+    if (fechaFilter && a.fecha !== fechaFilter) return false;
+    return true;
+  });
+
+  if (filtradas.length === 0){
+    actSel.innerHTML = '<option value="">No hay actividades con estos filtros</option>';
+    document.getElementById('ins-detalle').style.display = 'none';
+    return;
+  }
+
+  actSel.innerHTML = '<option value="">— Selecciona una actividad —</option>' +
+    filtradas.map(a => {
+      const [y,m,d] = a.fecha.split('-').map(Number);
+      return `<option value="${a.id}">${d}/${m} · ${a.hora} · ${a.area} · ${a.nombre}</option>`;
+    }).join('');
+  document.getElementById('ins-detalle').style.display = 'none';
+}
+
+function mostrarDetalleActividad(){
+  const data = CACHE_DROPDOWN; if (!data) return;
+  const id = document.getElementById('ins-act').value;
+  const detalle = document.getElementById('ins-detalle');
+  if (!id){ detalle.style.display = 'none'; return; }
+
+  const a = (data.actividades || []).find(x => x.id === id);
+  if (!a){ detalle.style.display = 'none'; return; }
+
+  document.getElementById('ins-detalle-nombre').textContent = a.nombre;
+  const [y,m,d] = a.fecha.split('-').map(Number);
+  const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+  document.getElementById('ins-detalle-meta').innerHTML =
+    `<strong>${a.area}</strong> · ${d} de ${meses[m-1]} ${y} · ${a.hora} · ${a.modalidad}`;
+  const linkEl = document.getElementById('ins-detalle-link');
+  linkEl.href = a.url || '#';
+  linkEl.style.display = a.url ? 'inline-flex' : 'none';
+  detalle.style.display = 'block';
+}
+
+// Exponer global para botón / debug
+window.abrirModalInscripcion = abrirModalInscripcion;
+
+// Submit del modal inscripción (registro directo, sin DOMContentLoaded)
+(function setupInscripcionListeners(){
+  const btn = document.getElementById('ins-submit');
+  if (!btn) return;
+  btn.addEventListener('click', async () => {
+    const id     = document.getElementById('ins-act').value;
+    const nombre = document.getElementById('ins-nombre').value.trim();
+    const email  = document.getElementById('ins-email').value.trim().toLowerCase();
+    let ok = true;
+
+    if (!id){
+      document.getElementById('ins-act').classList.add('err');
+      document.getElementById('ins-act-err').classList.add('show');
+      ok = false;
+    } else {
+      document.getElementById('ins-act').classList.remove('err');
+      document.getElementById('ins-act-err').classList.remove('show');
+    }
+    if (!nombre || nombre.length < 2){
+      document.getElementById('ins-nombre').classList.add('err');
+      document.getElementById('ins-nombre-err').classList.add('show');
+      ok = false;
+    }
+    if (!email.endsWith('@parservicios.com') || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      document.getElementById('ins-email').classList.add('err');
+      document.getElementById('ins-email-err').classList.add('show');
+      ok = false;
+    }
+    if (!ok) return;
+
+    btn.disabled = true;
+    btn.innerHTML = '<div style="width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:rot .7s linear infinite"></div> Confirmando...';
+
+    // Llamar al GAS
+    let res = null;
+    if (GAS_CAL_URL && !GAS_CAL_URL.includes('TU_GAS_ID_AQUI')){
+      try {
+        const url = `${GAS_CAL_URL}?action=inscribir&id=${encodeURIComponent(id)}&nombre=${encodeURIComponent(nombre)}&email=${encodeURIComponent(email)}`;
+        const r = await fetch(url, { mode: 'cors' });
+        res = await r.json();
+      } catch(e){ console.warn('GAS inscribir error:', e.message); }
+    }
+
+    // Guardar en local SIEMPRE
+    addInscripcion(id, nombre, email, { id, areaName: '', n: 'Inscripción', h: '' });
+
+    // Mostrar éxito
+    const a = (CACHE_DROPDOWN?.actividades || []).find(x => x.id === id);
+    document.getElementById('ins-success').style.display = 'block';
+    document.getElementById('ins-success-msg').textContent = a
+      ? `Te esperamos en ${a.nombre} (${a.area}, ${a.fecha} · ${a.hora}).`
+      : 'Tu cupo quedó confirmado.';
+    const linkOk = document.getElementById('ins-success-link');
+    if (a?.url){ linkOk.href = a.url; linkOk.style.display = 'inline-flex'; }
+    else linkOk.style.display = 'none';
+
+    // Limpiar form
+    document.getElementById('ins-nombre').value = '';
+    document.getElementById('ins-email').value = '';
+    btn.disabled = false;
+    btn.innerHTML = '<svg><use href="#i-check"/></svg> Confirmar mi inscripción';
+
+    if (window.refreshCalendar) window.refreshCalendar();
+  });
+
+  // Clear errors on input
+  ['ins-nombre','ins-email'].forEach(id => {
+    document.getElementById(id).addEventListener('input', function(){
+      this.classList.remove('err');
+      document.getElementById(id + '-err').classList.remove('show');
+    });
+  });
+
+  // Botón abrir modal inscripción
+  const insBtn = document.getElementById('cal-inscribir');
+  if (insBtn) insBtn.addEventListener('click', abrirModalInscripcion);
+})();
 
 /* ═══════════════════════════════════════════════════════
    RECOMENDACIONES TABS

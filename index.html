@@ -2686,35 +2686,80 @@ function addEventoCustom(year, month, day, evento){
   setEventosCustom(all);
 }
 
-// Genera eventos para un día específico (combina cronograma + custom)
-function eventosDelDia(year, month, day){
-  const date = new Date(year, month, day);
-  const dow = date.getDay(); // 0=dom..6=sab
-  const tipo = DOW_TYPE[dow];
+// EVENTOS DESTACADOS — solo actividades abiertas a todo el equipo (calendario)
+// Estos son distintos a las pausas internas de cada área (las del Gantt)
+const EVENTOS_DESTACADOS_SEMANALES = [
+  { dow:2, h:'15:30', t:'son', n:'Terapia 432 Hz · Calma profunda', d:'30 min', m:'Virtual' },
+  { dow:3, h:'09:00', t:'med', n:'Mindfulness Guiado para el Estrés', d:'20 min', m:'Híbrido' },
+  { dow:4, h:'16:00', t:'son', n:'Cuencos Tibetanos · Sesión Grupal', d:'45 min', m:'Presencial' },
+  { dow:5, h:'17:00', t:'gru', n:'Yoga Corporativo de Cierre', d:'60 min', m:'Presencial' }
+];
+
+const EVENTOS_DESTACADOS_FIJOS = {
+  // dia del mes: array de eventos especiales
+  5:  [{ t:'gru', n:'Charla SST · Apertura del mes', h:'09:00', d:'45 min', m:'Híbrido' }],
+  15: [{ t:'gru', n:'Día PAR · Bienestar Laboral',    h:'14:00', d:'90 min', m:'Presencial' }],
+  26: [{ t:'gru', n:'Cierre Bienestar · Reunión General', h:'16:00', d:'90 min', m:'Presencial' }]
+};
+
+// Eventos del CALENDARIO — destacados + custom
+function eventosCalendario(year, month, day){
   const eventos = [];
+  const date = new Date(year, month, day);
+  const dow = date.getDay();
 
-  if (tipo){
-    AREAS.forEach((a, ai) => {
-      a.times.forEach((h, hi) => {
-        const nombres = NOMBRE_PAUSA[tipo];
-        const nombre = nombres[(ai + hi) % nombres.length];
-        eventos.push({
-          id: `c-${year}-${month}-${day}-${a.id}-${hi}`,
-          t: tipo, n: nombre, h, d: a.dur[tipo] + ' min',
-          m: ai % 2 === 0 ? 'Virtual' : 'Presencial',
-          area: a.id, areaName: a.name, cargos: a.cargos,
-          editable: false
-        });
+  // Semanales (todas las semanas)
+  EVENTOS_DESTACADOS_SEMANALES.forEach((e, i) => {
+    if (e.dow === dow){
+      eventos.push({
+        ...e,
+        id: `w-${year}-${month}-${day}-${i}`,
+        editable: false
       });
-    });
-  }
+    }
+  });
 
-  // custom events
+  // Fijos del mes
+  (EVENTOS_DESTACADOS_FIJOS[day] || []).forEach((e, i) => {
+    eventos.push({
+      ...e,
+      id: `f-${year}-${month}-${day}-${i}`,
+      editable: false
+    });
+  });
+
+  // Custom (creados por el usuario)
   const key = `${year}-${month}-${day}`;
   const custom = getEventosCustom()[key] || [];
   custom.forEach(e => eventos.push({ ...e, editable: true }));
 
   return eventos.sort((a,b) => a.h.localeCompare(b.h));
+}
+
+// Pausas internas por ÁREA — solo para vista Gantt
+function pausasDelDiaPorArea(year, month, day){
+  const date = new Date(year, month, day);
+  const dow = date.getDay();
+  const tipo = DOW_TYPE[dow];
+  const resultado = {}; // areaId -> [pausas]
+
+  if (!tipo) return resultado;
+
+  AREAS.forEach((a, ai) => {
+    resultado[a.id] = [];
+    a.times.forEach((h, hi) => {
+      const nombres = NOMBRE_PAUSA[tipo];
+      const nombre = nombres[(ai + hi) % nombres.length];
+      resultado[a.id].push({
+        id: `g-${year}-${month}-${day}-${a.id}-${hi}`,
+        t: tipo, n: nombre, h, d: a.dur[tipo] + ' min',
+        m: ai % 2 === 0 ? 'Virtual' : 'Presencial',
+        area: a.id, areaName: a.name, cargos: a.cargos,
+        editable: false
+      });
+    });
+  });
+  return resultado;
 }
 
 let curMonth, curYear, filter = 'all', view = 'mes';
@@ -2750,23 +2795,15 @@ let curMonth, curYear, filter = 'all', view = 'mes';
       if (isCurrentMonth && d === today) cell.classList.add('today');
       cell.innerHTML = `<span class="cal-day-num">${d}</span>`;
 
-      const evs = eventosDelDia(curYear, curMonth, d).filter(e => filter === 'all' || filter === e.t);
-      const maxShow = 3;
-      evs.slice(0, maxShow).forEach(e => {
+      const evs = eventosCalendario(curYear, curMonth, d).filter(e => filter === 'all' || filter === e.t);
+      evs.forEach(e => {
         const ev = document.createElement('span');
         ev.className = `cal-event ${e.t}` + (isInscrito(e.id) ? ' booked' : '');
         ev.textContent = `${e.h} ${e.n}`;
-        ev.title = `${e.h} · ${e.areaName || ''} · ${e.n}`;
+        ev.title = `${e.h} · ${e.n} (${e.d})`;
         ev.addEventListener('click', () => abrirAgenda(e, d, curMonth, curYear));
         cell.appendChild(ev);
       });
-      if (evs.length > maxShow){
-        const more = document.createElement('span');
-        more.className = 'cal-event';
-        more.style.cssText = 'background:var(--bg);color:var(--muted);font-weight:500';
-        more.textContent = `+${evs.length - maxShow} más`;
-        cell.appendChild(more);
-      }
       grid.appendChild(cell);
     }
     document.getElementById('cal-month').textContent = `${MESES[curMonth]} ${curYear}`;
@@ -2804,33 +2841,35 @@ let curMonth, curYear, filter = 'all', view = 'mes';
     // Body — una fila por área
     const body = document.getElementById('gantt-body');
     body.innerHTML = '';
-    const dayEvts = eventosDelDia(curYear, curMonth, day);
+    const pausasPorArea = pausasDelDiaPorArea(curYear, curMonth, day);
 
     AREAS.forEach(area => {
       const row = document.createElement('div');
       row.className = 'gantt-row';
-      const evtsArea = dayEvts.filter(e => e.area === area.id || (!e.area && e.editable));
+      const pausasArea = pausasPorArea[area.id] || [];
+      // Calcular duración total
+      const totalMin = pausasArea.reduce((sum, p) => sum + (parseInt(p.d) || 0), 0);
       row.innerHTML = `
         <div class="gantt-row-head">
           <div class="gantt-row-name">${area.name}</div>
-          <div class="gantt-row-meta">${area.cargos} cargos · ${area.times.length} pausa${area.times.length>1?'s':''}</div>
+          <div class="gantt-row-meta">${area.cargos} cargos · ${totalMin} min/día</div>
         </div>
         <div class="gantt-row-track" data-area="${area.id}"></div>
       `;
       const track = row.querySelector('.gantt-row-track');
-      evtsArea.forEach(e => {
-        const [eh, em] = e.h.split(':').map(Number);
+      pausasArea.forEach(p => {
+        const [eh, em] = p.h.split(':').map(Number);
         const startMin = eh*60 + em;
-        const durMin = parseInt(e.d) || 15;
+        const durMin = parseInt(p.d) || 15;
         const leftPct = ((startMin - START) / SPAN) * 100;
         const widthPct = (durMin / SPAN) * 100;
         const bar = document.createElement('div');
-        bar.className = `gantt-bar ${e.t}` + (isInscrito(e.id) ? ' booked' : '');
+        bar.className = `gantt-bar ${p.t}` + (isInscrito(p.id) ? ' booked' : '');
         bar.style.left = leftPct + '%';
         bar.style.minWidth = Math.max(widthPct, 8) + '%';
-        bar.innerHTML = `<span class="gantt-bar-h">${e.h}</span><span class="gantt-bar-n">${e.n}</span>`;
-        bar.title = `${e.h} · ${e.n} (${e.d})`;
-        bar.addEventListener('click', () => abrirAgenda(e, day, curMonth, curYear));
+        bar.innerHTML = `<span class="gantt-bar-h">${p.h}</span><span class="gantt-bar-n">${p.n} · ${p.d}</span>`;
+        bar.title = `${p.h} · ${p.n} (${p.d}) — ${area.name}`;
+        bar.addEventListener('click', () => abrirAgenda(p, day, curMonth, curYear));
         track.appendChild(bar);
       });
       body.appendChild(row);
@@ -2844,13 +2883,13 @@ let curMonth, curYear, filter = 'all', view = 'mes';
   function renderFeats(){
     const wrap = document.getElementById('cal-feats');
     if (!wrap) return;
-    // 3 próximas actividades de hoy hacia adelante
+    // 3 próximas actividades del calendario (destacados, no pausas internas)
     const today = new Date();
     const all = [];
     const refDate = (curYear === today.getFullYear() && curMonth === today.getMonth()) ? today.getDate() : 1;
     const daysInMonth = new Date(curYear, curMonth + 1, 0).getDate();
     for (let d = refDate; d <= daysInMonth && all.length < 3; d++){
-      eventosDelDia(curYear, curMonth, d).forEach(e => {
+      eventosCalendario(curYear, curMonth, d).forEach(e => {
         if (all.length < 3) all.push({ ...e, day: d });
       });
     }
@@ -3065,7 +3104,7 @@ document.querySelectorAll('.reco-tab').forEach(t => {
 const RECETAS = [
   {
     id:'r1', tipo:'Desayuno', nombre:'Bowl de avena con frutas y nueces',
-    img:'https://images.unsplash.com/photo-1517673132405-a56a62b18caf?w=900&q=85',
+    img:'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=900&q=85',
     desc:'Energía sostenida toda la mañana con fibra, proteína y antioxidantes.',
     tiempo:'10 min', cal:'320', porciones:'1 porción', dificultad:'Fácil',
     ingredientes:['1/2 taza de avena en hojuelas','1 taza de leche o bebida vegetal','1 banano en rodajas','1/4 taza de fresas','1 cdita miel de abejas','1 cda nueces o almendras','Canela al gusto','Pizca de sal'],
@@ -3074,7 +3113,7 @@ const RECETAS = [
   },
   {
     id:'r2', tipo:'Smoothie', nombre:'Smoothie verde detox de espinaca y mango',
-    img:'https://images.unsplash.com/photo-1638176067000-9e89c95c7f96?w=900&q=85',
+    img:'https://images.unsplash.com/photo-1502741338009-cac2772e18bc?w=900&q=85',
     desc:'Hidratación + vitaminas + fibra en un vaso. Perfecto a media mañana.',
     tiempo:'5 min', cal:'180', porciones:'1 porción', dificultad:'Muy fácil',
     ingredientes:['1 taza de espinaca fresca','1/2 mango maduro','1/2 banano congelado','1 taza de agua de coco','1 cda chia','Jugo de 1/2 limón','Jengibre fresco (opcional)'],
@@ -3119,7 +3158,7 @@ const RECETAS = [
   },
   {
     id:'r7', tipo:'Snack', nombre:'Yogurt griego con granola casera y arándanos',
-    img:'https://images.unsplash.com/photo-1517959105821-eaf2591984ca?w=900&q=85',
+    img:'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=900&q=85',
     desc:'Snack proteico ideal antes o después de hacer ejercicio.',
     tiempo:'5 min', cal:'250', porciones:'1 porción', dificultad:'Muy fácil',
     ingredientes:['1 taza yogurt griego natural','1/4 taza granola sin azúcar','1/2 taza arándanos frescos','1 cda miel','1 cda almendras laminadas','Canela al gusto','Ralladura de limón (opcional)'],
@@ -3173,7 +3212,7 @@ function renderRecetas(){
     featuredWrap.innerHTML = `
       <article class="rec-featured" data-rid="${featured.id}">
         <div class="rec-img">
-          <img src="${featured.img.replace('w=900','w=1200')}" alt="${featured.nombre}">
+          <img src="${featured.img.replace('w=900','w=1200')}" alt="${featured.nombre}" onerror="this.onerror=null;this.src='https://picsum.photos/seed/par${featured.id}/1200/800'">
           <span class="rec-cal">${featured.cal}<sub>kcal</sub></span>
         </div>
         <div class="rec-body">
@@ -3207,10 +3246,10 @@ function renderRecetas(){
     featuredWrap.querySelector('.rec-featured').addEventListener('click', () => abrirReceta(featured));
   }
 
-  grid.innerHTML = rest.map(r => `
+  grid.innerHTML = rest.map((r, i) => `
     <article class="rec-card" data-rid="${r.id}">
       <div class="rec-img">
-        <img src="${r.img}" alt="${r.nombre}" loading="lazy">
+        <img src="${r.img}" alt="${r.nombre}" loading="lazy" onerror="this.onerror=null;this.src='https://picsum.photos/seed/par${r.id}/900/600'">
         <span class="rec-tag">${r.tipo}</span>
         <span class="rec-cal">${r.cal}<sub>kcal</sub></span>
       </div>
@@ -3237,6 +3276,28 @@ function renderRecetas(){
       if (r) abrirReceta(r);
     });
   });
+
+  // Fallback robusto: listener de error + check tardío
+  function setFallback(img){
+    const seed = (img.alt || 'food').replace(/[^a-z0-9]/gi, '').slice(0, 20);
+    img.src = `https://picsum.photos/seed/par-${seed}/900/600`;
+  }
+  document.querySelectorAll('.rec-card img, .rec-featured img').forEach(img => {
+    img.addEventListener('error', () => {
+      if (!img.dataset.fb){ img.dataset.fb = '1'; setFallback(img); }
+    });
+  });
+  // Backup: si no terminó de cargar a los 4s, asumimos roto y cambiamos a picsum
+  setTimeout(() => {
+    document.querySelectorAll('.rec-card img, .rec-featured img').forEach(img => {
+      if (img.dataset.fb) return;
+      // Si la imagen aún no cargó o está rota: fallback
+      if (!img.complete || img.naturalWidth === 0){
+        img.dataset.fb = '1';
+        setFallback(img);
+      }
+    });
+  }, 4000);
 }
 
 function abrirReceta(r){

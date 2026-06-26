@@ -2936,6 +2936,91 @@ function addEventoCustom(year, month, day, evento){
   });
 }
 
+/* ── LECTURA EN VIVO DEL SHEET ──────────────────────── */
+const SHEET_ID = '1mTIMwgIxdEN7BJmRGK-IUAQ7Xr0EZvIcZu1RHGKZ5o0';
+const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Actividades`;
+let ACTIVIDADES_SHEET = null; // null = no cargado, [] = cargado pero vacío
+
+// Mapeo nombre área → ID
+const AREA_NAME_TO_ID = {
+  'BPO':'bpo','Comercial':'comercial','Operaciones':'operaciones',
+  'Planeación y Sol. Financieras':'planeacion','Planeación y Soluciones Financieras':'planeacion',
+  'Talento Humano':'th','Tecnología':'tecnologia',
+  'Dirección General':'dg','Todas las áreas':'todos'
+};
+function areaIdDeNombre(nombre){
+  if (!nombre) return 'todos';
+  if (AREA_NAME_TO_ID[nombre]) return AREA_NAME_TO_ID[nombre];
+  const clean = String(nombre).trim();
+  return AREA_NAME_TO_ID[clean] || 'todos';
+}
+
+// Parser CSV simple (maneja comas dentro de comillas)
+function parseCSVLine(line){
+  const out = []; let cur = '', inQ = false;
+  for (let i = 0; i < line.length; i++){
+    const c = line[i];
+    if (c === '"'){
+      if (inQ && line[i+1] === '"'){ cur += '"'; i++; }
+      else inQ = !inQ;
+    } else if (c === ',' && !inQ){ out.push(cur); cur = ''; }
+    else cur += c;
+  }
+  out.push(cur);
+  return out;
+}
+
+function parseCSV(text){
+  const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+  if (lines.length < 2) return [];
+  const out = [];
+  for (let i = 1; i < lines.length; i++){
+    const r = parseCSVLine(lines[i]);
+    if (r.length < 6) continue;
+    let fecha = r[1] || '';
+    // normalizar fecha si viene como 25/06/2026 o 2026-06-25T...
+    if (fecha.includes('/')){
+      const [d, m, y] = fecha.split('/');
+      fecha = `${y}-${m.padStart(2,'0')}-${d.padStart(2,'0')}`;
+    } else if (fecha.includes('T')){
+      fecha = fecha.split('T')[0];
+    }
+    out.push({
+      id: r[0], fecha, hora: r[2], area: r[3], tipo: (r[4] || 'fis').toLowerCase(),
+      nombre: r[5], participantes: parseInt(r[6]) || 15, modalidad: r[7] || 'Virtual',
+      estado: r[8], asistentes: parseInt(r[9]) || 0,
+      fechaLimite: r[10], url: r[11] || ''
+    });
+  }
+  return out;
+}
+
+async function cargarActividadesDelSheet(){
+  try {
+    const res = await fetch(SHEET_CSV_URL, { mode: 'cors' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+    ACTIVIDADES_SHEET = parseCSV(text);
+    console.log('✓ Sheet cargado:', ACTIVIDADES_SHEET.length, 'actividades');
+  } catch(e){
+    console.warn('Sheet no disponible:', e.message);
+    ACTIVIDADES_SHEET = [];
+    return;
+  }
+  // Refrescar UI después del try (para no atrapar errores de render)
+  setTimeout(() => { try { if (window.refreshCalendar) window.refreshCalendar(); } catch(e){ console.warn(e); } }, 50);
+}
+
+// Convierte un row del Sheet a evento del calendario
+function actividadSheetAEvento(a){
+  return {
+    id: a.id, t: a.tipo, n: a.nombre, h: a.hora,
+    d: a.participantes + ' min', m: a.modalidad,
+    a: areaIdDeNombre(a.area), areaName: a.area, url: a.url,
+    editable: String(a.id).startsWith('ACT-') || String(a.id).startsWith('cust-')
+  };
+}
+
 // EVENTOS DESTACADOS — solo actividades abiertas a todo el equipo (calendario)
 // Estos son distintos a las pausas internas de cada área (las del Gantt)
 const EVENTOS_DESTACADOS_SEMANALES = [
@@ -2952,51 +3037,69 @@ const EVENTOS_DESTACADOS_FIJOS = {
   26: [{ t:'gru', n:'Cierre Bienestar · Reunión General',  h:'16:00', d:'90 min', m:'Presencial', a:'dg' }]
 };
 
-// Eventos del CALENDARIO — destacados + custom
+// Eventos del CALENDARIO — desde el Sheet (SEM/FIJ/ACT) + custom locales
 function eventosCalendario(year, month, day){
+  const fechaStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
   const eventos = [];
-  const date = new Date(year, month, day);
-  const dow = date.getDay();
 
-  // Semanales (todas las semanas)
-  EVENTOS_DESTACADOS_SEMANALES.forEach((e, i) => {
-    if (e.dow === dow){
-      eventos.push({
-        ...e,
-        id: `w-${year}-${month}-${day}-${i}`,
-        editable: false
-      });
-    }
-  });
-
-  // Fijos del mes
-  (EVENTOS_DESTACADOS_FIJOS[day] || []).forEach((e, i) => {
-    eventos.push({
-      ...e,
-      id: `f-${year}-${month}-${day}-${i}`,
-      editable: false
+  // 1. Desde el Sheet (filtra SEM-, FIJ-, ACT- ; ignora CRO- que va al Gantt)
+  if (ACTIVIDADES_SHEET && ACTIVIDADES_SHEET.length > 0){
+    ACTIVIDADES_SHEET.forEach(a => {
+      if (a.fecha !== fechaStr) return;
+      const id = String(a.id || '');
+      if (id.startsWith('CRO-')) return; // CRO es solo para Gantt
+      eventos.push(actividadSheetAEvento(a));
     });
-  });
+  } else {
+    // Fallback local si no hay Sheet
+    const date = new Date(year, month, day);
+    const dow = date.getDay();
+    EVENTOS_DESTACADOS_SEMANALES.forEach((e, i) => {
+      if (e.dow === dow) eventos.push({ ...e, id:`w-${year}-${month}-${day}-${i}`, editable:false });
+    });
+    (EVENTOS_DESTACADOS_FIJOS[day] || []).forEach((e, i) => {
+      eventos.push({ ...e, id:`f-${year}-${month}-${day}-${i}`, editable:false });
+    });
+  }
 
-  // Custom (creados por el usuario)
+  // 2. Custom locales (creados antes de sincronizar)
   const key = `${year}-${month}-${day}`;
   const custom = getEventosCustom()[key] || [];
-  custom.forEach(e => eventos.push({ ...e, editable: true }));
+  custom.forEach(e => {
+    // evitar duplicados si ya está en Sheet
+    if (!eventos.find(x => x.id === e.id)) eventos.push({ ...e, editable: true });
+  });
 
-  return eventos.sort((a,b) => a.h.localeCompare(b.h));
+  return eventos.sort((a,b) => String(a.h).localeCompare(String(b.h)));
 }
 
-// Pausas internas por ÁREA — solo para vista Gantt
+// Pausas internas por ÁREA — desde el Sheet (filtra CRO-) o fallback local
 function pausasDelDiaPorArea(year, month, day){
+  const fechaStr = `${year}-${String(month+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+  const resultado = {}; AREAS.forEach(a => resultado[a.id] = []);
+
+  // 1. Desde el Sheet (solo CRO-)
+  if (ACTIVIDADES_SHEET && ACTIVIDADES_SHEET.length > 0){
+    let found = false;
+    ACTIVIDADES_SHEET.forEach(a => {
+      if (a.fecha !== fechaStr) return;
+      const id = String(a.id || '');
+      if (!id.startsWith('CRO-')) return;
+      const areaId = areaIdDeNombre(a.area);
+      if (!resultado[areaId]) resultado[areaId] = [];
+      resultado[areaId].push(actividadSheetAEvento(a));
+      found = true;
+    });
+    if (found) return resultado;
+  }
+
+  // 2. Fallback local: generar desde el cronograma
   const date = new Date(year, month, day);
   const dow = date.getDay();
   const tipo = DOW_TYPE[dow];
-  const resultado = {}; // areaId -> [pausas]
-
   if (!tipo) return resultado;
 
   AREAS.forEach((a, ai) => {
-    resultado[a.id] = [];
     a.times.forEach((h, hi) => {
       const nombres = NOMBRE_PAUSA[tipo];
       const nombre = nombres[(ai + hi) % nombres.length];
@@ -3191,7 +3294,7 @@ let curMonth, curYear, filter = 'all', view = 'mes';
             <span class="cal-feat-d">${e.day}</span>
             <span class="cal-feat-m">${MESES_C[curMonth]}</span>
           </div>
-          <span class="cal-feat-tag ${e.t}">${TYPE_LABEL[e.t].lbl}</span>
+          <span class="cal-feat-tag ${e.t || 'gru'}">${(TYPE_LABEL[e.t] || TYPE_LABEL.gru).lbl}</span>
         </div>
         <h4>${e.n}</h4>
         <div class="cal-feat-time">
@@ -3251,6 +3354,9 @@ let curMonth, curYear, filter = 'all', view = 'mes';
   // Exponer
   window.refreshCalendar = rebuild;
   rebuild();
+
+  // Cargar actividades del Sheet en background y refrescar al terminar
+  cargarActividadesDelSheet();
 })();
 
 /* ── MODAL DE AGENDA — Inscripción + Edición ──────────── */
@@ -3260,7 +3366,7 @@ let currentAgendaContext = null; // {day, month, year, custom}
 function abrirAgenda(evento, day, month, year){
   currentAgendaEvent = evento;
   currentAgendaContext = { day, month, year, custom: !!evento.editable };
-  const tipo = TYPE_LABEL[evento.t];
+  const tipo = TYPE_LABEL[evento.t] || TYPE_LABEL.gru;
   const areaInfo = AREAS_COLOR[evento.a || evento.area || 'todos'] || AREAS_COLOR.todos;
 
   const tagEl = document.getElementById('ag-tag');
@@ -3456,28 +3562,40 @@ function abrirAgendaNueva(){
 /* ═══════════════════════════════════════════════════════
    GAS — Inscripción con dropdown desde Sheet
 ═══════════════════════════════════════════════════════ */
-// Fallback local cuando no hay GAS: genera dropdown desde las funciones del index
+// Genera dropdown desde el Sheet (si está cargado) o fallback local
 function generarDropdownLocal(year, month){
   const acts = [];
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  for (let d = 1; d <= daysInMonth; d++){
-    const eventos = eventosCalendario(year, month, d);
-    eventos.forEach(e => {
-      const areaInfo = AREAS_COLOR[e.a || 'todos'] || AREAS_COLOR.todos;
+
+  // Si tenemos el Sheet cargado, lo usamos directamente
+  if (ACTIVIDADES_SHEET && ACTIVIDADES_SHEET.length > 0){
+    const yyyymm = `${year}-${String(month+1).padStart(2,'0')}`;
+    ACTIVIDADES_SHEET.forEach(a => {
+      if (!String(a.fecha).startsWith(yyyymm)) return;
       acts.push({
-        id: e.id,
-        fecha: `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`,
-        hora: e.h,
-        area: areaInfo.name,
-        areaId: e.a || 'todos',
-        tipo: e.t,
-        nombre: e.n,
-        modalidad: e.m,
-        participantes: parseInt(e.d) || 15,
-        url: e.url || 'https://analyticssynaptic-cloud.github.io/Propuestas-de-Juegos/'
+        id: a.id, fecha: a.fecha, hora: a.hora, area: a.area,
+        areaId: areaIdDeNombre(a.area), tipo: a.tipo, nombre: a.nombre,
+        modalidad: a.modalidad, participantes: a.participantes,
+        url: a.url || 'https://analyticssynaptic-cloud.github.io/Propuestas-de-Juegos/'
       });
     });
+  } else {
+    // Fallback: genera desde las funciones locales
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    for (let d = 1; d <= daysInMonth; d++){
+      eventosCalendario(year, month, d).forEach(e => {
+        const areaInfo = AREAS_COLOR[e.a || 'todos'] || AREAS_COLOR.todos;
+        acts.push({
+          id: e.id,
+          fecha: `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`,
+          hora: e.h, area: areaInfo.name, areaId: e.a || 'todos',
+          tipo: e.t, nombre: e.n, modalidad: e.m,
+          participantes: parseInt(e.d) || 15,
+          url: e.url || 'https://analyticssynaptic-cloud.github.io/Propuestas-de-Juegos/'
+        });
+      });
+    }
   }
+
   const fechas = [...new Set(acts.map(a => a.fecha))].sort();
   const areas = [...new Set(acts.map(a => a.area))].sort();
   return { ok:true, total: acts.length, fechas, areas, actividades: acts };

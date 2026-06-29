@@ -590,16 +590,8 @@
 <nav class="bottomnav">
   <div class="nav-side left"><button class="nav-icon" id="btnPersona" type="button" aria-label="Mi información"><img id="navAvatarImg" alt="" style="display:none"><svg class="icon" id="navAvatarIcon"><use href="#i-user"/></svg></button></div>
   <div class="fab-slot"><button class="fab" id="fab" type="button" aria-label="Navegar módulos"><span class="fab-ic"><svg class="icon icon-lg"><use href="#i-grid"/></svg></span></button></div>
-  <div class="nav-side right"><button class="nav-icon" id="btnAyudas" type="button" aria-label="Ayudas"><svg class="icon"><use href="#i-help"/></svg></button></div>
+  <div class="nav-side right"></div>
 </nav>
-
-<!-- MENÚ AYUDAS -->
-<div class="ayudas-bd" id="ayudasBd" onclick="closeAyudas()"></div>
-<div class="ayudas" id="ayudas">
-  <a class="ayuda-item" id="ayudaImagenes" target="_blank" rel="noopener" onclick="closeAyudas()"><span class="ayuda-ic"><svg class="icon icon-lg"><use href="#i-image"/></svg></span>Imágenes</a>
-  <a class="ayuda-item" id="ayudaPresentaciones" target="_blank" rel="noopener" onclick="closeAyudas()"><span class="ayuda-ic"><svg class="icon icon-lg"><use href="#i-slides"/></svg></span>Presentaciones</a>
-  <a class="ayuda-item" id="ayudaVideos" target="_blank" rel="noopener" onclick="closeAyudas()"><span class="ayuda-ic"><svg class="icon icon-lg"><use href="#i-video"/></svg></span>Videos</a>
-</div>
 
 <!-- MODAL PERSONA -->
 <div class="overlay" id="personaModal">
@@ -676,10 +668,6 @@ let pendCiudad = null, pendPDV = null, ayudasOpen = false, restaurando = false;
 document.addEventListener('DOMContentLoaded', () => {
   const ahora = new Date();
   document.getElementById('heroDate').textContent = ahora.toLocaleDateString('es-CO',{weekday:'long',day:'numeric',month:'long'});
-  // URLs de ayudas
-  document.getElementById('ayudaImagenes').href = AYUDAS.imagenes;
-  document.getElementById('ayudaPresentaciones').href = AYUDAS.presentaciones;
-  document.getElementById('ayudaVideos').href = AYUDAS.videos;
 
   cargarParametrizacion();
 
@@ -710,7 +698,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.bottomnav').addEventListener('click', e => {
     if (e.target.closest('#fab')) toggleFlower();
     else if (e.target.closest('#btnPersona')) abrirPersona();
-    else if (e.target.closest('#btnAyudas')) toggleAyudas();
   });
 
   // Restaurar sesión previa (tras caída de red, cierre, etc.)

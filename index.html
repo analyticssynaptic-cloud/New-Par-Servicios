@@ -256,6 +256,14 @@
   .persona-foto-ph{width:96px;height:96px;border-radius:50%;background:var(--navy-grad);color:#fff;display:flex;align-items:center;justify-content:center}
   .persona-foto-edit{position:absolute;right:2px;bottom:2px;width:32px;height:32px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;border:3px solid #fff}
   .persona-foto-hint{text-align:center;font-size:12px;color:var(--muted);margin:0 0 16px}
+
+  /* ===== AYUDAS dentro del panel persona ===== */
+  .ayudas-sec{margin-top:20px;padding-top:18px;border-top:1px dashed var(--line-strong)}
+  .ayudas-titulo{display:flex;align-items:center;gap:8px;font-family:'Poppins';font-size:13px;font-weight:600;color:var(--navy);margin-bottom:11px}
+  .ayuda-link{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1.5px solid var(--line-strong);border-radius:var(--r-md);background:#fbfcfe;text-decoration:none;color:var(--ink);font-weight:600;font-size:14px;margin-bottom:9px;transition:.15s}
+  .ayuda-link:hover{border-color:var(--blue);background:var(--blue-soft)}
+  .ayuda-link .ayuda-ic{width:38px;height:38px;border-radius:50%;background:var(--blue-soft);color:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .ayuda-link .ayuda-go{margin-left:auto;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -354,7 +362,7 @@
         <span class="fi-txt"><b id="fiTitle">Tu selfie</b><span id="fiSub">Toca para tomar la foto (cámara frontal)</span></span>
       </label>
       <button class="btn-portada" onclick="comenzar()">Comenzar <svg class="icon"><use href="#i-arrowr"/></svg></button>
-      <div class="portada-foot">Tus datos quedan asociados a esta gestión</div>
+      <div class="portada-foot">Una herramienta de <b style="font-weight:700;letter-spacing:.5px">SYNAPTIC</b></div>
     </div>
   </div>
 </div>
@@ -598,19 +606,19 @@
   <div class="modal left">
     <button class="modal-close" onclick="cerrarPersona()"><svg class="icon icon-sm"><use href="#i-x"/></svg></button>
     <div class="modal-h"><svg class="icon"><use href="#i-user"/></svg>Mi información</div>
-    <div class="modal-p">Datos del mercaderista registrado</div>
-    <label class="persona-foto" id="personaFotoBox">
-      <input type="file" id="filePerfil" accept="image/*" capture="user" style="display:none">
-      <img class="persona-foto-img" id="personaFotoImg" alt="">
-      <span class="persona-foto-ph" id="personaFotoPh"><svg class="icon icon-xl"><use href="#i-user"/></svg></span>
-      <span class="persona-foto-edit"><svg class="icon icon-sm"><use href="#i-camera"/></svg></span>
-    </label>
-    <div class="persona-foto-hint">Toca para tomar tu selfie de nuevo</div>
+    <div class="modal-p">Datos del mercaderista y lugar</div>
     <div class="field"><label class="label">Nombre</label><input type="text" id="pNombre" class="input"></div>
     <div class="field"><label class="label">Documento</label><input type="tel" id="pDoc" class="input" inputmode="numeric"></div>
     <div class="field"><label class="label">Teléfono</label><input type="tel" id="pTel" class="input" inputmode="tel" placeholder="Teléfono"></div>
     <div class="merc-chip" style="margin:4px 0 16px"><div class="merc-ava"><svg class="icon"><use href="#i-pin"/></svg></div><div class="merc-info"><b>Ciudad / PDV</b><span id="pPdvActual">—</span></div><button type="button" class="btn btn-outline btn-sm" onclick="cerrarPersona();goTo('inicio')"><svg class="icon icon-sm"><use href="#i-edit"/></svg>Cambiar</button></div>
     <button class="btn btn-primary btn-block" onclick="guardarPersona()"><svg class="icon"><use href="#i-save"/></svg>Guardar cambios</button>
+
+    <div class="ayudas-sec">
+      <div class="ayudas-titulo"><svg class="icon icon-sm"><use href="#i-help"/></svg>Material de apoyo</div>
+      <a class="ayuda-link" id="ayudaImagenes" target="_blank" rel="noopener"><span class="ayuda-ic"><svg class="icon"><use href="#i-image"/></svg></span>Imágenes<svg class="icon icon-sm ayuda-go"><use href="#i-chevR"/></svg></a>
+      <a class="ayuda-link" id="ayudaPresentaciones" target="_blank" rel="noopener"><span class="ayuda-ic"><svg class="icon"><use href="#i-slides"/></svg></span>Presentaciones<svg class="icon icon-sm ayuda-go"><use href="#i-chevR"/></svg></a>
+      <a class="ayuda-link" id="ayudaVideos" target="_blank" rel="noopener"><span class="ayuda-ic"><svg class="icon"><use href="#i-video"/></svg></span>Videos<svg class="icon icon-sm ayuda-go"><use href="#i-chevR"/></svg></a>
+    </div>
   </div>
 </div>
 
@@ -668,6 +676,10 @@ let pendCiudad = null, pendPDV = null, ayudasOpen = false, restaurando = false;
 document.addEventListener('DOMContentLoaded', () => {
   const ahora = new Date();
   document.getElementById('heroDate').textContent = ahora.toLocaleDateString('es-CO',{weekday:'long',day:'numeric',month:'long'});
+  // Enlaces de material de apoyo (dentro del panel persona)
+  document.getElementById('ayudaImagenes').href = AYUDAS.imagenes;
+  document.getElementById('ayudaPresentaciones').href = AYUDAS.presentaciones;
+  document.getElementById('ayudaVideos').href = AYUDAS.videos;
 
   cargarParametrizacion();
 
@@ -679,7 +691,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const s=document.querySelector('input[name="ventaCondicion"]:checked'); document.getElementById('ventaPlazoG').style.display=(s&&s.value==='Credito')?'block':'none';
   }));
   document.getElementById('fileIngreso').addEventListener('change', e => leerFoto(e,'perfil'));
-  document.getElementById('filePerfil').addEventListener('change', e => leerFoto(e,'perfil'));
   document.getElementById('fileAntes').addEventListener('change', e => leerFoto(e,'antes'));
   document.getElementById('fileDespues').addEventListener('change', e => leerFoto(e,'despues'));
   document.getElementById('descuento').addEventListener('input', calcularTotalFinal);
@@ -959,7 +970,7 @@ function renderVentas(){
   if(ventasList.length===0){ cont.innerHTML='<div class="empty-hint">Agrega los productos vendidos.</div>'; return; }
   ventasList.forEach((p,idx)=>{ const d=document.createElement('div'); d.className='item'; d.innerHTML=`
     <div class="item-head"><div class="item-title"><svg class="icon icon-sm"><use href="#i-cart"/></svg>Vendido ${idx+1}</div><button type="button" class="btn btn-danger btn-icon" onclick="eliminarVenta('${p.id}')"><svg class="icon icon-sm"><use href="#i-trash"/></svg></button></div>
-    <div class="field"><label class="label label-req">SKU / Producto</label><input type="text" class="input" list="skusGlobal" value="${escAttr(p.sku)}" placeholder="Escribe o elige el producto" oninput="setSkuItem('${p.id}', this.value)"></div>
+    <div class="field"><label class="label label-req">SKU / Producto</label><select class="select" onchange="setSkuItem('${p.id}', this.value)">${opcionesSku(p.sku)}</select></div>
     <div class="field" style="margin-bottom:0"><label class="label label-req">Cantidad</label><input type="number" class="input" min="1" value="${p.cantidad}" oninput="setFld('${p.id}','cantidad',this.value)"></div>`; cont.appendChild(d); });
 }
 
@@ -971,7 +982,7 @@ function renderInventario(){
   if(inventarioList.length===0){ cont.innerHTML='<div class="empty-hint">Agrega los productos en estante.</div>'; return; }
   inventarioList.forEach((p,idx)=>{ const d=document.createElement('div'); d.className='item'; d.innerHTML=`
     <div class="item-head"><div class="item-title"><svg class="icon icon-sm"><use href="#i-box"/></svg>Producto ${idx+1}</div><button type="button" class="btn btn-danger btn-icon" onclick="eliminarInv('${p.id}')"><svg class="icon icon-sm"><use href="#i-trash"/></svg></button></div>
-    <div class="field"><label class="label label-req">SKU / Producto</label><input type="text" class="input" list="skusGlobal" value="${escAttr(p.sku)}" placeholder="Escribe o elige el producto" oninput="setSkuItem('${p.id}', this.value)"></div>
+    <div class="field"><label class="label label-req">SKU / Producto</label><select class="select" onchange="setSkuItem('${p.id}', this.value)">${opcionesSku(p.sku)}</select></div>
     <div class="field" style="margin-bottom:0"><label class="label label-req">Cantidad en estante</label><input type="number" class="input" min="0" value="${p.cantidad}" oninput="setFld('${p.id}','cantidad',this.value)"></div>`; cont.appendChild(d); });
 }
 
@@ -982,7 +993,7 @@ function renderPedido(){
   if(productosPedido.length===0){ cont.innerHTML='<div class="empty-hint">Sin productos. Agrega el primero.</div>'; calcularTotalPedido(); return; }
   productosPedido.forEach((p,idx)=>{ const d=document.createElement('div'); d.className='item'; d.innerHTML=`
     <div class="item-head"><div class="item-title"><svg class="icon icon-sm"><use href="#i-package"/></svg>Producto ${idx+1}</div><button type="button" class="btn btn-danger btn-icon" onclick="eliminarProducto('${p.id}')"><svg class="icon icon-sm"><use href="#i-trash"/></svg></button></div>
-    <div class="field"><label class="label label-req">SKU / Producto</label><input type="text" class="input" list="skusGlobal" value="${escAttr(p.sku)}" placeholder="Escribe o elige el producto" oninput="setSkuItem('${p.id}', this.value)"></div>
+    <div class="field"><label class="label label-req">SKU / Producto</label><select class="select" onchange="setSkuItem('${p.id}', this.value)">${opcionesSku(p.sku)}</select></div>
     <div class="field-row" style="margin-bottom:0"><div class="field" style="margin-bottom:0"><label class="label label-req">Cantidad</label><input type="number" class="input" min="1" value="${p.cantidad}" oninput="setCant('${p.id}',this.value)"></div><div class="field" style="margin-bottom:0"><label class="label">Precio unit.</label><input type="number" class="input" min="0" value="${p.precio}" oninput="setPrecio('${p.id}',this.value)"></div></div>
     <div class="item-sub">Subtotal: <strong>$${fmt(p.subtotal)}</strong></div>`; cont.appendChild(d); });
 }
@@ -999,7 +1010,7 @@ function renderAgotados(){
   if(agotadosList.length===0){ cont.innerHTML='<div class="empty-hint">Sin agotados registrados.</div>'; return; }
   agotadosList.forEach((p,idx)=>{ const d=document.createElement('div'); d.className='item'; d.innerHTML=`
     <div class="item-head"><div class="item-title"><svg class="icon icon-sm"><use href="#i-xcircle"/></svg>Agotado ${idx+1}</div><button type="button" class="btn btn-danger btn-icon" onclick="eliminarAgotado('${p.id}')"><svg class="icon icon-sm"><use href="#i-trash"/></svg></button></div>
-    <div class="field"><label class="label label-req">SKU / Producto</label><input type="text" class="input" list="skusGlobal" value="${escAttr(p.sku)}" placeholder="Escribe o elige el producto" oninput="setSkuItem('${p.id}', this.value)"></div>
+    <div class="field"><label class="label label-req">SKU / Producto</label><select class="select" onchange="setSkuItem('${p.id}', this.value)">${opcionesSku(p.sku)}</select></div>
     <div class="field" style="margin-bottom:0"><label class="label label-req">Cantidad próxima a agotarse</label><input type="number" class="input" min="0" value="${p.cantidad}" oninput="setFld('${p.id}','cantidad',this.value)"></div>`; cont.appendChild(d); });
 }
 
@@ -1010,17 +1021,22 @@ function renderFechas(){
   if(fechasList.length===0){ cont.innerHTML='<div class="empty-hint">Sin productos próximos a vencer.</div>'; return; }
   fechasList.forEach((p,idx)=>{ const d=document.createElement('div'); d.className='item'; d.innerHTML=`
     <div class="item-head"><div class="item-title"><svg class="icon icon-sm"><use href="#i-clock"/></svg>Producto ${idx+1}</div><button type="button" class="btn btn-danger btn-icon" onclick="eliminarFecha('${p.id}')"><svg class="icon icon-sm"><use href="#i-trash"/></svg></button></div>
-    <div class="field"><label class="label label-req">SKU / Producto</label><input type="text" class="input" list="skusGlobal" value="${escAttr(p.sku)}" placeholder="Escribe o elige el producto" oninput="setSkuItem('${p.id}', this.value)"></div>
+    <div class="field"><label class="label label-req">SKU / Producto</label><select class="select" onchange="setSkuItem('${p.id}', this.value)">${opcionesSku(p.sku)}</select></div>
     <div class="field-row" style="margin-bottom:0"><div class="field" style="margin-bottom:0"><label class="label label-req">Vence</label><input type="date" class="input" value="${escAttr(p.vence)}" oninput="setFld('${p.id}','vence',this.value)"></div><div class="field" style="margin-bottom:0"><label class="label">Cantidad</label><input type="number" class="input" min="1" value="${p.cantidad}" oninput="setFld('${p.id}','cantidad',this.value)"></div></div>`; cont.appendChild(d); });
 }
 function setFld(id,campo,v){ const p=findItem(id); if(p)p[campo]= (campo==='cantidad'?(parseFloat(v)||0):v); }
 
 // SKU buscador (compartido)
-// Poblar el datalist global con todos los SKU (selección nativa, robusta en móvil)
-function poblarSkus(){
-  const dl=document.getElementById('skusGlobal'); if(!dl) return;
-  dl.innerHTML=(parametrizacion.skus||[]).map(s=>'<option value="'+escAttr(s.completo)+'"></option>').join('');
+// Opciones para los <select> de SKU (lista desplegable nativa)
+function opcionesSku(sel){
+  return '<option value="">Seleccionar producto</option>' +
+    (parametrizacion.skus||[]).map(s=>{
+      const v=escAttr(s.completo);
+      return '<option value="'+v+'"'+(s.completo===sel?' selected':'')+'>'+escHtml(s.completo)+'</option>';
+    }).join('');
 }
+// Re-render de las listas para refrescar las opciones del desplegable cuando llegan los SKU
+function poblarSkus(){ renderPedido(); renderAgotados(); renderFechas(); renderVentas(); renderInventario(); }
 // Guardar el SKU escrito/elegido en el item (y precio si es pedido) sin re-render (no pierde el foco)
 function setSkuItem(id, valor){
   const p=findItem(id); if(!p) return;
@@ -1045,8 +1061,23 @@ function escHtml(s){ return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&
 function fmt(n){ return Number(n||0).toLocaleString('es-CO',{maximumFractionDigits:2}); }
 
 // ===== FOTOS =====
-function leerFoto(e,tipo){ const file=e.target.files[0]; if(!file)return; if(file.size>10*1024*1024){ alert('La imagen supera 10 MB.'); e.target.value=''; return; }
-  const r=new FileReader(); r.onload=ev=>{ aplicarFoto(tipo, ev.target.result); persistir(); persistirFotos(); }; r.readAsDataURL(file); }
+function leerFoto(e,tipo){ const file=e.target.files[0]; if(!file)return; if(file.size>25*1024*1024){ alert('La imagen es muy pesada (más de 25 MB).'); e.target.value=''; return; }
+  const r=new FileReader(); r.onload=ev=>{ comprimirImagen(ev.target.result, tipo==='perfil'?700:1280, 0.7, data=>{ aplicarFoto(tipo, data); persistir(); persistirFotos(); }); }; r.readAsDataURL(file); }
+// Redimensiona y comprime la imagen en el navegador antes de subirla (sube mucho más rápido)
+function comprimirImagen(dataURL, maxLado, calidad, cb){
+  const img=new Image();
+  img.onload=function(){
+    let w=img.width, h=img.height; const m=Math.max(w,h);
+    if(m>maxLado){ const r=maxLado/m; w=Math.round(w*r); h=Math.round(h*r); }
+    try{
+      const c=document.createElement('canvas'); c.width=w; c.height=h;
+      c.getContext('2d').drawImage(img,0,0,w,h);
+      cb(c.toDataURL('image/jpeg', calidad));
+    }catch(err){ cb(dataURL); }
+  };
+  img.onerror=function(){ cb(dataURL); };
+  img.src=dataURL;
+}
 function quitarFoto(tipo){
   if(tipo==='antes'){
     fotoAntes=''; fotoAntesURL=''; document.getElementById('fileAntes').value='';
